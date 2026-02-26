@@ -115,12 +115,12 @@ body{font-family:'DM Sans',sans-serif;background:#0a0610;color:var(--cream);over
 <div class="d-bar">
   <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
   <div class="d-tabs">
-    <button type="button" class="d-tab" onclick="parent.goTo(5)">Overview</button>
-    <button type="button" class="d-tab" onclick="parent.goTo(6)">Itinerary</button>
-    <button type="button" class="d-tab act" onclick="parent.goTo(7)">Venues</button>
-    <button type="button" class="d-tab" onclick="parent.goTo(8)">Events</button>
-    <button type="button" class="d-tab" onclick="parent.goTo(9)">Stickers</button>
-    <button type="button" class="d-tab" onclick="parent.goTo(10)">Account</button>
+    <span class="d-tab" data-slide="5">Overview</span>
+    <span class="d-tab" data-slide="6">Itinerary</span>
+    <span class="d-tab act" data-slide="7">Venues</span>
+    <span class="d-tab" data-slide="8">Events</span>
+    <span class="d-tab" data-slide="9">Stickers</span>
+    <span class="d-tab" data-slide="10">Account</span>
   </div>
 </div>
 
@@ -271,6 +271,7 @@ function animate(){
   requestAnimationFrame(animate);
 }
 animate();
+document.querySelectorAll('.d-tab').forEach(t=>t.addEventListener('click',function(){parent.goTo(parseInt(this.dataset.slide,10));}));
 </script>
 </body>
 </html>
