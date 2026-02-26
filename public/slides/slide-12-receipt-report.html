@@ -102,7 +102,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 .snap-l{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:.15rem;}
 
 /* ═══ CTA SECTION — THE FUNNEL ═══ */
-.cta-section{margin-top:2.5rem;text-align:center;padding:2rem 1rem;background:rgba(212,134,62,.06);border:1px solid rgba(212,134,62,.15);border-radius:14px;backdrop-filter:blur(10px);}
+.cta-section{margin-top:2.5rem;text-align:center;padding:2rem 1rem;background:rgba(212,134,62,.06);border:1px solid rgba(212,134,62,.15);border-radius:14px;backdrop-filter:blur(10px);position:relative;z-index:10;}
 .cta-title{font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:.4rem;}
 .cta-desc{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--fog);margin-bottom:1.5rem;line-height:1.6;}
 
@@ -157,14 +157,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 
 /* ═══ SHARE BUTTONS ═══ */
 .share-row{display:flex;gap:.4rem;justify-content:center;margin-top:1rem;}
-.share-btn{padding:8px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--cream);font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;cursor:pointer;transition:all .2s;text-decoration:none;}
+.share-btn{padding:8px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--cream);font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;cursor:pointer;transition:all .2s;text-decoration:none;font:inherit;-webkit-tap-highlight-color:transparent;}
 .share-btn:hover{background:rgba(212,134,62,.1);border-color:rgba(212,134,62,.2);color:var(--ember);}
 
 /* ═══ COPY RESULTS ═══ */
 .copy-btn{display:block;width:100%;padding:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--cream);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.5rem;}
 .copy-btn:hover{background:rgba(58,154,122,.08);border-color:rgba(58,154,122,.2);color:var(--jade);}
 
-@media(max-width:600px){.scores{grid-template-columns:1fr;}.snap{grid-template-columns:1fr;}.email-row{flex-direction:column;}.share-row{flex-wrap:wrap;}}
+/* ═══ MAP & CATEGORIES ═══ */
+.map-card{background:rgba(255,255,255,.07);border:1px solid rgba(212,134,62,.2);border-radius:12px;padding:1.2rem;margin:1rem 0;backdrop-filter:blur(8px);}
+.map-card a{color:var(--ember);text-decoration:none;font-weight:600;}
+.map-card a:hover{text-decoration:underline;}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1rem 0;}
+.cat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;backdrop-filter:blur(8px);}
+.cat-ico{font-size:1.4rem;margin-bottom:.4rem;}
+.cat-nm{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);margin-bottom:.3rem;}
+.cat-desc{font-size:.85rem;line-height:1.5;color:var(--cream);}
+.free-detail{background:rgba(58,154,122,.06);border:1px solid rgba(58,154,122,.15);border-radius:10px;padding:1.2rem;margin:1rem 0;backdrop-filter:blur(8px);}
+.free-detail .sec-t{color:var(--jade);}
+.readable{font-size:1rem;line-height:1.7;color:var(--cream);}
+.readable p{margin-bottom:.8rem;}
+.readable ul{margin:.5rem 0 1rem 1.2rem;}
+.readable li{margin-bottom:.4rem;}
+
+@media(max-width:600px){.scores{grid-template-columns:1fr;}.snap{grid-template-columns:1fr;}.email-row{flex-direction:column;}.share-row{flex-wrap:wrap;}.cat-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -242,6 +258,48 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
     <div class="snap-card"><div class="snap-v">43</div><div class="snap-l">Sticker Placements</div></div>
   </div>
 
+  <!-- ═══ MAP — Asheville Venues ═══ -->
+  <div class="sec">
+    <div class="sec-t">📍 Asheville Map — Where to Go</div>
+    <div class="sec-sub">Click to open in Google Maps. All 147 venues plotted with scores, peak times, and sticker spots.</div>
+    <div class="map-card">
+      <a href="https://www.google.com/maps/search/crystal+shops+herbals+tea+coffee+asheville+nc" target="_blank" rel="noopener">🗺️ Open Asheville Venue Map →</a><br>
+      <span style="font-size:.8rem;color:var(--dim);">Downtown · Lexington Ave · River Arts · West Asheville · Biltmore Village</span>
+    </div>
+  </div>
+
+  <!-- ═══ CATEGORY BREAKDOWN — Magic, Herbals, Tea, Coffee, Food, Snacks ═══ -->
+  <div class="sec">
+    <div class="sec-t">Your Best Venue Categories</div>
+    <div class="sec-sub">Asheville's top spots for your Oracle-Strategist archetype. Easy to read, easy to act on.</div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-ico">🔮</div><div class="cat-nm">Magic Supplies</div><div class="cat-desc">Sister Moon, Raven & Crone, Earth Guild. Crystal shops = your people. High dwell time, open to readings. 12 venues scored.</div></div>
+      <div class="cat-card"><div class="cat-ico">🌿</div><div class="cat-nm">Herbals & Apothecary</div><div class="cat-desc">Dancing Moon, Herbiary, French Broad Co-op. Wellness crowd, ready for heritage readings. 8 venues.</div></div>
+      <div class="cat-card"><div class="cat-ico">🍵</div><div class="cat-nm">Tea Houses</div><div class="cat-desc">Dobra Tea, High Climate. Slow, contemplative. Perfect for 15-min snapshots. 5 venues.</div></div>
+      <div class="cat-card"><div class="cat-ico">☕</div><div class="cat-nm">Coffee Shops</div><div class="cat-desc">Odd's Café, Trade & Lore, High Five. High traffic, laptop workers = impulse readings. 18 venues.</div></div>
+      <div class="cat-card"><div class="cat-ico">🥗</div><div class="cat-nm">Food & Restaurants</div><div class="cat-desc">Rosetta's, Early Girl, Tupelo Honey. Wait times = conversation windows. 22 venues.</div></div>
+      <div class="cat-card"><div class="cat-ico">🥐</div><div class="cat-nm">Snacks & Bakeries</div><div class="cat-desc">Old Europe, City Bakery, Vortex. Quick stops, grab-and-go crowd. Sticker hotspots. 11 venues.</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ FREE REPORT — More Detail ═══ -->
+  <div class="free-detail">
+    <div class="sec-t">✨ Your Free Report — What's Included</div>
+    <div class="readable">
+      <p><strong>This free assessment gives you:</strong></p>
+      <ul>
+        <li><strong>Archetype reveal</strong> — Your entrepreneurial DNA (Oracle-Strategist)</li>
+        <li><strong>4 layer scores</strong> — Identity, Geography, Capacity, Resonance</li>
+        <li><strong>147 Asheville venues</strong> — Mapped, scored, with peak times</li>
+        <li><strong>6 category breakdowns</strong> — Magic, herbals, tea, coffee, food, snacks</li>
+        <li><strong>23 events this week</strong> — With "Your Play" strategy for each</li>
+        <li><strong>43 sticker placements</strong> — Where to leave your mark</li>
+        <li><strong>Offering ladder</strong> — $0 to $1,500/mo, built for your archetype</li>
+      </ul>
+      <p>Upgrade to the full dashboard for live maps, weekly event alerts, and 1-on-1 strategy.</p>
+    </div>
+  </div>
+
   <!-- ═══ YOUR OFFERING LADDER ═══ -->
   <div class="sec">
     <div class="sec-t">Your Offering Ladder</div>
@@ -276,8 +334,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
     <div class="urgency"><div class="urgency-txt">⚡ Only 8 entrepreneur reading slots available this month — 3 already claimed</div></div>
 
     <div class="share-row">
-      <a class="share-btn" onclick="shareText()">📤 Share Results</a>
-      <a class="share-btn" onclick="copyResults()">📋 Copy to Clipboard</a>
+      <button type="button" class="share-btn" onclick="shareText()">📤 Share Results</button>
+      <button type="button" class="share-btn" onclick="copyResults()">📋 Copy to Clipboard</button>
     </div>
   </div>
 
@@ -478,6 +536,16 @@ SCORES:
 Sacred Identity: 87 | Wealth Geography: 72
 Sacred Capacity: 91 | Resonance: 74
 
+YOUR BEST VENUE CATEGORIES:
+• Magic Supplies: Sister Moon, Raven & Crone (12 venues)
+• Herbals: Dancing Moon, Herbiary (8 venues)
+• Tea: Dobra Tea, High Climate (5 venues)
+• Coffee: Odd's Café, Trade & Lore (18 venues)
+• Food: Rosetta's, Early Girl (22 venues)
+• Snacks: Old Europe, City Bakery (11 venues)
+
+MAP: https://www.google.com/maps/search/crystal+shops+herbals+tea+coffee+asheville+nc
+
 OFFERING LADDER:
 Flash Reading: $0 (free hook)
 Entrepreneur Snapshot: $44
@@ -509,16 +577,15 @@ function shareText(){
 // ═══ COPY TO CLIPBOARD ═══
 function copyResults(){
   const text=getResultsText();
+  const copyBtn=document.querySelector('.share-btn:nth-child(2)');
   navigator.clipboard.writeText(text).then(()=>{
-    const btns=document.querySelectorAll('.share-btn');
-    btns[1].textContent='✓ Copied!';
-    setTimeout(()=>{btns[1].textContent='📋 Copy to Clipboard';},2000);
+    if(copyBtn){copyBtn.textContent='✓ Copied!';setTimeout(()=>{copyBtn.textContent='📋 Copy to Clipboard';},2000);}
   }).catch(()=>{
-    // Fallback
     const ta=document.createElement('textarea');
     ta.value=text;document.body.appendChild(ta);
     ta.select();document.execCommand('copy');
     document.body.removeChild(ta);
+    if(copyBtn){copyBtn.textContent='✓ Copied!';setTimeout(()=>{copyBtn.textContent='📋 Copy to Clipboard';},2000);}
   });
 }
 </script>
