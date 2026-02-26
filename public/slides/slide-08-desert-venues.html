@@ -65,7 +65,7 @@ body{font-family:'DM Sans',sans-serif;background:#0a0610;color:var(--cream);over
 .d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
 .d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
 .d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
-.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid transparent;white-space:nowrap;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
 .d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
 
 .content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
@@ -115,12 +115,12 @@ body{font-family:'DM Sans',sans-serif;background:#0a0610;color:var(--cream);over
 <div class="d-bar">
   <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
   <div class="d-tabs">
-    <div class="d-tab" onclick="window.parent.goTo(5)" role="button" tabindex="0" style="cursor:pointer">Overview</div>
-    <div class="d-tab" onclick="window.parent.goTo(6)" role="button" tabindex="0" style="cursor:pointer">Itinerary</div>
-    <div class="d-tab act" onclick="window.parent.goTo(7)" role="button" tabindex="0" style="cursor:pointer">Venues</div>
-    <div class="d-tab" onclick="window.parent.goTo(8)" role="button" tabindex="0" style="cursor:pointer">Events</div>
-    <div class="d-tab" onclick="window.parent.goTo(9)" role="button" tabindex="0" style="cursor:pointer">Stickers</div>
-    <div class="d-tab" onclick="window.parent.goTo(10)" role="button" tabindex="0" style="cursor:pointer">Account</div>
+    <button type="button" class="d-tab" onclick="parent.goTo(5)">Overview</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(6)">Itinerary</button>
+    <button type="button" class="d-tab act" onclick="parent.goTo(7)">Venues</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(8)">Events</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(9)">Stickers</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(10)">Account</button>
   </div>
 </div>
 
@@ -129,7 +129,7 @@ body{font-family:'DM Sans',sans-serif;background:#0a0610;color:var(--cream);over
   <div class="page-sub">147 venues scored for your Oracle-Strategist archetype. <a href="https://www.google.com/maps/search/crystal+shops+herbals+tea+coffee+asheville+nc" target="_blank" rel="noopener" style="color:var(--ember);">🗺️ View on Map</a></div>
 
   <!-- MAGIC · HERBALS · TEA · COFFEE · FOOD · SNACKS -->
-  <div class="tier-hd"><span class="tier-t">🔮 Magic Supplies · 🌿 Herbals · 🍵 Tea · ☕ Coffee · 🥗 Food · 🥐 Snacks</span></div>
+  <div class="tier-hd"><span class="tier-t">Magic Supplies · Herbals · Tea · Coffee · Food · Snacks</span></div>
 
   <div class="vc"><div class="vc-dot t1"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Sister Moon</div><div class="vc-sc">92</div></div><div class="vc-meta">Magic supplies · Crystals, tarot, herbs · 3 sticker spots · Your people</div><div class="vc-tags"><span class="vc-tag hot">Magic Supplies</span><span class="vc-tag hot">Partnership Ready</span></div><div class="vc-pk">Peak: 11a–4p · Best for readings</div></div></div>
 

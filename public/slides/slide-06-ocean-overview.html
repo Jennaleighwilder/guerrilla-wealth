@@ -45,7 +45,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--ocean-deep);color:var(--c
 .d-city:hover{color:var(--ember);border-color:rgba(212,134,62,.2);}
 .d-city.act{background:rgba(212,134,62,.1);border-color:rgba(212,134,62,.25);color:var(--ember);}
 .d-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 .6rem;}
-.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:#b0a8b8;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .25s;-webkit-tap-highlight-color:transparent;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:#b0a8b8;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;transition:all .25s;-webkit-tap-highlight-color:transparent;}
 .d-tab:hover{color:var(--ember);}
 .d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
 
@@ -160,12 +160,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--ocean-deep);color:var(--c
     <div class="d-city" onclick="showCityMsg('Sedona')" role="button" tabindex="0">Sedona</div>
   </div>
   <div class="d-tabs">
-    <div class="d-tab act" onclick="window.parent.goTo(5)" role="button" tabindex="0">Overview</div>
-    <div class="d-tab" onclick="window.parent.goTo(6)" role="button" tabindex="0">Itinerary</div>
-    <div class="d-tab" onclick="window.parent.goTo(7)" role="button" tabindex="0">Venues</div>
-    <div class="d-tab" onclick="window.parent.goTo(8)" role="button" tabindex="0">Events</div>
-    <div class="d-tab" onclick="window.parent.goTo(9)" role="button" tabindex="0">Stickers</div>
-    <div class="d-tab" onclick="window.parent.goTo(10)" role="button" tabindex="0">Account</div>
+    <button type="button" class="d-tab act" onclick="parent.goTo(5)">Overview</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(6)">Itinerary</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(7)">Venues</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(8)">Events</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(9)">Stickers</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(10)">Account</button>
   </div>
 </div>
 

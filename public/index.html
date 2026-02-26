@@ -84,6 +84,7 @@ function goTo(index) {
   phaseEl.textContent = slides[current].phase;
   setTimeout(() => { transitioning = false; }, 700);
 }
+window.goTo = goTo;
 
 // Swipe support
 let touchStartY = 0;

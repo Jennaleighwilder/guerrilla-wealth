@@ -50,7 +50,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 .d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
 .d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
 .d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
-.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid transparent;white-space:nowrap;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
 .d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
 
 .content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
@@ -110,12 +110,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 <div class="d-bar">
   <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
   <div class="d-tabs">
-    <div class="d-tab" onclick="window.parent.goTo(5)" role="button" tabindex="0" style="cursor:pointer">Overview</div>
-    <div class="d-tab" onclick="window.parent.goTo(6)" role="button" tabindex="0" style="cursor:pointer">Itinerary</div>
-    <div class="d-tab" onclick="window.parent.goTo(7)" role="button" tabindex="0" style="cursor:pointer">Venues</div>
-    <div class="d-tab" onclick="window.parent.goTo(8)" role="button" tabindex="0" style="cursor:pointer">Events</div>
-    <div class="d-tab" onclick="window.parent.goTo(9)" role="button" tabindex="0" style="cursor:pointer">Stickers</div>
-    <div class="d-tab act" onclick="window.parent.goTo(10)" role="button" tabindex="0" style="cursor:pointer">Account</div>
+    <button type="button" class="d-tab" onclick="parent.goTo(5)">Overview</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(6)">Itinerary</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(7)">Venues</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(8)">Events</button>
+    <button type="button" class="d-tab" onclick="parent.goTo(9)">Stickers</button>
+    <button type="button" class="d-tab act" onclick="parent.goTo(10)">Account</button>
   </div>
 </div>
 

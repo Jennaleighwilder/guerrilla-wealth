@@ -173,6 +173,8 @@ git push -u origin main
 - All animations are pure CSS + vanilla JS (no libraries)
 - Particle systems use requestAnimationFrame — they're performant on mobile
 
+**Payment link:** Edit `public/slides/slide-12-receipt-report.html` — find `const PAYMENT_URL =` near the top of the script and replace with your Venmo, Stripe, PayPal, or other payment link.
+
 **Common modifications in Cursor:**
 - To change city data: edit slides 06-10 (each has hardcoded Asheville data)
 - To change quiz questions: edit slides 02-04
