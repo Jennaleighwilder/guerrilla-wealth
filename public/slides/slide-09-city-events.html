@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Events Calendar (City Dusk)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0a0c18;--smoke:#141828;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#b0a8b8;--fog:#a89ab8;
+  /* City palette */
+  --neon-warm:#e8a050;--neon-cool:#5090c8;--street:#c8b898;
+  --dusk-purple:#3a2850;--dusk-orange:#c86030;--window:#f0d870;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:#06081a;color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+#scene{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 90% 25% at 50% 100%,rgba(200,96,48,0.1),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 30% 60%,rgba(58,40,80,0.12),transparent 50%),
+    radial-gradient(ellipse 50% 30% at 70% 80%,rgba(80,144,200,0.05),transparent 50%);
+  animation:auroraShift 25s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.5}50%{opacity:.85}100%{opacity:.6}}
+
+/* WARM COPPER MOON */
+.moon{position:fixed;top:4vh;right:7vw;width:150px;height:150px;z-index:1;pointer-events:none;}
+.moon-body{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 38% 36%,#f0c060,#d4963e,#b07030,#6a4020);
+  box-shadow:0 0 55px rgba(212,150,62,0.3),0 0 110px rgba(200,130,50,0.15),0 0 220px rgba(176,112,48,0.08),inset -10px -6px 18px rgba(40,20,5,0.3);
+  animation:moonGlow 5.5s ease-in-out infinite;position:relative;overflow:hidden;}
+.moon-body::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,transparent 25%,rgba(255,220,160,0.3) 40%,transparent 50%,rgba(240,192,96,0.12) 65%,transparent 75%);animation:moonShimmer 9s ease-in-out infinite;}
+.moon-halo{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(212,150,62,0.08);animation:ringFloat 7s ease-in-out infinite;}
+.moon-halo2{position:absolute;inset:-42px;border-radius:50%;border:1px solid rgba(212,150,62,0.04);animation:ringFloat 9s ease-in-out infinite 1.5s;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 55px rgba(212,150,62,0.3),0 0 110px rgba(200,130,50,0.15),0 0 220px rgba(176,112,48,0.08)}50%{box-shadow:0 0 75px rgba(212,150,62,0.4),0 0 150px rgba(200,130,50,0.25),0 0 260px rgba(176,112,48,0.12)}}
+@keyframes moonShimmer{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ringFloat{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.55;transform:scale(1.02)}}
+
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.06;color:var(--dusk-purple);}
+.mtn svg{width:100%;height:120px;display:block;}
+
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--neon-warm);opacity:.25;z-index:50;pointer-events:none;}
+
+.d-bar{position:sticky;top:0;z-index:100;background:rgba(6,8,26,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);}
+.d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
+.d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
+.d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
+.d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid transparent;white-space:nowrap;}
+.d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
+
+.content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
+.page-title{font-family:'Cinzel',serif;font-size:1.15rem;margin-bottom:.2rem;}
+.page-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;}
+
+/* Event cards */
+.ev{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:0;margin-bottom:.75rem;backdrop-filter:blur(8px);overflow:hidden;position:relative;}
+.ev::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);animation:shimmer 14s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{left:-100%}50%{left:150%}}
+.ev-top{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem .4rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.ev-dt{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:var(--neon-warm);}
+.ev-pot{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:4px;}
+.ev-pot.high{background:rgba(212,134,62,.12);color:var(--ember);}
+.ev-pot.max{background:rgba(196,90,58,.12);color:var(--fire);}
+.ev-body{padding:.8rem 1rem;}
+.ev-nm{font-family:'Cinzel',serif;font-size:1.05rem;margin-bottom:.15rem;}
+.ev-vn{font-size:.75rem;color:var(--dim);margin-bottom:.6rem;line-height:1.4;}
+.ev-play{background:rgba(255,255,255,.04);border:1px solid rgba(212,134,62,.1);border-left:3px solid var(--copper);border-radius:0 8px 8px 0;padding:.7rem .8rem;margin-top:.5rem;}
+.ev-play-l{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper);margin-bottom:.3rem;}
+.ev-play-t{font-size:.82rem;line-height:1.5;color:var(--cream);}
+
+@media(max-width:600px){.moon{width:100px;height:100px;top:3vh;right:5vw;}}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div class="aurora"></div>
+<div class="moon"><div class="moon-body"></div><div class="moon-halo"></div><div class="moon-halo2"></div></div>
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,92 C130,72 210,42 340,54 C470,66 540,84 660,56 C780,28 860,46 980,38 C1100,30 1180,54 1300,44 C1380,38 1420,48 1440,46 L1440,120Z"/></svg></div>
+<div class="sea-lbl">✦ city · events</div>
+
+<div class="d-bar">
+  <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
+  <div class="d-tabs">
+    <div class="d-tab">Overview</div><div class="d-tab">Itinerary</div><div class="d-tab">Venues</div>
+    <div class="d-tab act">Events</div><div class="d-tab">Stickers</div><div class="d-tab">Account</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="page-title">Every Door Worth Walking Through</div>
+  <div class="page-sub">23 events this week. Top 4 scored for your Oracle-Strategist archetype and boldness level.</div>
+
+  <div class="ev"><div class="ev-top"><div class="ev-dt">Tue Mar 4 · 6 PM</div><div class="ev-pot high">9/10</div></div><div class="ev-body"><div class="ev-nm">Entrepreneurs Mixer</div><div class="ev-vn">The Odditorium · Haywood Rd · Free · ~60 people</div><div class="ev-play"><div class="ev-play-l">Your Play</div><div class="ev-play-t">Arrive 6:15. Stand near food table. Lead with "What's your thing?" not "What do you do?" Goal: 5 conversations, 3 card exchanges. Follow up within 24hrs. Your archetype thrives in strategy conversations — find the other operators.</div></div></div></div>
+
+  <div class="ev"><div class="ev-top"><div class="ev-dt">Thu Mar 6 · 7 PM</div><div class="ev-pot high">9/10</div></div><div class="ev-body"><div class="ev-nm">Full Moon Drum Circle</div><div class="ev-vn">Pritchard Park · Free · 100–300+ people</div><div class="ev-play"><div class="ev-play-l">Your Play</div><div class="ev-play-t">YOUR event. Arrive 30 min early. Blanket on circle edge + sign: "Free Pull — Ask The Cards." Work periphery. The energy is already high — you're harvesting attention that's already flowing. Goal: 15–20 readings → 5–8 report sales within the week.</div></div></div></div>
+
+  <div class="ev"><div class="ev-top"><div class="ev-dt">Sat Mar 8 · 8 AM</div><div class="ev-pot max">10/10</div></div><div class="ev-body"><div class="ev-nm">North Asheville Tailgate Market</div><div class="ev-vn">UNC Asheville · $30 booth · 800+ traffic</div><div class="ev-play"><div class="ev-play-l">Your Play</div><div class="ev-play-t">VENDOR booth. Sign: "Heritage Readings — What Does Your Bloodline Want You To Know?" 80% women 30–60 in buying mode. This is your highest-ROI event this month. Goal: 20+ readings, 5+ sales ($220+), 30+ emails. Bring the folding table, banner, and card display.</div></div></div></div>
+
+  <div class="ev"><div class="ev-top"><div class="ev-dt">Sun Mar 9 · 10 AM</div><div class="ev-pot high">8/10</div></div><div class="ev-body"><div class="ev-nm">Brunch Market at Zillicoah</div><div class="ev-vn">Zillicoah Beer Co · Woodfin · Free · 200+ families</div><div class="ev-play"><div class="ev-play-l">Your Play</div><div class="ev-play-t">Set up near kids' activity area — parents linger. "Family heritage snapshots" — 2-min mini-readings. Moms talk. One good reading = 3–4 referrals. This is relationship planting, not direct sales. Harvest comes next week.</div></div></div></div>
+</div>
+
+<script>
+// ═══ CITY DUSK — building silhouettes, window lights, city particles ═══
+const cv=document.getElementById('scene'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let time=0;
+
+// City buildings (silhouettes at bottom)
+const buildings=[];
+for(let i=0;i<25;i++){
+  const w=30+Math.random()*60;
+  buildings.push({
+    x:i*(W/25)+Math.random()*20-10,
+    w,h:60+Math.random()*140,
+    windows:Math.floor(Math.random()*8)+2,
+    windowPhases:Array.from({length:12},()=>Math.random()*Math.PI*2)
+  });
+}
+
+// City glow particles (warm dots floating up)
+const glows=[];
+for(let i=0;i<30;i++){
+  glows.push({
+    x:Math.random()*W,y:H*.6+Math.random()*H*.3,
+    size:.5+Math.random()*1.5,
+    vy:-(0.05+Math.random()*.1),
+    phase:Math.random()*Math.PI*2,
+    alpha:.04+Math.random()*.1,
+    color:Math.random()>.5?'#e8a050':'#f0d870'
+  });
+}
+
+// Stars (fewer, city light pollution)
+const stars=[];
+for(let i=0;i<50;i++){
+  stars.push({
+    x:Math.random()*W,y:Math.random()*H*.5,
+    size:.3+Math.random()*1.2,
+    phase:Math.random()*Math.PI*2,
+    alpha:.1+Math.random()*.3
+  });
+}
+
+function drawStars(){
+  stars.forEach(s=>{
+    s.phase+=.008;
+    const a=s.alpha*(.5+Math.sin(s.phase)*.5);
+    cx.globalAlpha=a;
+    cx.fillStyle='#c8d0e0';
+    cx.beginPath();cx.arc(s.x,s.y,s.size,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function drawBuildings(){
+  buildings.forEach((b,idx)=>{
+    const baseY=H;
+    // Building body
+    cx.fillStyle='rgba(8,10,20,0.8)';
+    cx.fillRect(b.x,baseY-b.h,b.w,b.h);
+    // Windows (flickering)
+    const cols=Math.floor(b.w/12);
+    const rows=Math.floor(b.h/20);
+    for(let r=0;r<rows;r++){
+      for(let c=0;c<cols;c++){
+        const wi=r*cols+c;
+        const phase=b.windowPhases[wi%b.windowPhases.length];
+        const on=Math.sin(time*.003+phase)>.1;
+        if(on){
+          const wx=b.x+6+c*12;
+          const wy=baseY-b.h+10+r*20;
+          const warmth=Math.sin(time*.005+phase)*.2+.6;
+          cx.globalAlpha=warmth*.3;
+          cx.fillStyle='#f0d870';
+          cx.fillRect(wx-1,wy-1,7,9);
+          cx.globalAlpha=warmth*.6;
+          cx.fillRect(wx,wy,5,7);
+          cx.globalAlpha=1;
+        }
+      }
+    }
+  });
+}
+
+function drawGlows(){
+  glows.forEach(g=>{
+    g.phase+=.008;
+    g.y+=g.vy;
+    g.x+=Math.sin(g.phase)*.15;
+    if(g.y<H*.3){g.y=H;g.x=Math.random()*W;}
+    const a=g.alpha*(.5+Math.sin(g.phase*2)*.5);
+    cx.globalAlpha=a;
+    cx.fillStyle=g.color;
+    cx.beginPath();cx.arc(g.x,g.y,g.size,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=a*.2;
+    cx.beginPath();cx.arc(g.x,g.y,g.size*4,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function animate(){
+  time++;
+  cx.clearRect(0,0,W,H);
+  drawStars();
+  drawGlows();
+  drawBuildings();
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

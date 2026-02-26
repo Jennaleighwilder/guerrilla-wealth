@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Account (Void)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0e0b18;--smoke:#1a1528;--ridge:#2a2240;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#b0a8b8;--fog:#a89ab8;
+  --glow:rgba(212,134,62,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 60%,rgba(212,134,62,0.08),transparent 50%),
+    radial-gradient(ellipse 80% 40% at 15% 80%,rgba(74,63,140,0.3),transparent 50%),
+    radial-gradient(ellipse 50% 40% at 85% 20%,rgba(58,154,122,0.1),transparent 50%);
+  animation:auroraShift 22s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.8;filter:hue-rotate(0deg)}50%{opacity:1;filter:hue-rotate(8deg)}100%{opacity:.85;filter:hue-rotate(-5deg)}}
+
+/* COPPER ORB — back to home base, 150px */
+.moon{position:fixed;top:5vh;right:8vw;width:150px;height:150px;z-index:1;pointer-events:none;}
+.moon-body{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#f0b865,#d4863e,#8a4a1a);
+  box-shadow:0 0 60px rgba(212,134,62,.45),0 0 120px rgba(212,134,62,.18),0 0 220px rgba(212,134,62,.08),inset 0 -6px 15px rgba(0,0,0,.35);
+  animation:moonGlow 3.5s ease-in-out infinite;position:relative;overflow:hidden;}
+.moon-body::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,transparent 25%,rgba(255,220,160,0.3) 40%,transparent 55%);animation:moonShimmer 6s ease-in-out infinite;}
+.moon-halo{position:absolute;inset:-18px;border-radius:50%;border:1px solid rgba(212,134,62,.12);animation:ringFloat 4s ease-in-out infinite;}
+.moon-halo2{position:absolute;inset:-38px;border-radius:50%;border:1px solid rgba(212,134,62,.06);animation:ringFloat 5s ease-in-out infinite 1s;}
+.moon-halo3{position:absolute;inset:-60px;border-radius:50%;border:1px solid rgba(212,134,62,.03);animation:ringFloat 6s ease-in-out infinite 1.5s;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 60px rgba(212,134,62,.45),0 0 120px rgba(212,134,62,.18),0 0 220px rgba(212,134,62,.08)}50%{box-shadow:0 0 80px rgba(212,134,62,.55),0 0 160px rgba(212,134,62,.25),0 0 260px rgba(212,134,62,.12)}}
+@keyframes moonShimmer{0%,100%{opacity:.6;transform:rotate(0deg)}50%{opacity:1;transform:rotate(3deg)}}
+@keyframes ringFloat{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.7;transform:scale(1.03)}}
+
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.06;color:var(--cream);}
+.mtn svg{width:100%;height:120px;display:block;}
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);opacity:.3;z-index:50;pointer-events:none;}
+
+.d-bar{position:sticky;top:0;z-index:100;background:rgba(8,6,16,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);}
+.d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
+.d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
+.d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
+.d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid transparent;white-space:nowrap;}
+.d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
+
+.content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
+.page-title{font-family:'Cinzel',serif;font-size:1.15rem;margin-bottom:.2rem;}
+.page-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;}
+
+/* Account panels */
+.acct{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.2rem;margin-bottom:.8rem;backdrop-filter:blur(8px);}
+.acct-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.acct-row:last-child{border:none;}
+.acct-lbl{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:.2rem;}
+.acct-val{font-size:.88rem;font-weight:600;}
+.acct-val .em{color:var(--ember);}
+
+.btn-sm{padding:6px 14px;background:rgba(212,134,62,.12);border:1px solid rgba(212,134,62,.25);color:var(--ember);border-radius:5px;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.btn-sm:hover{background:rgba(212,134,62,.22);transform:translateY(-1px);}
+
+/* City grid */
+.cities-title{font-family:'Cinzel',serif;font-size:1.05rem;margin:1.2rem 0 .5rem;}
+.city-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem;}
+.city-card{padding:.8rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.city-card::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);transition:left .6s;pointer-events:none;}
+.city-card:hover::before{left:100%;}
+.city-card.owned{border-color:rgba(58,154,122,.2);background:rgba(58,154,122,.04);}
+.city-nm{font-weight:600;font-size:.82rem;}
+.city-nm .check{color:var(--jade);}
+.city-ct{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--dim);margin-top:.1rem;}
+.city-pr{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--copper);margin-top:.2rem;}
+
+/* Plan cards */
+.plan-title{font-family:'Cinzel',serif;font-size:1.05rem;margin:1.2rem 0 .5rem;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem;margin-bottom:.6rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.plan:hover{border-color:rgba(212,134,62,.25);}
+.plan.pop{border-color:rgba(212,134,62,.2);}
+.plan-pop-badge{position:absolute;top:-.4rem;right:.8rem;font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(135deg,var(--copper),var(--fire));color:#fff;padding:2px 8px;border-radius:3px;}
+.plan-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
+.plan-nm{font-family:'Cinzel',serif;font-size:1rem;}
+.plan-pr{font-family:'Space Mono',monospace;font-size:.92rem;color:var(--ember);font-weight:700;}
+.plan-pr small{font-size:.52rem;color:var(--dim);font-weight:400;}
+.plan-feats{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:.3rem;}
+.plan-feat{font-family:'Space Mono',monospace;font-size:.52rem;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);}
+.plan-feat.hot{background:rgba(212,134,62,.08);border-color:rgba(212,134,62,.15);color:var(--copper);}
+.plan-cities{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--dim);}
+.plan-cities strong{color:var(--copper);}
+
+@media(max-width:600px){.moon{width:100px;height:100px;top:3vh;right:5vw;}.city-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="aurora"></div>
+<div class="moon"><div class="moon-body"></div><div class="moon-halo"></div><div class="moon-halo2"></div><div class="moon-halo3"></div></div>
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,92 C130,72 210,42 340,54 C470,66 540,84 660,56 C780,28 860,46 980,38 C1100,30 1180,54 1300,44 C1380,38 1420,48 1440,46 L1440,120Z"/></svg></div>
+<div class="sea-lbl">✦ void · account</div>
+
+<div class="d-bar">
+  <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
+  <div class="d-tabs">
+    <div class="d-tab">Overview</div><div class="d-tab">Itinerary</div><div class="d-tab">Venues</div>
+    <div class="d-tab">Events</div><div class="d-tab">Stickers</div><div class="d-tab act">Account</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="page-title">Account</div>
+  <div class="page-sub">Manage your subscription, cities, and billing.</div>
+
+  <div class="acct">
+    <div class="acct-row"><div><div class="acct-lbl">Current Plan</div><div class="acct-val">Pro — <span class="em">$79/mo</span></div></div><button class="btn-sm">Upgrade</button></div>
+    <div class="acct-row"><div><div class="acct-lbl">Active Cities</div><div class="acct-val">3 cities</div></div><button class="btn-sm">+ Add</button></div>
+    <div class="acct-row"><div><div class="acct-lbl">Billing</div><div class="acct-val">Next charge: Mar 25, 2026</div></div></div>
+    <div class="acct-row"><div><div class="acct-lbl">Member Since</div><div class="acct-val">February 2026</div></div></div>
+    <div class="acct-row"><div><div class="acct-lbl">Archetype</div><div class="acct-val">Oracle-Strategist</div></div><button class="btn-sm">Retake Quiz</button></div>
+  </div>
+
+  <div class="cities-title">Your Cities</div>
+  <div class="city-grid">
+    <div class="city-card owned"><div class="city-nm">Asheville, NC <span class="check">✓</span></div><div class="city-ct">147 venues · 23 events</div></div>
+    <div class="city-card owned"><div class="city-nm">Knoxville, TN <span class="check">✓</span></div><div class="city-ct">98 venues · 15 events</div></div>
+    <div class="city-card owned"><div class="city-nm">Sedona, AZ <span class="check">✓</span></div><div class="city-ct">82 venues · 11 events</div></div>
+    <div class="city-card"><div class="city-nm">Portland, OR</div><div class="city-ct">156 venues · 28 events</div><div class="city-pr">+ $9/mo</div></div>
+    <div class="city-card"><div class="city-nm">Austin, TX</div><div class="city-ct">189 venues · 34 events</div><div class="city-pr">+ $9/mo</div></div>
+    <div class="city-card"><div class="city-nm">Nashville, TN</div><div class="city-ct">134 venues · 22 events</div><div class="city-pr">+ $9/mo</div></div>
+    <div class="city-card"><div class="city-nm">Santa Fe, NM</div><div class="city-ct">67 venues · 9 events</div><div class="city-pr">+ $9/mo</div></div>
+    <div class="city-card"><div class="city-nm">Savannah, GA</div><div class="city-ct">88 venues · 14 events</div><div class="city-pr">+ $9/mo</div></div>
+    <div class="city-card"><div class="city-nm">Boulder, CO</div><div class="city-ct">112 venues · 19 events</div><div class="city-pr">+ $9/mo</div></div>
+    <div class="city-card"><div class="city-nm">Orange County, CA</div><div class="city-ct">203 venues · 31 events</div><div class="city-pr">+ $9/mo</div></div>
+  </div>
+
+  <div class="plan-title">Available Plans</div>
+
+  <div class="plan"><div class="plan-top"><div class="plan-nm">Elite</div><div class="plan-pr">$149<small>/mo</small></div></div><div class="plan-feats"><span class="plan-feat hot">Priority Alerts</span><span class="plan-feat hot">Fund Finder</span><span class="plan-feat hot">Brand Kit</span><span class="plan-feat">1-on-1 Strategy</span></div><div class="plan-cities"><strong>All 10 cities</strong> included</div></div>
+
+  <div style="font-size:.68rem;color:var(--dim);text-align:center;margin-top:.8rem;padding-bottom:3rem;">7-day free trial on all paid plans · Cancel anytime</div>
+</div>
+
+<script>
+// ═══ VOID PARTICLES — same as splash, home base ═══
+const cv=document.getElementById('particles'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+const TYPES=[
+  {name:'ember',count:12,color:'rgba(212,134,62,',sizeMin:1.5,sizeMax:3,speedY:-.3,speedX:.1,drift:'rise'},
+  {name:'leaf',count:8,color:'rgba(58,154,122,',sizeMin:2,sizeMax:4,speedY:.15,speedX:.2,drift:'float'},
+  {name:'mist',count:10,color:'rgba(120,80,160,',sizeMin:3,sizeMax:6,speedY:0,speedX:.08,drift:'wave'},
+  {name:'spark',count:10,color:'rgba(240,192,96,',sizeMin:.8,sizeMax:1.5,speedY:-.5,speedX:.15,drift:'rise'}
+];
+
+let particles=[];
+
+function spawnP(type){
+  const s=type.sizeMin+Math.random()*(type.sizeMax-type.sizeMin);
+  const a=.15+Math.random()*.35;
+  return{
+    x:Math.random()*W,
+    y:type.drift==='rise'?H+Math.random()*100:Math.random()*H,
+    s,a,
+    vx:(Math.random()-.5)*type.speedX,
+    vy:type.drift==='rise'?-(type.speedY+Math.random()*.3)*1.5:type.speedY+Math.random()*.1,
+    color:type.color+a+')',
+    type:type.name,
+    phase:Math.random()*Math.PI*2,life:0
+  };
+}
+
+TYPES.forEach(t=>{for(let i=0;i<t.count;i++)particles.push(spawnP(t));});
+
+function animate(){
+  cx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    p.life+=.005;
+    if(p.type==='wave'){p.x+=p.vx;p.y+=Math.sin(p.life*2+p.phase)*.3;}
+    else{p.x+=p.vx+Math.sin(p.life*1.5+p.phase)*.2;p.y+=p.vy;}
+    if(p.y<-20){p.y=H+20;p.x=Math.random()*W;}
+    if(p.y>H+20){p.y=-20;p.x=Math.random()*W;}
+    if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;
+    cx.beginPath();cx.arc(p.x,p.y,p.s,0,Math.PI*2);
+    cx.fillStyle=p.color;cx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Plan Selection & Generating (Summer)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0e0b18;--smoke:#1a1528;--ridge:#2a2240;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#7a7288;--fog:#a89ab8;
+  --glow:rgba(212,134,62,0.15);--glow2:rgba(212,134,62,0.45);
+  /* Summer palette */
+  --canopy:#3a6a3a;--meadow:#5a9a5a;--warmth:#d4a030;--honey:#e8c060;
+  --firefly:#c8e868;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ═══ SUMMER AURORA — warm green-gold ═══ */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 60%,rgba(58,106,58,0.08),transparent 55%),
+    radial-gradient(ellipse 70% 40% at 25% 40%,rgba(212,160,48,0.06),transparent 50%),
+    radial-gradient(ellipse 50% 45% at 75% 70%,rgba(90,154,90,0.07),transparent 50%),
+    radial-gradient(ellipse 40% 30% at 60% 20%,rgba(200,232,104,0.04),transparent 50%);
+  animation:auroraShift 24s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.6;filter:hue-rotate(0deg)}50%{opacity:.95;filter:hue-rotate(4deg)}100%{opacity:.7;filter:hue-rotate(-2deg)}}
+
+/* ═══ BLUE-ICE MOON ═══ */
+.moon{position:fixed;top:7vh;right:12vw;width:78px;height:78px;z-index:1;pointer-events:none;}
+.moon-body{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 38% 36%,#c8e8ff,#88c0e0,#5090b8,#306a8a);
+  box-shadow:
+    0 0 30px rgba(100,180,230,0.3),
+    0 0 65px rgba(80,144,184,0.15),
+    0 0 130px rgba(60,120,160,0.08),
+    inset -6px -4px 12px rgba(10,30,50,0.2);
+  animation:moonGlow 5s ease-in-out infinite;
+  position:relative;overflow:hidden;}
+.moon-body::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,transparent 25%,rgba(200,240,255,0.3) 40%,transparent 50%,rgba(160,220,255,0.12) 65%,transparent 75%);
+  animation:moonShimmer 8s ease-in-out infinite;}
+.moon-body::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 56% 52%,transparent 35%,rgba(30,60,80,0.1) 55%,rgba(20,40,60,0.06) 75%);}
+.moon-halo{position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(100,180,230,0.06);animation:ringFloat 6s ease-in-out infinite;}
+.moon-halo2{position:absolute;inset:-28px;border-radius:50%;border:1px solid rgba(100,180,230,0.03);animation:ringFloat 8s ease-in-out infinite 1s;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 30px rgba(100,180,230,0.3),0 0 65px rgba(80,144,184,0.15),0 0 130px rgba(60,120,160,0.08),inset -6px -4px 12px rgba(10,30,50,0.2)}50%{box-shadow:0 0 45px rgba(100,180,230,0.4),0 0 90px rgba(80,144,184,0.22),0 0 150px rgba(60,120,160,0.12),inset -6px -4px 12px rgba(10,30,50,0.15)}}
+@keyframes moonShimmer{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ringFloat{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.55;transform:scale(1.02)}}
+
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.06;color:var(--meadow);}
+.mtn svg{width:100%;height:110px;display:block;}
+
+.sea{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--firefly);opacity:.3;z-index:50;pointer-events:none;}
+
+/* ═══ SCREENS ═══ */
+[data-s]{display:none;min-height:100vh;position:relative;z-index:2;}
+
+/* ═══ PLAN PICKER ═══ */
+.plans{max-width:600px;margin:0 auto;padding:3.5rem 2rem 4rem;text-align:center;}
+.plans h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4.5vw,2.2rem);margin-bottom:.5rem;}
+.plans-sub{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--fog);margin-bottom:2.5rem;}
+.plan{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:1.3rem;margin-bottom:.8rem;text-align:left;cursor:pointer;backdrop-filter:blur(8px);position:relative;overflow:hidden;transition:all .3s;-webkit-tap-highlight-color:transparent;}
+.plan::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);transition:left .7s;pointer-events:none;}
+.plan:hover::before{left:100%;}
+.plan:hover{border-color:rgba(212,134,62,.25);transform:translateX(4px);}
+.plan.sel{border-color:rgba(212,134,62,.5);background:rgba(212,134,62,.08);box-shadow:0 0 30px rgba(212,134,62,.08);}
+.plan.pop{border-color:rgba(212,134,62,.25);}
+.plan-pop{position:absolute;top:-.5rem;right:1rem;font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,var(--copper),var(--fire));color:#fff;padding:2px 8px;border-radius:3px;}
+.plan-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;}
+.plan-nm{font-family:'Cinzel',serif;font-size:1.1rem;}
+.plan-pr{font-family:'Space Mono',monospace;font-size:.95rem;color:var(--ember);font-weight:700;}
+.plan-pr small{font-size:.85rem;color:#b0a8b8;font-weight:400;}
+.plan-feats{display:flex;flex-wrap:wrap;gap:.3rem;}
+.plan-feat{font-family:'Space Mono',monospace;font-size:.8rem;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);}
+.plan-feat.hot{background:rgba(212,134,62,.08);border-color:rgba(212,134,62,.15);color:var(--copper);}
+.plan-cities{margin-top:.4rem;font-family:'Space Mono',monospace;font-size:.8rem;color:#b0a8b8;}
+.plan-cities strong{color:var(--copper);}
+.plans-foot{margin-top:1.5rem;font-size:.85rem;color:#b0a8b8;}
+
+.btn{display:inline-block;padding:18px 52px;background:linear-gradient(135deg,var(--copper),var(--fire));color:var(--cream);border:none;border-radius:6px;font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;transition:all .35s;-webkit-tap-highlight-color:transparent;margin-top:1rem;}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(212,134,62,.35);}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .6s;}
+.btn:hover::after{left:100%;}
+
+/* ═══ GENERATING ═══ */
+.gen{display:flex;align-items:center;justify-content:center;}
+.gen-w{text-align:center;max-width:480px;padding:2rem;}
+.gen-orb{width:90px;height:90px;margin:0 auto 2rem;border-radius:50%;background:radial-gradient(circle at 38% 35%,#f0b865,var(--copper),#8a4a1a);box-shadow:0 0 50px rgba(212,134,62,.4),0 0 120px rgba(212,134,62,.12);animation:orbP 2.5s ease-in-out infinite;}
+@keyframes orbP{0%,100%{transform:scale(1);box-shadow:0 0 50px rgba(212,134,62,.4),0 0 120px rgba(212,134,62,.12)}50%{transform:scale(1.06);box-shadow:0 0 70px rgba(212,134,62,.5),0 0 150px rgba(212,134,62,.2)}}
+.gen-t{font-family:'Cinzel',serif;font-size:1.4rem;margin-bottom:2rem;}
+.gen-steps{text-align:left;}
+.gen-s{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;opacity:.15;transition:all .6s;}
+.gen-s.on{opacity:1;}
+.gen-s-dot{width:6px;height:6px;border-radius:50%;background:var(--dim);flex-shrink:0;transition:all .5s;}
+.gen-s.on .gen-s-dot{background:var(--ember);box-shadow:0 0 8px rgba(232,169,91,.5);}
+.gen-s-t{font-family:'Space Mono',monospace;font-size:.8rem;color:#b0a8b8;letter-spacing:.03em;}
+.gen-s.on .gen-s-t{color:var(--cream);}
+
+/* ═══ ARCHETYPE REVEAL ═══ */
+.reveal{display:none;position:relative;z-index:2;max-width:500px;margin:3rem auto;padding:2.5rem;background:rgba(255,255,255,.07);border:1px solid rgba(212,134,62,.2);border-radius:16px;backdrop-filter:blur(12px);text-align:center;animation:revealPop .8s cubic-bezier(.16,1,.3,1);}
+.reveal.on{display:block;}
+@keyframes revealPop{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.reveal-ic{font-size:3rem;margin-bottom:1rem;}
+.reveal-lbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--copper);margin-bottom:.5rem;}
+.reveal-nm{font-family:'Cinzel',serif;font-size:1.6rem;margin-bottom:.5rem;}
+.reveal-desc{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--fog);line-height:1.5;margin-bottom:1.5rem;}
+
+@media(max-width:600px){.moon{width:55px;height:55px;top:5vh;right:8vw;}}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="aurora"></div>
+
+<!-- ═══ BLUE-ICE MOON ═══ -->
+<div class="moon">
+  <div class="moon-body"></div>
+  <div class="moon-halo"></div>
+  <div class="moon-halo2"></div>
+</div>
+
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,85 C150,65 230,35 370,48 C510,61 570,78 690,50 C810,22 890,40 1010,34 C1130,28 1210,48 1330,38 C1400,33 1430,40 1440,38 L1440,120Z"/></svg></div>
+<div class="sea">✦ summer · activation</div>
+
+<!-- ═══ PLAN PICKER SCREEN ═══ -->
+<div data-s="plans" style="display:flex;align-items:center;justify-content:center;">
+  <div class="plans">
+    <h2>Choose Your Path</h2>
+    <div class="plans-sub">Every tier includes your personalized intelligence map. Higher tiers unlock more cities, AI regeneration, and your full IP suite.</div>
+
+    <div class="plan" onclick="selPlan('free',this)" id="p-free">
+      <div class="plan-top"><div class="plan-nm">Free</div><div class="plan-pr">$0</div></div>
+      <div class="plan-feats"><span class="plan-feat">Quiz + Archetype</span><span class="plan-feat">3 Venue Previews</span><span class="plan-feat">Offering Ladder</span></div>
+      <div class="plan-cities"><strong>1 city</strong></div>
+    </div>
+
+    <div class="plan" onclick="selPlan('starter',this)" id="p-starter">
+      <div class="plan-top"><div class="plan-nm">Starter</div><div class="plan-pr">$29<small>/mo</small></div></div>
+      <div class="plan-feats"><span class="plan-feat">Full Itinerary</span><span class="plan-feat">All Events</span><span class="plan-feat">Sticker Kit</span><span class="plan-feat">All Venues</span></div>
+      <div class="plan-cities"><strong>1 city</strong> included · +$9/mo each</div>
+    </div>
+
+    <div class="plan pop" onclick="selPlan('pro',this)" id="p-pro">
+      <div class="plan-pop">Most Popular</div>
+      <div class="plan-top"><div class="plan-nm">Pro</div><div class="plan-pr">$79<small>/mo</small></div></div>
+      <div class="plan-feats"><span class="plan-feat hot">AI Weekly Regen</span><span class="plan-feat hot">Revenue Dashboard</span><span class="plan-feat hot">Heritage Report/mo</span><span class="plan-feat">All Features</span></div>
+      <div class="plan-cities"><strong>3 cities</strong> included · +$9/mo each</div>
+    </div>
+
+    <div class="plan" onclick="selPlan('elite',this)" id="p-elite">
+      <div class="plan-top"><div class="plan-nm">Elite</div><div class="plan-pr">$149<small>/mo</small></div></div>
+      <div class="plan-feats"><span class="plan-feat">Priority Alerts</span><span class="plan-feat">Fund Finder</span><span class="plan-feat">Brand Kit</span><span class="plan-feat">1-on-1 Strategy</span></div>
+      <div class="plan-cities"><strong>All 10 cities</strong></div>
+    </div>
+
+    <button class="btn" id="planBtn" onclick="startGen()" style="opacity:.4;pointer-events:none;">Continue →</button>
+    <div class="plans-foot">7-day free trial on all paid plans · Cancel anytime</div>
+  </div>
+</div>
+
+<!-- ═══ GENERATING SCREEN ═══ -->
+<div data-s="gen" style="min-height:100vh;">
+  <div class="gen" style="min-height:100vh;">
+    <div class="gen-w">
+      <div class="gen-orb"></div>
+      <div class="gen-t">Building your intelligence map...</div>
+      <div class="gen-steps" id="genSteps">
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Analyzing your sacred archetype blend</div></div>
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Mapping venue compatibility scores</div></div>
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Cross-referencing event calendar</div></div>
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Calibrating boldness to itinerary</div></div>
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Building your personalized sticker kit</div></div>
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Generating revenue projections</div></div>
+        <div class="gen-s"><div class="gen-s-dot"></div><div class="gen-s-t">Assembling guerrilla operations plan</div></div>
+      </div>
+
+      <!-- Archetype reveal (shows after generating) -->
+      <div class="reveal" id="reveal">
+        <div class="reveal-ic">🔮</div>
+        <div class="reveal-lbl">Your Sacred Archetype</div>
+        <div class="reveal-nm">Oracle-Strategist</div>
+        <div class="reveal-desc">You see what others can't and build systems from vision. Your power is translating the invisible into the actionable. Clients don't just trust you — they rely on you to see around corners.</div>
+        <button class="btn" onclick="alert('→ Next: Dashboard slides')">Enter Your Dashboard →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ SUMMER PARTICLES — fireflies + warm pollen + canopy mist ═══
+const cv=document.getElementById('particles'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let particles=[];
+
+// Fireflies (55) — pulse glow
+for(let i=0;i<55;i++){
+  particles.push({
+    type:'firefly',x:Math.random()*W,y:Math.random()*H,
+    size:1.2+Math.random()*2,
+    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.2,
+    phase:Math.random()*Math.PI*2,
+    glowPhase:Math.random()*Math.PI*2,
+    alpha:.05
+  });
+}
+
+// Warm pollen (20) — rising slowly
+for(let i=0;i<20;i++){
+  particles.push({
+    type:'pollen',x:Math.random()*W,y:H+Math.random()*200,
+    size:.8+Math.random()*1.5,
+    vy:-(0.1+Math.random()*.2),vx:(Math.random()-.5)*.1,
+    phase:Math.random()*Math.PI*2,
+    alpha:.1+Math.random()*.2
+  });
+}
+
+// Canopy mist (green tones)
+for(let i=0;i<7;i++){
+  particles.push({
+    type:'mist',x:Math.random()*W,y:Math.random()*H,
+    size:5+Math.random()*8,vx:.03+Math.random()*.05,
+    phase:Math.random()*Math.PI*2,
+    alpha:.03+Math.random()*.06,life:0
+  });
+}
+
+function animate(){
+  cx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    if(p.type==='firefly'){
+      p.phase+=.008;p.glowPhase+=.04;
+      p.x+=p.vx+Math.sin(p.phase)*.3;
+      p.y+=p.vy+Math.cos(p.phase*.7)*.2;
+      // Bounce off edges softly
+      if(p.x<50||p.x>W-50)p.vx*=-1;
+      if(p.y<50||p.y>H-50)p.vy*=-1;
+      const glow=Math.max(0,Math.sin(p.glowPhase));
+      const a=.05+glow*.45;
+      // Glow ring
+      cx.globalAlpha=a*.2;
+      cx.fillStyle='#68b8e8';
+      cx.beginPath();cx.arc(p.x,p.y,p.size*5,0,Math.PI*2);cx.fill();
+      // Core
+      cx.globalAlpha=a;
+      cx.fillStyle='#88d8ff';
+      cx.beginPath();cx.arc(p.x,p.y,p.size,0,Math.PI*2);cx.fill();
+      cx.globalAlpha=1;
+    }else if(p.type==='pollen'){
+      p.phase+=.012;
+      p.x+=p.vx+Math.sin(p.phase)*.15;
+      p.y+=p.vy;
+      if(p.y<-20){p.y=H+20;p.x=Math.random()*W;}
+      cx.globalAlpha=p.alpha;
+      cx.fillStyle='#e8d098';
+      cx.beginPath();cx.arc(p.x,p.y,p.size,0,Math.PI*2);cx.fill();
+      cx.globalAlpha=1;
+    }else if(p.type==='mist'){
+      p.life+=.002;
+      p.x+=p.vx;p.y+=Math.sin(p.life*1.5+p.phase)*.2;
+      if(p.x>W+50){p.x=-50;p.y=Math.random()*H;}
+      cx.beginPath();cx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      cx.fillStyle='rgba(58,106,58,'+p.alpha+')';cx.fill();
+    }
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ═══ PLAN SELECTION ═══
+let selectedPlan=null;
+
+function selPlan(tier,el){
+  selectedPlan=tier;
+  document.querySelectorAll('.plan').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  const btn=document.getElementById('planBtn');
+  btn.style.opacity='1';btn.style.pointerEvents='auto';
+}
+
+function go(s){
+  document.querySelectorAll('[data-s]').forEach(el=>el.style.display='none');
+  const target=document.querySelector(`[data-s="${s}"]`);
+  if(target){
+    target.style.display=s==='gen'?'block':'flex';
+    window.scrollTo(0,0);
+  }
+}
+
+function startGen(){
+  go('gen');
+  const steps=document.querySelectorAll('.gen-s');
+  let i=0;
+  const interval=setInterval(()=>{
+    if(i<steps.length){
+      steps[i].classList.add('on');
+      i++;
+    }else{
+      clearInterval(interval);
+      setTimeout(()=>{
+        document.getElementById('genSteps').style.opacity='.3';
+        document.querySelector('.gen-t').textContent='Your map is ready.';
+        document.getElementById('reveal').classList.add('on');
+      },800);
+    }
+  },700);
+}
+
+// Start on plans screen
+go('plans');
+</script>
+</body>
+</html>

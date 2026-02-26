@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Sticker Warfare Kit (Forest)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#060e08;--deep:#081210;--smoke:#0e1a14;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#b0a8b8;--fog:#a89ab8;
+  /* Forest palette */
+  --canopy:#1a3a1a;--fern:#3a7a3a;--moss:#5a8a4a;--bark:#4a3a2a;
+  --lichen:#88aa78;--dapple:#c8d8a0;--forest-moon:#88c898;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+#scene{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 20%,rgba(58,122,58,0.08),transparent 55%),
+    radial-gradient(ellipse 60% 50% at 30% 70%,rgba(26,58,26,0.12),transparent 50%),
+    radial-gradient(ellipse 50% 35% at 75% 50%,rgba(136,170,120,0.04),transparent 50%);
+  animation:auroraShift 28s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.5}50%{opacity:.85}100%{opacity:.6}}
+
+/* GREEN FOREST MOON — 150px */
+.moon{position:fixed;top:4vh;right:7vw;width:150px;height:150px;z-index:1;pointer-events:none;}
+.moon-body{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 40% 36%,#c8e8b8,#88c898,#5a9a6a,#3a6a4a);
+  box-shadow:0 0 50px rgba(136,200,152,0.3),0 0 100px rgba(90,154,106,0.15),0 0 200px rgba(58,106,74,0.08),inset -10px -6px 18px rgba(10,30,15,0.2);
+  animation:moonGlow 6s ease-in-out infinite;position:relative;overflow:hidden;}
+.moon-body::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(140deg,transparent 28%,rgba(200,232,184,0.3) 42%,transparent 52%,rgba(136,200,152,0.12) 68%,transparent 78%);animation:moonShimmer 9s ease-in-out infinite;}
+.moon-halo{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(136,200,152,0.08);animation:ringFloat 7s ease-in-out infinite;}
+.moon-halo2{position:absolute;inset:-42px;border-radius:50%;border:1px solid rgba(136,200,152,0.04);animation:ringFloat 9s ease-in-out infinite 1.5s;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 50px rgba(136,200,152,0.3),0 0 100px rgba(90,154,106,0.15),0 0 200px rgba(58,106,74,0.08)}50%{box-shadow:0 0 70px rgba(136,200,152,0.4),0 0 140px rgba(90,154,106,0.25),0 0 240px rgba(58,106,74,0.12)}}
+@keyframes moonShimmer{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ringFloat{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.55;transform:scale(1.02)}}
+
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.08;color:var(--canopy);}
+.mtn svg{width:100%;height:120px;display:block;}
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lichen);opacity:.25;z-index:50;pointer-events:none;}
+
+.d-bar{position:sticky;top:0;z-index:100;background:rgba(6,14,8,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);}
+.d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
+.d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
+.d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(58,154,122,.1);color:var(--jade);}
+.d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid transparent;white-space:nowrap;}
+.d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
+
+.content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
+.page-title{font-family:'Cinzel',serif;font-size:1.15rem;margin-bottom:.2rem;}
+.page-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;}
+
+/* Sticker previews */
+.stk{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.1rem;margin-bottom:.65rem;backdrop-filter:blur(8px);text-align:center;position:relative;overflow:hidden;}
+.stk::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);animation:shimmer 14s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{left:-100%}50%{left:150%}}
+.stk-main{font-family:'Cinzel',serif;font-size:1.1rem;margin-bottom:.3rem;color:var(--cream);}
+.stk-sub{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ember);margin-bottom:.5rem;}
+.stk-best{font-size:.72rem;color:var(--dim);padding:.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;}
+
+/* Deployment zones */
+.zone-title{font-family:'Cinzel',serif;font-size:1.05rem;margin:1.5rem 0 .6rem;}
+.zone{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:.9rem;margin-bottom:.6rem;backdrop-filter:blur(8px);}
+.zone-nm{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lichen);margin-bottom:.5rem;}
+.zone-spots{display:flex;flex-wrap:wrap;gap:.3rem;}
+.zone-spot{font-size:.72rem;padding:4px 8px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+
+@media(max-width:600px){.moon{width:100px;height:100px;top:3vh;right:5vw;}}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div class="aurora"></div>
+<div class="moon"><div class="moon-body"></div><div class="moon-halo"></div><div class="moon-halo2"></div></div>
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,85 C150,65 230,35 370,48 C510,61 570,78 690,50 C810,22 890,40 1010,34 C1130,28 1210,48 1330,38 C1400,33 1430,40 1440,38 L1440,120Z"/></svg></div>
+<div class="sea-lbl">✦ forest · stickers</div>
+
+<div class="d-bar">
+  <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
+  <div class="d-tabs">
+    <div class="d-tab">Overview</div><div class="d-tab">Itinerary</div><div class="d-tab">Venues</div>
+    <div class="d-tab">Events</div><div class="d-tab act">Stickers</div><div class="d-tab">Account</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="page-title">Sticker Warfare Kit</div>
+  <div class="page-sub">3 designs × 43 spots. QR codes link directly to your booking page. Designed for guerrilla placement — bathroom stalls, community boards, window ledges, register displays.</div>
+
+  <div class="stk"><div class="stk-main">"Your ancestors have a message."</div><div class="stk-sub">Scan to find out →</div><div class="stk-best">BEST FOR: Crystal shops, spiritual venues, yoga studios, restrooms</div></div>
+
+  <div class="stk"><div class="stk-main">"Your next client is 3 blocks away."</div><div class="stk-sub">Guerrilla Wealth · Free Map</div><div class="stk-best">BEST FOR: Coworking spaces, coffee shops, business districts</div></div>
+
+  <div class="stk"><div class="stk-main">"The mountains know your name."</div><div class="stk-sub">Free Asheville heritage reading →</div><div class="stk-best">BEST FOR: Tourist areas, hotels, Biltmore Village, visitor centers</div></div>
+
+  <div class="zone-title">Deployment Map: 43 Spots</div>
+
+  <div class="zone"><div class="zone-nm">Downtown — 18 spots</div><div class="zone-spots"><span class="zone-spot">Malaprop's</span><span class="zone-spot">Izzy's</span><span class="zone-spot">Firestorm</span><span class="zone-spot">Woolworth</span><span class="zone-spot">Grove Arcade ×6</span><span class="zone-spot">Dobra Tea</span><span class="zone-spot">LAB Studios</span><span class="zone-spot">Salt Cave</span><span class="zone-spot">East Fork</span><span class="zone-spot">Pritchard Park</span><span class="zone-spot">Wall St garage</span></div></div>
+
+  <div class="zone"><div class="zone-nm">Lexington / South Slope — 10</div><div class="zone-spots"><span class="zone-spot">Sister Moon</span><span class="zone-spot">Rosetta's</span><span class="zone-spot">Burial Beer</span><span class="zone-spot">Hi-Wire</span><span class="zone-spot">French Broad</span><span class="zone-spot">Tops Shoes</span><span class="zone-spot">Blue Spiral</span><span class="zone-spot">Yoga Shala</span><span class="zone-spot">Universal Joint</span></div></div>
+
+  <div class="zone"><div class="zone-nm">River Arts — 8</div><div class="zone-spots"><span class="zone-spot">Riverview Station</span><span class="zone-spot">Cotton Mill</span><span class="zone-spot">Wedge Brewing</span><span class="zone-spot">Phil Mechanic</span><span class="zone-spot">CURVE</span><span class="zone-spot">12 Bones</span><span class="zone-spot">Foundation</span></div></div>
+
+  <div class="zone"><div class="zone-nm">West AVL / Biltmore — 7</div><div class="zone-spots"><span class="zone-spot">Odd's Café</span><span class="zone-spot">West Village</span><span class="zone-spot">Fleetwood's</span><span class="zone-spot">Biltmore ×2</span><span class="zone-spot">All Souls</span><span class="zone-spot">Haywood Common</span></div></div>
+</div>
+
+<script>
+// ═══ FOREST CANOPY — light rays, floating spores, hanging vines ═══
+const cv=document.getElementById('scene'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let time=0;
+
+// Light rays filtering through canopy
+const rays=[];
+for(let i=0;i<6;i++){
+  rays.push({
+    x:W*.15+Math.random()*W*.7,
+    width:30+Math.random()*60,
+    angle:-.15+Math.random()*.3,
+    alpha:.02+Math.random()*.03,
+    phase:Math.random()*Math.PI*2,
+    speed:.003+Math.random()*.005
+  });
+}
+
+// Floating spores / pollen
+const spores=[];
+for(let i=0;i<40;i++){
+  spores.push({
+    x:Math.random()*W,y:Math.random()*H,
+    size:.5+Math.random()*2,
+    vx:(Math.random()-.5)*.1,vy:-(0.02+Math.random()*.08),
+    phase:Math.random()*Math.PI*2,
+    alpha:.06+Math.random()*.15
+  });
+}
+
+// Canopy leaf particles (drifting down)
+const leaves=[];
+for(let i=0;i<15;i++){
+  leaves.push({
+    x:Math.random()*W,y:-20-Math.random()*200,
+    size:2+Math.random()*4,rot:Math.random()*Math.PI*2,
+    rotSpeed:(Math.random()-.5)*.02,
+    vx:(Math.random()-.5)*.2,vy:.1+Math.random()*.2,
+    drift:Math.random()*Math.PI*2,
+    color:Math.random()>.5?'#5a8a4a':'#3a7a3a',
+    alpha:.1+Math.random()*.25
+  });
+}
+
+function drawRays(){
+  rays.forEach(r=>{
+    r.phase+=r.speed;
+    const sway=Math.sin(r.phase)*20;
+    const a=r.alpha*(.5+Math.sin(r.phase*2)*.5);
+    cx.save();
+    cx.globalAlpha=a;
+    cx.translate(r.x+sway,0);cx.rotate(r.angle);
+    const grad=cx.createLinearGradient(0,0,0,H);
+    grad.addColorStop(0,'rgba(200,216,160,0.15)');
+    grad.addColorStop(.3,'rgba(200,216,160,0.08)');
+    grad.addColorStop(1,'rgba(200,216,160,0)');
+    cx.fillStyle=grad;
+    cx.fillRect(-r.width/2,0,r.width,H);
+    cx.restore();
+  });
+}
+
+function drawSpores(){
+  spores.forEach(s=>{
+    s.phase+=.008;
+    s.x+=s.vx+Math.sin(s.phase)*.2;
+    s.y+=s.vy+Math.cos(s.phase*.7)*.1;
+    if(s.y<-20){s.y=H+20;s.x=Math.random()*W;}
+    if(s.x<-20)s.x=W+20;if(s.x>W+20)s.x=-20;
+    const twinkle=.5+Math.sin(s.phase*3)*.5;
+    cx.globalAlpha=s.alpha*twinkle;
+    cx.fillStyle='#c8d8a0';
+    cx.beginPath();cx.arc(s.x,s.y,s.size,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=s.alpha*twinkle*.15;
+    cx.beginPath();cx.arc(s.x,s.y,s.size*3,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function drawLeaves(){
+  leaves.forEach(l=>{
+    l.drift+=.005;
+    l.x+=l.vx+Math.sin(l.drift)*.4;
+    l.y+=l.vy;l.rot+=l.rotSpeed;
+    if(l.y>H+40){l.y=-40;l.x=Math.random()*W;}
+    cx.save();
+    cx.translate(l.x,l.y);cx.rotate(l.rot);
+    cx.globalAlpha=l.alpha;
+    cx.fillStyle=l.color;
+    cx.beginPath();
+    cx.ellipse(0,0,l.size*.4,l.size,0,0,Math.PI*2);
+    cx.fill();
+    cx.restore();
+  });
+}
+
+function animate(){
+  time++;
+  cx.clearRect(0,0,W,H);
+  drawRays();
+  drawSpores();
+  drawLeaves();
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

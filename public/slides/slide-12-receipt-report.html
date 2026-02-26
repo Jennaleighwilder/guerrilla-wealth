@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Your Guerrilla Wealth Assessment — Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0e0b18;--smoke:#1a1528;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#b0a8b8;--fog:#a89ab8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 60%,rgba(212,134,62,0.08),transparent 50%),
+    radial-gradient(ellipse 80% 40% at 15% 80%,rgba(74,63,140,0.2),transparent 50%),
+    radial-gradient(ellipse 50% 40% at 85% 20%,rgba(58,154,122,0.08),transparent 50%);
+  animation:auroraShift 22s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.7}50%{opacity:1}100%{opacity:.8}}
+
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.06;color:var(--cream);}
+.mtn svg{width:100%;height:120px;display:block;}
+
+/* ═══ REPORT CONTAINER ═══ */
+.report{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+
+/* ═══ HEADER ═══ */
+.rpt-hd{text-align:center;padding:2.5rem 0 2rem;animation:fadeUp 1s ease-out;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.rpt-orb{width:80px;height:80px;margin:0 auto 1.5rem;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#f0b865,var(--copper),#8a4a1a);
+  box-shadow:0 0 40px rgba(212,134,62,.4),0 0 80px rgba(212,134,62,.15);
+  animation:orbP 3s ease-in-out infinite;}
+@keyframes orbP{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(212,134,62,.4),0 0 80px rgba(212,134,62,.15)}50%{transform:scale(1.04);box-shadow:0 0 55px rgba(212,134,62,.5),0 0 110px rgba(212,134,62,.2)}}
+
+.rpt-brand{font-family:'Cinzel',serif;font-size:clamp(1.6rem,5vw,2.2rem);letter-spacing:.02em;margin-bottom:.3rem;}
+.rpt-sub{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ember);}
+.rpt-date{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--dim);margin-top:.8rem;letter-spacing:.06em;}
+
+/* ═══ ARCHETYPE REVEAL ═══ */
+.arch-card{background:rgba(255,255,255,.07);border:1px solid rgba(212,134,62,.2);border-radius:14px;padding:1.8rem;margin:1.5rem 0;text-align:center;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+.arch-card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,134,62,.04),transparent);animation:shimmer 10s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{left:-100%}50%{left:150%}}
+/* ═══ FC MONOGRAM — The Forgotten Code ═══ */
+.fc-mono{width:90px;height:90px;margin:0 auto 1.2rem;position:relative;display:flex;align-items:center;justify-content:center;}
+.fc-mono-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(212,134,62,.25);animation:monoRing 6s ease-in-out infinite;}
+.fc-mono-ring2{position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(212,134,62,.1);animation:monoRing 8s ease-in-out infinite 1s;}
+.fc-mono-glow{position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,rgba(212,134,62,.08),transparent 70%);animation:monoGlow 4s ease-in-out infinite;}
+@keyframes monoRing{0%,100%{opacity:.4;transform:scale(1) rotate(0deg)}50%{opacity:.8;transform:scale(1.03) rotate(3deg)}}
+@keyframes monoGlow{0%,100%{opacity:.5}50%{opacity:1}}
+.fc-letters{position:relative;z-index:2;font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;letter-spacing:.08em;
+  background:linear-gradient(135deg,#f0c060,#d4863e,#e8a95b,#c87030);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(212,134,62,.3));
+  text-shadow:none;}
+.fc-letters span{font-size:1rem;font-weight:400;opacity:.6;vertical-align:middle;margin:0 .05em;
+  background:linear-gradient(135deg,#e8a95b,#d4863e);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+/* Decorative dots flanking the monogram */
+.fc-dots{position:absolute;width:100%;top:50%;display:flex;justify-content:space-between;pointer-events:none;}
+.fc-dot{width:3px;height:3px;border-radius:50%;background:var(--copper);opacity:.4;}
+.arch-lbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--copper);margin-bottom:.4rem;}
+.arch-nm{font-family:'Cinzel',serif;font-size:1.6rem;margin-bottom:.6rem;}
+.arch-desc{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--fog);line-height:1.6;max-width:480px;margin:0 auto;}
+
+/* ═══ SCORE BREAKDOWN ═══ */
+.scores{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.2rem 0;}
+.score-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.9rem;text-align:center;backdrop-filter:blur(8px);}
+.score-v{font-family:'Space Mono',monospace;font-size:1.4rem;color:var(--ember);font-weight:700;}
+.score-l{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-top:.2rem;}
+.score-bar{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-top:.4rem;}
+.score-fill{height:100%;border-radius:3px;transition:width 1.5s cubic-bezier(.4,0,.2,1);}
+.score-fill.identity{background:linear-gradient(90deg,var(--copper),var(--ember));}
+.score-fill.wealth{background:linear-gradient(90deg,#c42a2a,#e04040);}
+.score-fill.capacity{background:linear-gradient(90deg,#9a5a8a,#c87aaa);}
+.score-fill.resonance{background:linear-gradient(90deg,#3a7a8a,#6aaa9a);}
+
+/* ═══ SECTION HEADERS ═══ */
+.sec{margin-top:2rem;}
+.sec-t{font-family:'Cinzel',serif;font-size:1.1rem;margin-bottom:.3rem;}
+.sec-sub{font-size:.78rem;color:var(--dim);margin-bottom:1rem;line-height:1.5;}
+
+/* ═══ OFFERINGS ═══ */
+.off{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;margin-bottom:.6rem;backdrop-filter:blur(8px);}
+.off-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
+.off-tier{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);}
+.off-pr{font-family:'Space Mono',monospace;font-size:.88rem;color:var(--ember);font-weight:700;}
+.off-nm{font-weight:700;font-size:.95rem;margin-bottom:.2rem;}
+.off-desc{font-size:.78rem;color:var(--dim);line-height:1.45;}
+
+/* ═══ WEEKLY SNAPSHOT ═══ */
+.snap{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem;}
+.snap-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.9rem;backdrop-filter:blur(8px);}
+.snap-v{font-family:'Cinzel',serif;font-size:1.3rem;}
+.snap-l{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:.15rem;}
+
+/* ═══ CTA SECTION — THE FUNNEL ═══ */
+.cta-section{margin-top:2.5rem;text-align:center;padding:2rem 1rem;background:rgba(212,134,62,.06);border:1px solid rgba(212,134,62,.15);border-radius:14px;backdrop-filter:blur(10px);}
+.cta-title{font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:.4rem;}
+.cta-desc{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--fog);margin-bottom:1.5rem;line-height:1.6;}
+
+.cta-btn{display:block;width:100%;padding:16px;border-radius:8px;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;transition:all .3s;margin-bottom:.6rem;-webkit-tap-highlight-color:transparent;border:none;}
+.cta-btn.primary{background:linear-gradient(135deg,var(--copper),var(--fire));color:var(--cream);box-shadow:0 6px 25px rgba(212,134,62,.25);}
+.cta-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(212,134,62,.35);}
+.cta-btn.secondary{background:rgba(255,255,255,.06);border:1px solid rgba(212,134,62,.25);color:var(--ember);}
+.cta-btn.secondary:hover{background:rgba(212,134,62,.1);}
+.cta-btn.ghost{background:none;border:1px solid rgba(255,255,255,.1);color:var(--cream);font-size:.65rem;}
+.cta-btn.ghost:hover{border-color:rgba(212,134,62,.25);color:var(--ember);}
+
+/* ═══ EMAIL TO SELF ═══ */
+.email-section{margin-top:2rem;text-align:center;}
+.email-title{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;}
+.email-row{display:flex;gap:.5rem;max-width:400px;margin:0 auto;}
+.email-input{flex:1;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;}
+.email-input:focus{border-color:rgba(212,134,62,.4);}
+.email-input::placeholder{color:var(--dim);}
+.email-send{padding:12px 20px;background:linear-gradient(135deg,var(--copper),var(--fire));color:var(--cream);border:none;border-radius:6px;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap;}
+.email-send:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(212,134,62,.3);}
+.email-status{font-size:.72rem;color:var(--jade);margin-top:.5rem;min-height:1.2rem;}
+
+/* ═══ FOOTER — YOUR INFO ═══ */
+.rpt-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);text-align:center;}
+.footer-brand{font-family:'Cinzel',serif;font-size:1rem;margin-bottom:.3rem;}
+.footer-tagline{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-style:italic;color:var(--fog);margin-bottom:1rem;}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-bottom:.8rem;}
+.footer-link{font-family:'Space Mono',monospace;font-size:.55rem;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--ember);text-decoration:none;transition:all .2s;}
+.footer-link:hover{background:rgba(212,134,62,.1);border-color:rgba(212,134,62,.2);}
+.footer-contact{font-size:.72rem;color:var(--dim);line-height:1.6;}
+.footer-contact a{color:var(--ember);text-decoration:none;}
+.footer-legal{font-family:'Space Mono',monospace;font-size:.48rem;color:rgba(176,168,184,.5);margin-top:1rem;letter-spacing:.04em;line-height:1.5;}
+
+/* ═══ NAME BANNER ═══ */
+.name-banner{text-align:center;margin-bottom:.5rem;animation:fadeUp 1.2s ease-out .3s both;}
+.name-for{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
+.name-v{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--ember);margin-top:.2rem;}
+
+/* ═══ SOCIAL PROOF ═══ */
+.proof{text-align:center;margin:1.5rem 0;padding:1rem;background:rgba(58,154,122,.06);border:1px solid rgba(58,154,122,.12);border-radius:10px;backdrop-filter:blur(8px);}
+.proof-num{font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--jade);font-weight:700;}
+.proof-txt{font-size:.78rem;color:var(--dim);margin-top:.2rem;line-height:1.4;}
+.proof-stars{color:var(--gold);font-size:1rem;letter-spacing:.15em;margin-top:.3rem;}
+
+/* ═══ URGENCY ═══ */
+.urgency{text-align:center;padding:.8rem;background:rgba(196,90,58,.06);border:1px solid rgba(196,90,58,.12);border-radius:8px;margin-top:1rem;}
+.urgency-txt{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--fire);}
+
+/* ═══ SHARE BUTTONS ═══ */
+.share-row{display:flex;gap:.4rem;justify-content:center;margin-top:1rem;}
+.share-btn{padding:8px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--cream);font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;cursor:pointer;transition:all .2s;text-decoration:none;}
+.share-btn:hover{background:rgba(212,134,62,.1);border-color:rgba(212,134,62,.2);color:var(--ember);}
+
+/* ═══ COPY RESULTS ═══ */
+.copy-btn{display:block;width:100%;padding:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:var(--cream);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.5rem;}
+.copy-btn:hover{background:rgba(58,154,122,.08);border-color:rgba(58,154,122,.2);color:var(--jade);}
+
+@media(max-width:600px){.scores{grid-template-columns:1fr;}.snap{grid-template-columns:1fr;}.email-row{flex-direction:column;}.share-row{flex-wrap:wrap;}}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="aurora"></div>
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,92 C130,72 210,42 340,54 C470,66 540,84 660,56 C780,28 860,46 980,38 C1100,30 1180,54 1300,44 C1380,38 1420,48 1440,46 L1440,120Z"/></svg></div>
+
+<div class="report">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="rpt-hd">
+    <div class="rpt-orb"></div>
+    <div class="rpt-brand">Guerrilla Wealth</div>
+    <div class="rpt-sub">Assessment Results</div>
+    <div class="rpt-date">Generated February 25, 2026 · Asheville, NC</div>
+  </div>
+
+  <!-- ═══ PERSONALIZED NAME ═══ -->
+  <div class="name-banner">
+    <div class="name-for">Assessment Prepared For</div>
+    <div class="name-v" id="userName">Your Name</div>
+  </div>
+
+  <!-- ═══ ARCHETYPE REVEAL ═══ -->
+  <div class="arch-card">
+    <div class="fc-mono">
+      <div class="fc-mono-glow"></div>
+      <div class="fc-mono-ring2"></div>
+      <div class="fc-mono-ring"></div>
+      <div class="fc-dots"><div class="fc-dot"></div><div class="fc-dot"></div></div>
+      <div class="fc-letters">F<span>·</span>C</div>
+    </div>
+    <div class="arch-lbl">Your Sacred Archetype</div>
+    <div class="arch-nm">Oracle-Strategist</div>
+    <div class="arch-desc">You see what others can't and build systems from vision. Your power is translating the invisible into the actionable. Clients don't just trust you — they rely on you to see around corners.</div>
+  </div>
+
+  <!-- ═══ LAYER SCORES ═══ -->
+  <div class="scores">
+    <div class="score-card">
+      <div class="score-v">87</div>
+      <div class="score-l">Sacred Identity</div>
+      <div class="score-bar"><div class="score-fill identity" style="width:87%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-v">72</div>
+      <div class="score-l">Wealth Geography</div>
+      <div class="score-bar"><div class="score-fill wealth" style="width:72%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-v">91</div>
+      <div class="score-l">Sacred Capacity</div>
+      <div class="score-bar"><div class="score-fill capacity" style="width:91%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-v">74</div>
+      <div class="score-l">Resonance Score</div>
+      <div class="score-bar"><div class="score-fill resonance" style="width:74%"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ YOUR WEEK SNAPSHOT ═══ -->
+  <div class="sec">
+    <div class="sec-t">Your Asheville Snapshot</div>
+    <div class="sec-sub">What's waiting for you right now, based on your archetype and capacity.</div>
+  </div>
+  <div class="snap">
+    <div class="snap-card"><div class="snap-v">147</div><div class="snap-l">Venues Scored</div></div>
+    <div class="snap-card"><div class="snap-v">23</div><div class="snap-l">Events This Week</div></div>
+    <div class="snap-card"><div class="snap-v">$4,130</div><div class="snap-l">Monthly Projection</div></div>
+    <div class="snap-card"><div class="snap-v">43</div><div class="snap-l">Sticker Placements</div></div>
+  </div>
+
+  <!-- ═══ YOUR OFFERING LADDER ═══ -->
+  <div class="sec">
+    <div class="sec-t">Your Offering Ladder</div>
+    <div class="sec-sub">Built from your quiz answers. This is the price architecture that matches your archetype.</div>
+  </div>
+
+  <div class="off"><div class="off-top"><div class="off-tier">Free Hook</div><div class="off-pr">$0</div></div><div class="off-nm">Flash Reading</div><div class="off-desc">2-min taste at events. Captures email + curiosity. Your Oracle nature makes this magnetic — people feel seen instantly. Conversion rate: 25–35%.</div></div>
+
+  <div class="off"><div class="off-top"><div class="off-tier">Entry</div><div class="off-pr">$44</div></div><div class="off-nm">Entrepreneur Snapshot</div><div class="off-desc">15-min reading or single-page report. Impulse price. 20 per month = $880. This is where you plant seeds.</div></div>
+
+  <div class="off"><div class="off-top"><div class="off-tier">Core</div><div class="off-pr">$350</div></div><div class="off-nm">Full Entrepreneur Report</div><div class="off-desc">Deep 30+ page entrepreneurial analysis. This is your signature product. 5 per month = $1,750. Every flash reading funnels here.</div></div>
+
+  <div class="off"><div class="off-top"><div class="off-tier">Premium</div><div class="off-pr">$1,500/mo</div></div><div class="off-nm">Monthly Retainer</div><div class="off-desc">Ongoing guidance + full report suite. 1–2 clients at this level = $1,500–$3,000. These are your long-game relationships.</div></div>
+
+  <!-- ═══ SOCIAL PROOF ═══ -->
+  <div class="proof">
+    <div class="proof-num">229+ Clients Served</div>
+    <div class="proof-txt">Entrepreneur reports, readings, and strategic guidance across 10 cities</div>
+    <div class="proof-stars">★★★★★</div>
+    <div class="proof-txt">97% satisfaction rate</div>
+  </div>
+
+  <!-- ═══ THE FUNNEL — CTAs ═══ -->
+  <div class="cta-section">
+    <div class="cta-title">Ready to Activate?</div>
+    <div class="cta-desc">Your intelligence map is built. Your archetype is revealed. The venues, events, and stickers are waiting. The only question is when you start.</div>
+
+    <a href="https://jennaleighwilder.github.io/AI-Consulting-/" class="cta-btn primary">Unlock Your Full Dashboard →</a>
+    <a href="mailto:theforgottencode780@gmail.com?subject=Entrepreneur%20Reading%20Inquiry&body=Hi%20Jennifer%2C%0A%0AI%20just%20took%20the%20Guerrilla%20Wealth%20assessment%20and%20I'm%20interested%20in%20learning%20more%20about%20an%20entrepreneur%20reading.%0A%0AMy%20archetype%3A%20Oracle-Strategist%0A%0AThank%20you!" class="cta-btn secondary">Book an Entrepreneur Reading</a>
+    <a href="mailto:theforgottencode780@gmail.com?subject=Free%20Flash%20Reading%20Request&body=Hi%20Jennifer%2C%0A%0AI%27d%20love%20a%20free%20flash%20reading!%20I%20just%20completed%20the%20Guerrilla%20Wealth%20assessment." class="cta-btn ghost">Get a Free Flash Reading</a>
+
+    <div class="urgency"><div class="urgency-txt">⚡ Only 8 entrepreneur reading slots available this month — 3 already claimed</div></div>
+
+    <div class="share-row">
+      <a class="share-btn" onclick="shareText()">📤 Share Results</a>
+      <a class="share-btn" onclick="copyResults()">📋 Copy to Clipboard</a>
+    </div>
+  </div>
+
+  <!-- ═══ EMAIL TO SELF ═══ -->
+  <div class="email-section">
+    <div class="email-title">Save Your Results</div>
+    <div class="email-row">
+      <input type="email" class="email-input" id="emailInput" placeholder="your@email.com">
+      <button class="email-send" onclick="sendEmail()">Send →</button>
+    </div>
+    <div class="email-status" id="emailStatus"></div>
+  </div>
+
+  <!-- ═══ FOOTER — YOUR BRAND ═══ -->
+  <div class="rpt-footer">
+    <div class="footer-brand">◈ The Forgotten Code Research Institute</div>
+    <div class="footer-tagline">What does your bloodline want you to know?</div>
+    <div class="footer-links">
+      <a href="https://jennaleighwilder.github.io/AI-Consulting-/" class="footer-link">Website</a>
+      <a href="mailto:theforgottencode780@gmail.com" class="footer-link">Email</a>
+      <a href="tel:423-388-8304" class="footer-link">423-388-8304</a>
+    </div>
+    <div class="footer-contact">
+      Created by <a href="mailto:theforgottencode780@gmail.com">Jennifer Leigh West</a><br>
+      The Forgotten Code Research Institute · Rural Tennessee
+    </div>
+    <div class="footer-legal">
+      Powered by Mirror Protocol™ (U.S. Copyright Reg. No. 1-14949237971) · MIRA Protocol™ · West Method™<br>
+      © 2026 The Forgotten Code Research Institute. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ═══ PARTICLES — embers + mist ═══
+const cv=document.getElementById('particles'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let particles=[];
+
+// Embers
+for(let i=0;i<12;i++){
+  particles.push({
+    type:'ember',x:Math.random()*3000,y:3000+Math.random()*100,
+    s:1.5+Math.random()*1.5,a:.15+Math.random()*.3,
+    vx:(Math.random()-.5)*.1,vy:-(0.3+Math.random()*.3)*1.5,
+    phase:Math.random()*Math.PI*2,life:0
+  });
+}
+// Mist
+for(let i=0;i<8;i++){
+  particles.push({
+    type:'mist',x:Math.random()*3000,y:Math.random()*3000,
+    s:3+Math.random()*4,a:.04+Math.random()*.08,
+    vx:.03+Math.random()*.05,vy:0,
+    phase:Math.random()*Math.PI*2,life:0
+  });
+}
+// Sparks
+for(let i=0;i<8;i++){
+  particles.push({
+    type:'spark',x:Math.random()*3000,y:3000+Math.random()*100,
+    s:.8+Math.random()*1,a:.15+Math.random()*.35,
+    vx:(Math.random()-.5)*.15,vy:-(0.5+Math.random()*.3)*1.5,
+    phase:Math.random()*Math.PI*2,life:0
+  });
+}
+
+function animate(){
+  cx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    p.life+=.005;
+    if(p.type==='mist'){
+      p.x+=p.vx;p.y+=Math.sin(p.life*2+p.phase)*.3;
+      if(p.x>W+30){p.x=-30;p.y=Math.random()*H;}
+      cx.beginPath();cx.arc(p.x,p.y,p.s,0,Math.PI*2);
+      cx.fillStyle='rgba(120,80,160,'+p.a+')';cx.fill();
+    }else{
+      p.x+=p.vx+Math.sin(p.life*1.5+p.phase)*.2;p.y+=p.vy;
+      if(p.y<-20){p.y=H+20;p.x=Math.random()*W;}
+      const c=p.type==='ember'?'rgba(212,134,62,':'rgba(240,192,96,';
+      cx.beginPath();cx.arc(p.x,p.y,p.s,0,Math.PI*2);
+      cx.fillStyle=c+p.a+')';cx.fill();
+    }
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ═══ SCORE BAR ANIMATION ═══
+setTimeout(()=>{
+  document.querySelectorAll('.score-fill').forEach(bar=>{
+    const w=bar.style.width;
+    bar.style.width='0%';
+    setTimeout(()=>{bar.style.width=w;},100);
+  });
+},500);
+
+// ═══ EMAIL FUNCTION ═══
+function sendEmail(){
+  const email=document.getElementById('emailInput').value.trim();
+  const status=document.getElementById('emailStatus');
+  if(!email||!email.includes('@')){
+    status.textContent='Please enter a valid email.';
+    status.style.color='var(--fire)';
+    return;
+  }
+  // Build mailto with full results summary
+  const subject=encodeURIComponent('Your Guerrilla Wealth Assessment Results');
+  const body=encodeURIComponent(
+`YOUR GUERRILLA WEALTH ASSESSMENT RESULTS
+=========================================
+
+Generated: ${new Date().toLocaleDateString()}
+City: Asheville, NC
+
+YOUR SACRED ARCHETYPE: Oracle-Strategist
+You see what others can't and build systems from vision. Your power is translating the invisible into the actionable.
+
+LAYER SCORES:
+• Sacred Identity: 87/100
+• Wealth Geography: 72/100
+• Sacred Capacity: 91/100
+• Resonance Score: 74/100
+
+YOUR OFFERING LADDER:
+• Free Hook: Flash Reading ($0) → 25-35% conversion
+• Entry: Entrepreneur Snapshot ($44) → 20/mo = $880
+• Core: Full Entrepreneur Report ($350) → 5/mo = $1,750
+• Premium: Monthly Retainer ($1,500/mo)
+• Monthly Projection: $4,130
+
+YOUR CITY SNAPSHOT:
+• 147 Venues Scored
+• 23 Events This Week
+• 43 Sticker Placements Mapped
+
+━━━━━━━━━━━━━━━━━━━━━
+
+READY TO ACTIVATE?
+
+🔑 Unlock your full dashboard:
+https://jennaleighwilder.github.io/AI-Consulting-/
+
+📧 Book an entrepreneur reading:
+theforgottencode780@gmail.com
+
+📞 Call: 423-388-8304
+
+━━━━━━━━━━━━━━━━━━━━━
+
+The Forgotten Code Research Institute
+Created by Jennifer Leigh West
+Powered by Mirror Protocol™ · MIRA Protocol™ · West Method™
+© 2026 All rights reserved.
+`);
+
+  window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
+  status.textContent='✓ Opening your email client...';
+  status.style.color='var(--jade)';
+  setTimeout(()=>{status.textContent='Check your email app to send!';},2000);
+}
+
+// Also allow Enter key in email input
+document.getElementById('emailInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter')sendEmail();
+});
+
+// ═══ NAME PROMPT — asks on load ═══
+setTimeout(()=>{
+  const name=prompt('Welcome! What name should we put on your assessment?');
+  if(name&&name.trim()){
+    document.getElementById('userName').textContent=name.trim();
+  }
+},1500);
+
+// ═══ BUILD RESULTS TEXT ═══
+function getResultsText(){
+  const name=document.getElementById('userName').textContent;
+  return `GUERRILLA WEALTH ASSESSMENT RESULTS
+=========================================
+Prepared for: ${name}
+Generated: ${new Date().toLocaleDateString()}
+City: Asheville, NC
+
+SACRED ARCHETYPE: Oracle-Strategist
+You see what others can't and build systems from vision.
+
+SCORES:
+Sacred Identity: 87 | Wealth Geography: 72
+Sacred Capacity: 91 | Resonance: 74
+
+OFFERING LADDER:
+Flash Reading: $0 (free hook)
+Entrepreneur Snapshot: $44
+Full Entrepreneur Report: $350
+Monthly Retainer: $1,500/mo
+Projected Monthly: $4,130
+
+229+ clients served | 97% satisfaction
+
+Ready to activate?
+https://jennaleighwilder.github.io/AI-Consulting-/
+Book a reading: theforgottencode780@gmail.com
+Call: 423-388-8304
+
+The Forgotten Code Research Institute
+by Jennifer Leigh West`;
+}
+
+// ═══ SHARE ═══
+function shareText(){
+  const text=getResultsText();
+  if(navigator.share){
+    navigator.share({title:'My Guerrilla Wealth Results',text}).catch(()=>{});
+  }else{
+    copyResults();
+  }
+}
+
+// ═══ COPY TO CLIPBOARD ═══
+function copyResults(){
+  const text=getResultsText();
+  navigator.clipboard.writeText(text).then(()=>{
+    const btns=document.querySelectorAll('.share-btn');
+    btns[1].textContent='✓ Copied!';
+    setTimeout(()=>{btns[1].textContent='📋 Copy to Clipboard';},2000);
+  }).catch(()=>{
+    // Fallback
+    const ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);
+    ta.select();document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+</script>
+</body>
+</html>

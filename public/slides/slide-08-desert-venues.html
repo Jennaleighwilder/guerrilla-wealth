@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Venue Intelligence (Desert Night)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0c0814;--smoke:#1a1528;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#b0a8b8;--fog:#a89ab8;
+  --glow:rgba(212,134,62,0.15);
+  /* Desert palette */
+  --mesa:#8a4a2a;--sandstone:#c8a070;--terra:#b06a3a;--sage:#6a8a5a;
+  --cactus:#4a6a3a;--dusk:#2a1a30;--starlight:#d0d8e8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:#0a0610;color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+#scene{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* Desert aurora — warm purple-amber horizon */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 90% 30% at 50% 95%,rgba(138,74,42,0.12),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 20% 70%,rgba(42,26,48,0.15),transparent 50%),
+    radial-gradient(ellipse 50% 35% at 80% 40%,rgba(106,138,90,0.04),transparent 50%),
+    radial-gradient(ellipse 40% 25% at 50% 10%,rgba(100,80,140,0.06),transparent 50%);
+  animation:auroraShift 30s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.5}50%{opacity:.9}100%{opacity:.6}}
+
+/* AMBER DESERT MOON — big 150px */
+.moon{position:fixed;top:5vh;right:8vw;width:150px;height:150px;z-index:1;pointer-events:none;}
+.moon-body{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 38% 36%,#f0c870,#d4963e,#a86a2a,#6a4018);
+  box-shadow:
+    0 0 55px rgba(212,150,62,0.35),
+    0 0 110px rgba(200,130,50,0.18),
+    0 0 220px rgba(168,106,42,0.1),
+    inset -10px -6px 18px rgba(40,20,5,0.25);
+  animation:moonGlow 6s ease-in-out infinite;
+  position:relative;overflow:hidden;}
+.moon-body::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,transparent 25%,rgba(255,220,160,0.25) 40%,transparent 50%,rgba(240,200,112,0.1) 65%,transparent 75%);
+  animation:moonShimmer 9s ease-in-out infinite;}
+.moon-body::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 55% 50%,transparent 35%,rgba(100,60,20,0.12) 55%,rgba(60,30,10,0.08) 75%);}
+.moon-halo{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(212,150,62,0.08);animation:ringFloat 7s ease-in-out infinite;}
+.moon-halo2{position:absolute;inset:-42px;border-radius:50%;border:1px solid rgba(212,150,62,0.04);animation:ringFloat 9s ease-in-out infinite 1.5s;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 55px rgba(212,150,62,0.35),0 0 110px rgba(200,130,50,0.18),0 0 220px rgba(168,106,42,0.1),inset -10px -6px 18px rgba(40,20,5,0.25)}50%{box-shadow:0 0 75px rgba(212,150,62,0.45),0 0 150px rgba(200,130,50,0.28),0 0 260px rgba(168,106,42,0.15),inset -10px -6px 18px rgba(40,20,5,0.2)}}
+@keyframes moonShimmer{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ringFloat{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.55;transform:scale(1.02)}}
+
+/* Smooth rolling desert hills */
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.08;color:var(--mesa);}
+.mtn svg{width:100%;height:120px;display:block;}
+
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sandstone);opacity:.25;z-index:50;pointer-events:none;}
+
+/* Dashboard bar */
+.d-bar{position:sticky;top:0;z-index:100;background:rgba(10,6,16,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);}
+.d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
+.d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
+.d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
+.d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid transparent;white-space:nowrap;}
+.d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
+
+.content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
+.page-title{font-family:'Cinzel',serif;font-size:1.15rem;margin-bottom:.2rem;}
+.page-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;}
+
+/* Venue panels */
+.tier-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;margin-top:1rem;}
+.tier-hd:first-of-type{margin-top:0;}
+.tier-t{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.tier-badge{font-family:'Space Mono',monospace;font-size:.55rem;padding:2px 8px;border-radius:3px;background:rgba(212,134,62,.08);color:var(--copper);}
+
+.vc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem;margin-bottom:.6rem;backdrop-filter:blur(8px);position:relative;overflow:hidden;display:flex;gap:.8rem;align-items:flex-start;}
+.vc::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);animation:shimmer 14s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{left:-100%}50%{left:150%}}
+.vc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:.25rem;}
+.vc-dot.t1{background:var(--copper);box-shadow:0 0 10px rgba(212,134,62,.3);}
+.vc-dot.t2{background:var(--river);box-shadow:0 0 10px rgba(74,159,162,.25);}
+.vc-dot.t3{background:var(--jade);box-shadow:0 0 10px rgba(58,154,122,.2);}
+.vc-info{flex:1;min-width:0;}
+.vc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.vc-nm{font-weight:700;font-size:.92rem;}
+.vc-sc{font-family:'Space Mono',monospace;font-size:.88rem;color:var(--ember);font-weight:700;flex-shrink:0;}
+.vc-meta{font-size:.75rem;color:var(--dim);margin-top:.15rem;line-height:1.4;}
+.vc-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.4rem;}
+.vc-tag{font-family:'Space Mono',monospace;font-size:.52rem;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.vc-tag.hot{background:rgba(212,134,62,.08);border-color:rgba(212,134,62,.15);color:var(--copper);}
+.vc-pk{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--sage);margin-top:.3rem;}
+
+@media(max-width:600px){.moon{width:100px;height:100px;top:3vh;right:5vw;}}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div class="aurora"></div>
+
+<div class="moon">
+  <div class="moon-body"></div>
+  <div class="moon-halo"></div>
+  <div class="moon-halo2"></div>
+</div>
+
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,88 C160,68 240,38 380,50 C520,62 580,80 700,52 C820,24 900,42 1020,36 C1140,30 1220,50 1340,40 C1400,35 1430,42 1440,40 L1440,120Z"/></svg></div>
+<div class="sea-lbl">✦ desert · venues</div>
+
+<div class="d-bar">
+  <div class="d-bar-top"><div class="d-logo">◈ Guerrilla Wealth</div><div class="d-tier">PRO</div></div>
+  <div class="d-tabs">
+    <div class="d-tab">Overview</div>
+    <div class="d-tab">Itinerary</div>
+    <div class="d-tab act">Venues</div>
+    <div class="d-tab">Events</div>
+    <div class="d-tab">Stickers</div>
+    <div class="d-tab">Account</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="page-title">Venue Intelligence — Asheville</div>
+  <div class="page-sub">147 venues scored for your Oracle-Strategist archetype. Guerrilla compatibility, foot traffic, sticker placement, and partnership readiness.</div>
+
+  <!-- TIER 1 -->
+  <div class="tier-hd"><span class="tier-t">Tier 1 — Premium</span><span class="tier-badge">29 venues</span></div>
+
+  <div class="vc"><div class="vc-dot t1"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Grove Arcade</div><div class="vc-sc">94</div></div><div class="vc-meta">Shopping/Art · 4 active partnerships · 6 sticker spots · Tourist + local mix</div><div class="vc-tags"><span class="vc-tag hot">Partnership Ready</span><span class="vc-tag hot">High Traffic</span><span class="vc-tag">Multiple Restrooms</span><span class="vc-tag">Community Board</span></div><div class="vc-pk">Peak: 11a–2p weekdays · 10a–5p weekends</div></div></div>
+
+  <div class="vc"><div class="vc-dot t1"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Biltmore Village</div><div class="vc-sc">91</div></div><div class="vc-meta">Luxury district · Tourist heavy · 6 sticker spots · High spending audience</div><div class="vc-tags"><span class="vc-tag hot">Premium Clients</span><span class="vc-tag">Tourist Zone</span><span class="vc-tag">Multiple Shops</span></div><div class="vc-pk">Peak: 10a–4p daily · Strongest Sat-Sun</div></div></div>
+
+  <div class="vc"><div class="vc-dot t1"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Battery Park Book Exchange</div><div class="vc-sc">83</div></div><div class="vc-meta">Books + wine bar · High dwell time · 2 sticker spots · Intellectually curious crowd</div><div class="vc-tags"><span class="vc-tag hot">Partnership Ready</span><span class="vc-tag">High Dwell</span><span class="vc-tag">Wine Bar</span></div><div class="vc-pk">Peak: 5p–9p evenings · Thurs-Sat strongest</div></div></div>
+
+  <!-- TIER 2 -->
+  <div class="tier-hd"><span class="tier-t">Tier 2 — Strategic</span><span class="tier-badge">51 venues</span></div>
+
+  <div class="vc"><div class="vc-dot t2"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Lexington Ave Corridor</div><div class="vc-sc">88</div></div><div class="vc-meta">Crystal shops + cafés · Local/tourist mix · 10 placement spots across strip</div><div class="vc-tags"><span class="vc-tag">Sister Moon</span><span class="vc-tag">Rosetta's</span><span class="vc-tag">Tops Shoes</span><span class="vc-tag hot">Your People</span></div><div class="vc-pk">Peak: 12p–6p daily</div></div></div>
+
+  <div class="vc"><div class="vc-dot t2"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">River Arts District</div><div class="vc-sc">85</div></div><div class="vc-meta">Studio crawls · Weekend zone · 8 spots across studios and galleries</div><div class="vc-tags"><span class="vc-tag">Riverview Station</span><span class="vc-tag">Wedge Brewing</span><span class="vc-tag">Cotton Mill</span></div><div class="vc-pk">Peak: Sat 11a–5p · Second Saturday crawls</div></div></div>
+
+  <div class="vc"><div class="vc-dot t2"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Malaprop's Bookstore</div><div class="vc-sc">82</div></div><div class="vc-meta">Independent bookstore · High-traffic restroom · Community board active</div><div class="vc-tags"><span class="vc-tag hot">Sticker Hotspot</span><span class="vc-tag">Community Board</span><span class="vc-tag">Restroom</span></div><div class="vc-pk">Peak: 10a–6p · Events Thurs evenings</div></div></div>
+
+  <!-- TIER 3 -->
+  <div class="tier-hd"><span class="tier-t">Tier 3 — Emerging</span><span class="tier-badge">67 venues</span></div>
+
+  <div class="vc"><div class="vc-dot t3"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">West Asheville Strip</div><div class="vc-sc">72</div></div><div class="vc-meta">Local energy · Growing wellness scene · 7 spots along Haywood Rd</div><div class="vc-tags"><span class="vc-tag">Odd's Café</span><span class="vc-tag">Fleetwood's</span><span class="vc-tag">West Village</span></div><div class="vc-pk">Peak: 10a–2p · Sat farmers market</div></div></div>
+
+  <div class="vc"><div class="vc-dot t3"></div><div class="vc-info"><div class="vc-top"><div class="vc-nm">Black Mountain</div><div class="vc-sc">68</div></div><div class="vc-meta">Day trip · Artisan heavy · 4 spots in walkable downtown</div><div class="vc-tags"><span class="vc-tag">Day Trip</span><span class="vc-tag">Artisan Market</span><span class="vc-tag">Low Competition</span></div><div class="vc-pk">Peak: Sat all day · First Friday events</div></div></div>
+</div>
+
+<script>
+// ═══ DESERT NIGHT — stars, heat shimmer, drifting sand motes ═══
+const cv=document.getElementById('scene'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let time=0;
+
+// Stars (120)
+const stars=[];
+for(let i=0;i<120;i++){
+  stars.push({
+    x:Math.random()*W,y:Math.random()*H*.7,
+    size:.3+Math.random()*1.8,
+    phase:Math.random()*Math.PI*2,
+    twinkleSpeed:.005+Math.random()*.02,
+    alpha:.15+Math.random()*.6
+  });
+}
+
+// Heat shimmer waves (subtle distortion lines near horizon)
+const shimmers=[];
+for(let i=0;i<8;i++){
+  shimmers.push({
+    y:H*.75+Math.random()*H*.15,
+    phase:Math.random()*Math.PI*2,
+    speed:.008+Math.random()*.012,
+    alpha:.02+Math.random()*.03,
+    width:200+Math.random()*400
+  });
+}
+
+// Sand motes (floating dust)
+const dust=[];
+for(let i=0;i<25;i++){
+  dust.push({
+    x:Math.random()*W,y:H*.4+Math.random()*H*.5,
+    size:.6+Math.random()*1.5,
+    vx:.05+Math.random()*.1,
+    phase:Math.random()*Math.PI*2,
+    alpha:.05+Math.random()*.12
+  });
+}
+
+function drawStars(){
+  stars.forEach(s=>{
+    s.phase+=s.twinkleSpeed;
+    const twinkle=.4+Math.sin(s.phase)*.6;
+    const a=s.alpha*twinkle;
+    // Glow
+    cx.globalAlpha=a*.15;
+    cx.fillStyle='#d0d8e8';
+    cx.beginPath();cx.arc(s.x,s.y,s.size*3,0,Math.PI*2);cx.fill();
+    // Core
+    cx.globalAlpha=a;
+    cx.fillStyle='#e8eef8';
+    cx.beginPath();cx.arc(s.x,s.y,s.size,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function drawShimmer(){
+  shimmers.forEach(sh=>{
+    sh.phase+=sh.speed;
+    const x=W*.2+Math.sin(sh.phase)*W*.3;
+    cx.globalAlpha=sh.alpha*(0.5+Math.sin(sh.phase*2)*.5);
+    cx.strokeStyle='rgba(200,160,112,0.15)';
+    cx.lineWidth=1;
+    cx.beginPath();
+    for(let i=0;i<sh.width;i+=4){
+      const py=sh.y+Math.sin((x+i)*.02+sh.phase*3)*3;
+      if(i===0)cx.moveTo(x+i,py);else cx.lineTo(x+i,py);
+    }
+    cx.stroke();
+    cx.globalAlpha=1;
+  });
+}
+
+function drawDust(){
+  dust.forEach(d=>{
+    d.phase+=.006;
+    d.x+=d.vx;
+    d.y+=Math.sin(d.phase)*.15;
+    if(d.x>W+20){d.x=-20;d.y=H*.4+Math.random()*H*.5;}
+    const a=d.alpha*(0.5+Math.sin(d.phase*2)*.5);
+    cx.globalAlpha=a;
+    cx.fillStyle='#c8a070';
+    cx.beginPath();cx.arc(d.x,d.y,d.size,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function animate(){
+  time++;
+  cx.clearRect(0,0,W,H);
+  drawStars();
+  drawShimmer();
+  drawDust();
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

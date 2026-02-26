@@ -1,0 +1,13 @@
+{
+  "name": "guerrilla-wealth",
+  "version": "1.0.0",
+  "description": "Guerrilla Wealth Assessment App — The Forgotten Code Research Institute",
+  "author": "Jennifer Leigh West",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve public -l 3000",
+    "start": "npx serve public -l $PORT",
+    "build": "echo 'Static site — no build needed'"
+  }
+}

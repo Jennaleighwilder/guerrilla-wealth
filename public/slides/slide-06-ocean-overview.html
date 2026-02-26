@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Dashboard Overview (Ocean)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0a0d1a;--smoke:#101828;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#7a7288;--fog:#a89ab8;
+  --glow:rgba(212,134,62,0.15);--glow2:rgba(212,134,62,0.45);
+  /* Ocean palette */
+  --ocean-deep:#0a1628;--ocean-mid:#102040;--ocean-surf:#1a3a5a;
+  --foam:#c8dce8;--seafoam:#6aaa9a;--sand:#d4c8a8;--kelp:#2a5a3a;
+  --tidal:#3a7a8a;--salt:#e8e0d0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--ocean-deep);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ═══ CANVAS (waves + particles) ═══ */
+#scene{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ═══ OCEAN AURORA — deep blue-green glow ═══ */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 90%,rgba(42,90,58,0.1),transparent 55%),
+    radial-gradient(ellipse 60% 50% at 30% 60%,rgba(58,122,138,0.08),transparent 50%),
+    radial-gradient(ellipse 50% 40% at 70% 30%,rgba(16,32,64,0.15),transparent 50%),
+    radial-gradient(ellipse 40% 30% at 80% 85%,rgba(106,170,154,0.05),transparent 50%);
+  animation:auroraShift 30s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.6;filter:hue-rotate(0deg)}50%{opacity:.9;filter:hue-rotate(4deg)}100%{opacity:.7;filter:hue-rotate(-3deg)}}
+
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--seafoam);opacity:.25;z-index:50;pointer-events:none;}
+
+/* ═══ DASHBOARD BAR ═══ */
+.d-bar{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.12);}
+.d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
+.d-logo{font-family:'Cinzel',serif;font-size:1.05rem;}
+.d-tier{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
+.d-city-row{display:flex;align-items:center;gap:.4rem;padding:0 1.2rem .35rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.d-city{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.05em;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.12);color:#b0a8b8;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.d-city.act{background:rgba(212,134,62,.1);border-color:rgba(212,134,62,.25);color:var(--ember);}
+.d-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 .6rem;}
+.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:#b0a8b8;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .25s;}
+.d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
+
+/* ═══ CONTENT ═══ */
+.content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
+
+/* ═══ ON METER — Celestial Biophysics Resonance ═══ */
+.on-meter{background:rgba(255,255,255,.07);border:1px solid rgba(106,170,154,.15);border-radius:14px;padding:1.4rem;margin-bottom:1rem;backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+.on-meter::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(106,170,154,.04),transparent);animation:shimmer 10s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{left:-100%}50%{left:150%}}
+.on-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.on-title{font-family:'Cinzel',serif;font-size:1rem;}
+.on-score-wrap{text-align:right;}
+.on-score{font-family:'Space Mono',monospace;font-size:1.6rem;color:var(--seafoam);font-weight:700;}
+.on-score-lbl{font-family:'Space Mono',monospace;font-size:.65rem;color:#b0a8b8;letter-spacing:.1em;text-transform:uppercase;}
+.on-status{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--foam);margin-bottom:1.2rem;line-height:1.5;}
+
+.on-gauges{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.on-gauge{padding:.7rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:8px;}
+.on-gauge-lbl{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#b0a8b8;margin-bottom:.4rem;display:flex;justify-content:space-between;}
+.on-gauge-val{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--seafoam);}
+.on-bar{height:6px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden;margin-top:.3rem;}
+.on-bar-fill{height:100%;border-radius:2px;transition:width 1.5s cubic-bezier(.4,0,.2,1);}
+.on-bar-fill.energy{background:linear-gradient(90deg,var(--tidal),var(--seafoam));}
+.on-bar-fill.focus{background:linear-gradient(90deg,var(--ocean-surf),var(--foam));}
+.on-bar-fill.emotional{background:linear-gradient(90deg,var(--kelp),var(--jade));}
+.on-bar-fill.physical{background:linear-gradient(90deg,var(--sand),var(--gold));}
+
+.on-conditions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.14);}
+.on-cond{font-family:'Space Mono',monospace;font-size:.65rem;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);}
+.on-cond.active{background:rgba(106,170,154,.08);border-color:rgba(106,170,154,.15);color:var(--seafoam);}
+
+/* ═══ STAT CARDS ═══ */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1rem;}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem;backdrop-filter:blur(8px);}
+.stat-v{font-family:'Cinzel',serif;font-size:1.5rem;}
+.stat-l{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#b0a8b8;margin-top:.15rem;}
+.stat-ch{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--jade);margin-top:.3rem;}
+
+/* ═══ ARCHETYPE CARD ═══ */
+.arch{background:rgba(255,255,255,.07);border:1px solid rgba(212,134,62,.12);border-radius:12px;padding:1.2rem;margin-bottom:1rem;backdrop-filter:blur(8px);position:relative;overflow:hidden;}
+.arch::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,134,62,.03),transparent);animation:shimmer 12s ease-in-out infinite;}
+.arch-lbl{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:.3rem;}
+.arch-nm{font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:.3rem;}
+.arch-desc{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--fog);line-height:1.5;}
+
+/* ═══ PANELS ═══ */
+.panel{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-bottom:.9rem;backdrop-filter:blur(8px);}
+.panel-hd{padding:.8rem 1.1rem .6rem;border-bottom:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;}
+.panel-t{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#b0a8b8;}
+.badge{font-family:'Space Mono',monospace;font-size:.65rem;padding:2px 6px;border-radius:3px;background:rgba(212,134,62,.08);color:var(--copper);}
+
+.vi{display:flex;align-items:center;gap:.65rem;padding:.7rem 1.1rem;border-bottom:1px solid rgba(255,255,255,.14);}
+.vi:last-child{border:none;}
+.vi-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.vi-dot.t1{background:var(--copper);box-shadow:0 0 8px rgba(212,134,62,.3);}
+.vi-dot.t2{background:var(--river);box-shadow:0 0 8px rgba(74,159,162,.2);}
+.vi-dot.t3{background:var(--jade);box-shadow:0 0 8px rgba(58,154,122,.2);}
+.vi-info{flex:1;min-width:0;}
+.vi-nm{font-weight:600;font-size:.95rem;}
+.vi-meta{font-size:.8rem;color:#b0a8b8;margin-top:.05rem;}
+.vi-sc{font-family:'Space Mono',monospace;font-size:1.05rem;color:var(--ember);font-weight:700;}
+
+/* ═══ OFFERING LADDER ═══ */
+.off-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:.8rem 1.1rem;}
+.off-c{border-radius:10px;padding:.9rem;backdrop-filter:blur(8px);}
+.off-c.free{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);}
+.off-c.entry{background:rgba(212,134,62,.04);border:1px solid rgba(212,134,62,.1);}
+.off-c.core{background:rgba(255,255,255,.07);border:1px solid rgba(212,134,62,.15);}
+.off-c.prem{background:linear-gradient(135deg,rgba(212,134,62,.06),rgba(196,90,58,.04));border:1px solid rgba(212,134,62,.2);}
+.off-tier{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);margin-bottom:.3rem;}
+.off-nm{font-weight:700;font-size:.95rem;margin-bottom:.15rem;}
+.off-pr{font-family:'Space Mono',monospace;font-size:.95rem;color:var(--copper);margin-bottom:.3rem;}
+.off-nt{font-size:.8rem;color:#b0a8b8;line-height:1.35;}
+
+/* ═══ REVENUE BOX ═══ */
+.rev{background:rgba(212,134,62,.04);border:1px solid rgba(212,134,62,.1);border-radius:10px;padding:1rem;margin-top:.5rem;backdrop-filter:blur(8px);}
+.rev-t{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper);margin-bottom:.4rem;}
+.rev-row{display:flex;justify-content:space-between;padding:.25rem 0;font-size:1.05rem;}
+.rev-row span:last-child{font-family:'Space Mono',monospace;color:var(--ember);font-weight:600;}
+.rev-total{border-top:1px solid rgba(212,134,62,.15);margin-top:.3rem;padding-top:.4rem;font-weight:700;}
+
+@media(max-width:600px){.stats{grid-template-columns:1fr;}.off-grid{grid-template-columns:1fr;}.on-gauges{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div class="aurora"></div>
+<div class="sea-lbl">✦ ocean · overview</div>
+
+<!-- ═══ DASHBOARD BAR ═══ -->
+<div class="d-bar">
+  <div class="d-bar-top">
+    <div class="d-logo">◈ Guerrilla Wealth</div>
+    <div class="d-tier">PRO</div>
+  </div>
+  <div class="d-city-row">
+    <div class="d-city act">Asheville, NC</div>
+    <div class="d-city">Knoxville</div>
+    <div class="d-city">Sedona</div>
+  </div>
+  <div class="d-tabs">
+    <div class="d-tab act">Overview</div>
+    <div class="d-tab">Itinerary</div>
+    <div class="d-tab">Venues</div>
+    <div class="d-tab">Events</div>
+    <div class="d-tab">Stickers</div>
+    <div class="d-tab">Account</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ═══ ON METER — Celestial Biophysics Resonance ═══ -->
+  <div class="on-meter">
+    <div class="on-header">
+      <div>
+        <div class="on-title">Resonance Meter</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:#b0a8b8;letter-spacing:.08em;margin-top:.15rem;">CELESTIAL BIOPHYSICS · UVRK-1 PATTERN ENGINE</div>
+      </div>
+      <div class="on-score-wrap">
+        <div class="on-score" id="onScore">74</div>
+        <div class="on-score-lbl">Resonance Score</div>
+      </div>
+    </div>
+    <div class="on-status" id="onStatus">Aligned day — your birth electromagnetic baseline matches today's field conditions. Expansion pattern detected. Good window for outward action, partnerships, and public-facing work.</div>
+    <div class="on-gauges">
+      <div class="on-gauge">
+        <div class="on-gauge-lbl">Energy <span class="on-gauge-val">High</span></div>
+        <div class="on-bar"><div class="on-bar-fill energy" style="width:78%"></div></div>
+      </div>
+      <div class="on-gauge">
+        <div class="on-gauge-lbl">Focus <span class="on-gauge-val">Strong</span></div>
+        <div class="on-bar"><div class="on-bar-fill focus" style="width:82%"></div></div>
+      </div>
+      <div class="on-gauge">
+        <div class="on-gauge-lbl">Emotional Field <span class="on-gauge-val">Calm</span></div>
+        <div class="on-bar"><div class="on-bar-fill emotional" style="width:65%"></div></div>
+      </div>
+      <div class="on-gauge">
+        <div class="on-gauge-lbl">Physical <span class="on-gauge-val">Strong</span></div>
+        <div class="on-bar"><div class="on-bar-fill physical" style="width:71%"></div></div>
+      </div>
+    </div>
+    <div class="on-conditions">
+      <span class="on-cond active">Kp 2 · Quiet</span>
+      <span class="on-cond active">Waxing Crescent · 38%</span>
+      <span class="on-cond">Solar · Low Activity</span>
+      <span class="on-cond active">Schumann · 7.83 Hz Stable</span>
+      <span class="on-cond">Pattern · EXPANSION</span>
+    </div>
+  </div>
+
+  <!-- ═══ STAT CARDS ═══ -->
+  <div class="stats">
+    <div class="stat"><div class="stat-v">$1,240</div><div class="stat-l">Revenue This Month</div><div class="stat-ch">↑ 34% vs last month</div></div>
+    <div class="stat"><div class="stat-v">12/28</div><div class="stat-l">Actions Complete</div><div class="stat-ch">43% this week</div></div>
+    <div class="stat"><div class="stat-v">47</div><div class="stat-l">Contacts Captured</div><div class="stat-ch">↑ 8 this week</div></div>
+    <div class="stat"><div class="stat-v">6</div><div class="stat-l">Active Venues</div><div class="stat-ch">2 partnerships pending</div></div>
+  </div>
+
+  <!-- ═══ ARCHETYPE REVEAL ═══ -->
+  <div class="arch">
+    <div class="arch-lbl">Your Sacred Archetype</div>
+    <div class="arch-nm">Oracle-Strategist</div>
+    <div class="arch-desc">You see what others can't and build systems from vision. Your power is translating the invisible into the actionable. Clients don't just trust you — they rely on you to see around corners.</div>
+  </div>
+
+  <!-- ═══ TOP VENUES ═══ -->
+  <div class="panel">
+    <div class="panel-hd"><span class="panel-t">Top Venues This Week</span><span class="badge">5 scored</span></div>
+    <div class="vi"><div class="vi-dot t1"></div><div class="vi-info"><div class="vi-nm">Grove Arcade</div><div class="vi-meta">Shopping/Art · 4 partnerships · 6 sticker spots</div></div><div><div class="vi-sc">94</div></div></div>
+    <div class="vi"><div class="vi-dot t1"></div><div class="vi-info"><div class="vi-nm">Battery Park Books</div><div class="vi-meta">Wine bar · High dwell · Partnership ready</div></div><div><div class="vi-sc">83</div></div></div>
+    <div class="vi"><div class="vi-dot t2"></div><div class="vi-info"><div class="vi-nm">Lexington Ave</div><div class="vi-meta">Crystal shops + cafés · Local/tourist mix</div></div><div><div class="vi-sc">88</div></div></div>
+  </div>
+
+  <!-- ═══ OFFERING LADDER ═══ -->
+  <div class="panel">
+    <div class="panel-hd"><span class="panel-t">Your Offering Ladder</span><span class="badge">4 tiers</span></div>
+    <div class="off-grid">
+      <div class="off-c free"><div class="off-tier">Free Hook</div><div class="off-nm">Flash Reading</div><div class="off-pr">$0</div><div class="off-nt">2-min taste at events. Captures email + curiosity. Conversion: 25-35%</div></div>
+      <div class="off-c entry"><div class="off-tier">Entry</div><div class="off-nm">Heritage Snapshot</div><div class="off-pr">$44</div><div class="off-nt">15-min reading or single-page report. Impulse price. Goal: 20/month = $880</div></div>
+      <div class="off-c core"><div class="off-tier">Core</div><div class="off-nm">Full Heritage Report</div><div class="off-pr">$350</div><div class="off-nt">Deep 30+ page ancestral analysis. 4-6/month = $1,400-$2,100</div></div>
+      <div class="off-c prem"><div class="off-tier">Premium</div><div class="off-nm">Monthly Retainer</div><div class="off-pr">$1,500/mo</div><div class="off-nt">Ongoing guidance + report suite. 1-2 clients = $1,500-$3,000</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ REVENUE MATH ═══ -->
+  <div class="rev">
+    <div class="rev-t">Monthly Revenue Projection</div>
+    <div class="rev-row"><span>20 × Flash → Heritage Snapshot ($44)</span><span>$880</span></div>
+    <div class="rev-row"><span>5 × Full Heritage Report ($350)</span><span>$1,750</span></div>
+    <div class="rev-row"><span>1 × Monthly Retainer ($1,500)</span><span>$1,500</span></div>
+    <div class="rev-row rev-total"><span>Projected Monthly</span><span>$4,130</span></div>
+  </div>
+
+</div>
+
+<script>
+// ═══ OCEAN SCENE — waves, sea grass, foam, tidal particles ═══
+const cv=document.getElementById('scene'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let time=0;
+
+// Sea grass blades
+const GRASS_COUNT=45;
+const grass=[];
+for(let i=0;i<GRASS_COUNT;i++){
+  grass.push({
+    x:Math.random()*2,// 0-2 normalized, will multiply by W
+    baseH:30+Math.random()*50,
+    width:1.5+Math.random()*2.5,
+    phase:Math.random()*Math.PI*2,
+    speed:.008+Math.random()*.012,
+    color:Math.random()>.5?'rgba(42,90,58,':'rgba(58,122,90,',
+    alpha:.15+Math.random()*.25
+  });
+}
+
+// Foam / spray particles
+const foam=[];
+for(let i=0;i<35;i++){
+  foam.push({
+    x:Math.random()*W,y:H-20-Math.random()*60,
+    size:1+Math.random()*3,
+    vx:(Math.random()-.5)*.3,vy:-(Math.random()*.15),
+    alpha:.08+Math.random()*.2,
+    phase:Math.random()*Math.PI*2,
+    life:Math.random()*100
+  });
+}
+
+// Tidal motes (float in water)
+const motes=[];
+for(let i=0;i<20;i++){
+  motes.push({
+    x:Math.random()*W,y:H*.5+Math.random()*H*.4,
+    size:.8+Math.random()*1.5,
+    phase:Math.random()*Math.PI*2,
+    alpha:.06+Math.random()*.12,
+    speed:.003+Math.random()*.005
+  });
+}
+
+function drawWaves(){
+  // Multiple wave layers
+  for(let layer=0;layer<3;layer++){
+    const yBase=H-40-layer*25;
+    const amplitude=8+layer*5;
+    const freq=.008-layer*.001;
+    const speed=.015+layer*.005;
+    const alpha=.04-layer*.01;
+
+    cx.beginPath();
+    cx.moveTo(0,H);
+    for(let x=0;x<=W;x+=3){
+      const y=yBase+Math.sin(x*freq+time*speed+layer)*amplitude
+              +Math.sin(x*freq*2.3+time*speed*1.5)*amplitude*.4;
+      cx.lineTo(x,y);
+    }
+    cx.lineTo(W,H);cx.closePath();
+    cx.fillStyle=`rgba(16,32,64,${alpha+.02})`;
+    cx.fill();
+
+    // Wave crest highlight
+    cx.beginPath();
+    for(let x=0;x<=W;x+=3){
+      const y=yBase+Math.sin(x*freq+time*speed+layer)*amplitude
+              +Math.sin(x*freq*2.3+time*speed*1.5)*amplitude*.4;
+      if(x===0)cx.moveTo(x,y);else cx.lineTo(x,y);
+    }
+    cx.strokeStyle=`rgba(200,220,232,${alpha})`;
+    cx.lineWidth=.8;
+    cx.stroke();
+  }
+}
+
+function drawSeaGrass(){
+  grass.forEach(g=>{
+    const baseX=g.x*W*.5+W*.25;// centered in lower portion
+    const baseY=H;
+    const sway=Math.sin(time*g.speed+g.phase)*12+Math.sin(time*g.speed*.7+g.phase*1.3)*6;
+
+    cx.save();
+    cx.globalAlpha=g.alpha;
+    cx.strokeStyle=g.color+'0.6)';
+    cx.lineWidth=g.width;
+    cx.lineCap='round';
+    cx.beginPath();
+    cx.moveTo(baseX,baseY);
+    // Curved blade
+    const midX=baseX+sway*.4;
+    const midY=baseY-g.baseH*.5;
+    const tipX=baseX+sway;
+    const tipY=baseY-g.baseH;
+    cx.quadraticCurveTo(midX,midY,tipX,tipY);
+    cx.stroke();
+    cx.restore();
+  });
+}
+
+function drawFoam(){
+  foam.forEach(p=>{
+    p.life+=.02;
+    p.phase+=.015;
+    p.x+=p.vx+Math.sin(p.phase)*.2;
+    p.y+=p.vy+Math.sin(p.life)*.1;
+    // Reset when faded or off screen
+    if(p.y<H-100||p.alpha<.01){
+      p.x=Math.random()*W;
+      p.y=H-10-Math.random()*40;
+      p.alpha=.08+Math.random()*.2;
+      p.life=0;
+    }
+    const fadeAlpha=p.alpha*(0.5+Math.sin(p.phase)*.5);
+    cx.globalAlpha=fadeAlpha;
+    cx.fillStyle='#c8dce8';
+    cx.beginPath();cx.arc(p.x,p.y,p.size,0,Math.PI*2);cx.fill();
+    // Glow
+    cx.globalAlpha=fadeAlpha*.2;
+    cx.beginPath();cx.arc(p.x,p.y,p.size*3,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function drawMotes(){
+  motes.forEach(m=>{
+    m.phase+=m.speed;
+    const x=m.x+Math.sin(m.phase)*15;
+    const y=m.y+Math.cos(m.phase*.7)*8;
+    const twinkle=.5+Math.sin(m.phase*3)*.5;
+    cx.globalAlpha=m.alpha*twinkle;
+    cx.fillStyle='#6aaa9a';
+    cx.beginPath();cx.arc(x,y,m.size,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=m.alpha*twinkle*.15;
+    cx.beginPath();cx.arc(x,y,m.size*4,0,Math.PI*2);cx.fill();
+    cx.globalAlpha=1;
+  });
+}
+
+function animate(){
+  time++;
+  cx.clearRect(0,0,W,H);
+  drawMotes();
+  drawWaves();
+  drawSeaGrass();
+  drawFoam();
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ═══ ON METER ANIMATION — bars fill on load ═══
+setTimeout(()=>{
+  document.querySelectorAll('.on-bar-fill').forEach(bar=>{
+    const w=bar.style.width;
+    bar.style.width='0%';
+    setTimeout(()=>{bar.style.width=w;},100);
+  });
+},300);
+
+// Animate score count-up
+let scoreTarget=74,scoreCurrent=0;
+const scoreEl=document.getElementById('onScore');
+function countUp(){
+  if(scoreCurrent<scoreTarget){
+    scoreCurrent+=1;
+    scoreEl.textContent=scoreCurrent;
+    setTimeout(countUp,25);
+  }
+}
+setTimeout(countUp,500);
+</script>
+</body>
+</html>

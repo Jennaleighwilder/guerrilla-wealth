@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guerrilla Wealth — Layer I: Sacred Identity (Autumn)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080610;--deep:#0e0b18;--smoke:#1a1528;--ridge:#2a2240;
+  --copper:#d4863e;--ember:#e8a95b;--fire:#c45a3a;--gold:#f0c060;
+  --jade:#3a9a7a;--river:#4a9fa2;
+  --cream:#f5f0e8;--dim:#7a7288;--fog:#a89ab8;
+  --glow:rgba(212,134,62,0.15);--glow2:rgba(212,134,62,0.45);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ═══ CANVAS ═══ */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ═══ AUTUMN AURORA ═══ */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 50% at 40% 70%,rgba(196,74,42,0.1),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 70% 30%,rgba(212,134,62,0.08),transparent 50%),
+    radial-gradient(ellipse 50% 60% at 20% 50%,rgba(138,58,26,0.06),transparent 50%),
+    radial-gradient(ellipse 40% 30% at 80% 80%,rgba(106,42,42,0.05),transparent 50%);
+  animation:auroraShift 25s ease-in-out infinite alternate;}
+@keyframes auroraShift{0%{opacity:.7;filter:hue-rotate(0deg)}50%{opacity:1;filter:hue-rotate(5deg)}100%{opacity:.8;filter:hue-rotate(-3deg)}}
+
+/* ═══ SILVER MOON — BIG, dramatic like the splash orb ═══ */
+.moon{position:fixed;top:6vh;right:8vw;width:150px;height:150px;z-index:1;pointer-events:none;}
+.moon-body{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 40% 38%,#ffffff,#e8e4e0,#c8c4c0,#a8a4a0);
+  box-shadow:
+    0 0 50px rgba(255,255,255,0.3),
+    0 0 100px rgba(255,255,255,0.15),
+    0 0 200px rgba(230,225,220,0.1),
+    inset -10px -6px 20px rgba(0,0,0,0.12);
+  animation:moonGlow 5s ease-in-out infinite;
+  position:relative;overflow:hidden;}
+.moon-body::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,0.4) 45%,transparent 55%,rgba(255,255,255,0.15) 70%,transparent 80%);
+  animation:moonShimmer 8s ease-in-out infinite;}
+.moon-body::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 60% 55%,transparent 40%,rgba(180,175,170,0.15) 60%,rgba(140,135,130,0.1) 80%);}
+.moon-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.08);}
+.moon-ring:nth-child(2){inset:-16px;animation:ringFloat 6s ease-in-out infinite;}
+.moon-ring:nth-child(3){inset:-34px;border-color:rgba(255,255,255,0.04);animation:ringFloat 8s ease-in-out infinite 1s;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 50px rgba(255,255,255,0.3),0 0 100px rgba(255,255,255,0.15),0 0 200px rgba(230,225,220,0.1),inset -10px -6px 20px rgba(0,0,0,0.12)}50%{box-shadow:0 0 70px rgba(255,255,255,0.4),0 0 140px rgba(255,255,255,0.22),0 0 240px rgba(230,225,220,0.14),inset -10px -6px 20px rgba(0,0,0,0.1)}}
+@keyframes moonShimmer{0%,100%{opacity:.6;transform:rotate(0deg)}50%{opacity:1;transform:rotate(3deg)}}
+@keyframes ringFloat{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.02)}}
+
+/* ═══ MOUNTAINS ═══ */
+.mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.06;color:var(--cream);}
+.mtn svg{width:100%;height:110px;display:block;}
+
+.sea{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);opacity:.3;z-index:50;pointer-events:none;}
+
+/* ═══ PROGRESS ═══ */
+.prog{position:fixed;top:0;left:0;width:100%;height:4px;z-index:200;background:rgba(255,255,255,.06);}
+.prog-fill{height:100%;background:linear-gradient(90deg,#8a3a1a,var(--copper),var(--ember));transition:width .6s cubic-bezier(.4,0,.2,1);border-radius:0 2px 2px 0;}
+
+.content{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;}
+
+/* ═══ SECTION INTRO ═══ */
+.sec-intro{max-width:600px;margin:0 auto;padding:4rem 2rem 3rem;text-align:center;animation:fadeUp .8s ease-out;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.sec-icon{font-size:2.8rem;margin-bottom:1rem;filter:drop-shadow(0 0 12px rgba(212,134,62,.3));}
+.sec-num{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--copper);margin-bottom:.5rem;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:.6rem;}
+.sec-desc{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--fog);line-height:1.6;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
+
+/* ═══ QUESTION ═══ */
+.qc{max-width:640px;margin:0 auto;padding:2rem 1.5rem 4rem;display:none;}
+.qc.on{display:block;animation:fadeUp .5s ease-out;}
+.qc-ct{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:#b0a8b8;margin-bottom:1.2rem;text-align:center;}
+.qc-t{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3.5vw,1.6rem);text-align:center;line-height:1.35;margin-bottom:.5rem;}
+.qc-sub{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:#b0a8b8;text-align:center;margin-bottom:2rem;}
+
+/* ═══ OPTIONS ═══ */
+.opts{display:flex;flex-direction:column;gap:.6rem;}
+.opt{padding:1.1rem 1.3rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:10px;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(8px);display:flex;align-items:flex-start;gap:.9rem;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;}
+.opt::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);transition:left .6s;pointer-events:none;}
+.opt:hover{border-color:rgba(212,134,62,.3);background:rgba(212,134,62,.06);transform:translateX(6px);}
+.opt:hover::before{left:100%;}
+.opt:active{transform:scale(.98);}
+.opt.sel{border-color:rgba(212,134,62,.5);background:rgba(212,134,62,.1);box-shadow:0 0 20px rgba(212,134,62,.08);}
+.opt-ic{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:.05rem;transition:all .3s;}
+.opt.sel .opt-ic{background:rgba(212,134,62,.2);}
+.opt-body{flex:1;}
+.opt-t{font-weight:600;font-size:.95rem;}
+.opt-d{font-size:.8rem;color:#b0a8b8;margin-top:.15rem;line-height:1.4;}
+.opt-sh{font-family:'Cormorant Garamond',serif;font-size:.85rem;font-style:italic;color:var(--fog);margin-top:0;opacity:0;max-height:0;overflow:hidden;transition:all .5s ease;}
+.opt.sel .opt-sh{opacity:1;max-height:60px;margin-top:.4rem;}
+
+/* ═══ NAV ═══ */
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;padding:0 .5rem;}
+.btn-back{background:none;border:none;color:#b0a8b8;font-family:'Space Mono',monospace;font-size:.75rem;cursor:pointer;letter-spacing:.06em;transition:color .2s;-webkit-tap-highlight-color:transparent;}
+.btn-back:hover{color:var(--cream);}
+.btn-next{padding:12px 32px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);color:var(--ember);border-radius:6px;font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);-webkit-tap-highlight-color:transparent;}
+.btn-next:hover{background:rgba(212,134,62,.25);transform:translateY(-2px);}
+.btn-begin{padding:14px 40px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);color:var(--ember);border-radius:6px;font-family:'Space Mono',monospace;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);-webkit-tap-highlight-color:transparent;}
+.btn-begin:hover{background:rgba(212,134,62,.25);transform:translateY(-2px);}
+
+@media(max-width:600px){.opts{gap:.5rem;}.opt{padding:.9rem 1rem;}.moon{width:100px;height:100px;top:4vh;right:5vw;}}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="aurora"></div>
+
+<!-- ═══ SILVER-WHITE SHIMMERING MOON ═══ -->
+<div class="moon">
+  <div class="moon-body"></div>
+  <div class="moon-ring"></div>
+  <div class="moon-ring"></div>
+</div>
+
+<div class="mtn"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor"><path d="M0,120 L0,95 C120,75 200,45 320,55 C440,65 500,85 620,60 C740,35 820,50 940,40 C1060,30 1140,55 1260,45 C1340,38 1400,50 1440,48 L1440,120Z"/></svg></div>
+<div class="sea">✦ autumn · layer i</div>
+<div class="prog"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+<div class="content" id="content"></div>
+
+<script>
+// ═══ AUTUMN PARTICLE SYSTEM — falling leaves + embers + mist ═══
+const cv=document.getElementById('particles'),cx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+const LEAF_COLORS=['#c44a2a','#d4863e','#e8a95b','#8a3a1a','#6a2a2a','#d06030','#b85a28','#e0a040','#cc6622'];
+
+function drawLeaf(x,y,size,rot,color,alpha){
+  cx.save();
+  cx.translate(x,y);
+  cx.rotate(rot);
+  cx.globalAlpha=alpha;
+  cx.fillStyle=color;
+  cx.beginPath();
+  cx.moveTo(0,-size);
+  cx.bezierCurveTo(size*.6,-size*.4,size*.5,size*.3,0,size);
+  cx.bezierCurveTo(-size*.5,size*.3,-size*.6,-size*.4,0,-size);
+  cx.fill();
+  cx.strokeStyle='rgba(255,255,255,0.06)';
+  cx.lineWidth=.4;
+  cx.beginPath();cx.moveTo(0,-size*.7);cx.lineTo(0,size*.6);cx.stroke();
+  cx.restore();
+}
+
+let particles=[];
+
+// Falling leaves (50)
+for(let i=0;i<50;i++){
+  particles.push({
+    type:'leaf',x:Math.random()*3000,y:-50-Math.random()*600,
+    size:4+Math.random()*9,rot:Math.random()*Math.PI*2,
+    rotSpeed:(Math.random()-.5)*.025,
+    vx:(Math.random()-.5)*.5,vy:.25+Math.random()*.55,
+    drift:Math.random()*Math.PI*2,driftSpeed:.004+Math.random()*.012,
+    color:LEAF_COLORS[Math.floor(Math.random()*LEAF_COLORS.length)],
+    alpha:.15+Math.random()*.4
+  });
+}
+
+// Embers rising (25)
+for(let i=0;i<25;i++){
+  particles.push({
+    type:'ember',x:Math.random()*3000,y:3000+Math.random()*200,
+    size:1+Math.random()*2.2,vy:-(0.25+Math.random()*.45),vx:(Math.random()-.5)*.12,
+    phase:Math.random()*Math.PI*2,
+    alpha:.12+Math.random()*.28
+  });
+}
+
+// Mist (8)
+for(let i=0;i<8;i++){
+  particles.push({
+    type:'mist',x:Math.random()*3000,y:Math.random()*3000,
+    size:4+Math.random()*7,vx:.04+Math.random()*.07,
+    phase:Math.random()*Math.PI*2,
+    alpha:.06+Math.random()*.12,life:0,
+    color:Math.random()>.5?'rgba(160,100,60,':'rgba(120,80,140,'
+  });
+}
+
+function animate(){
+  cx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    if(p.type==='leaf'){
+      p.drift+=p.driftSpeed;
+      p.x+=p.vx+Math.sin(p.drift)*.7;
+      p.y+=p.vy;
+      p.rot+=p.rotSpeed;
+      if(p.y>H+60){p.y=-60-Math.random()*120;p.x=Math.random()*W;}
+      if(p.x<-60)p.x=W+60;if(p.x>W+60)p.x=-60;
+      drawLeaf(p.x,p.y,p.size,p.rot,p.color,p.alpha);
+    }else if(p.type==='ember'){
+      p.phase+=.018;
+      p.x+=p.vx+Math.sin(p.phase)*.18;
+      p.y+=p.vy;
+      if(p.y<-30){p.y=H+30;p.x=Math.random()*W;}
+      cx.beginPath();cx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      cx.fillStyle='rgba(212,134,62,'+p.alpha+')';cx.fill();
+    }else if(p.type==='mist'){
+      p.life+=.003;
+      p.x+=p.vx;p.y+=Math.sin(p.life*2+p.phase)*.3;
+      if(p.x>W+40){p.x=-40;p.y=Math.random()*H;}
+      cx.beginPath();cx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      cx.fillStyle=p.color+p.alpha+')';cx.fill();
+    }
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ═══ QUIZ ENGINE ═══
+const QS=[
+  {id:'sacred_work',ct:'LAYER I · QUESTION 1 OF 3',
+   t:'What is your sacred work?',
+   sub:'The offering you were born to give — even if the world hasn\'t named it yet.',
+   type:'select',
+   opts:[
+     {ic:'🔮',lbl:'Divination & Intuitive Readings',d:'Tarot, oracle, astrology, psychic guidance',sh:'You see what others can\'t. That\'s power — and it scares you sometimes.'},
+     {ic:'🌿',lbl:'Healing & Body Work',d:'Energy work, massage, herbalism, somatic healing',sh:'Your hands know what your mind hasn\'t caught up to yet.'},
+     {ic:'📚',lbl:'Teaching & Mentorship',d:'Courses, coaching, workshops, curriculum',sh:'You teach what you needed to learn. That\'s not coincidence.'},
+     {ic:'🎨',lbl:'Creative & Artisan Craft',d:'Visual art, music, writing, handmade goods',sh:'The thing you make in secret is the thing the world needs most.'},
+     {ic:'🏛️',lbl:'Strategy & Business Consulting',d:'Marketing, branding, systems, operations',sh:'You see patterns in chaos. Others call it magic. It\'s architecture.'},
+     {ic:'🌙',lbl:'Spiritual Services & Ritual',d:'Ceremony, heritage work, ancestral connection',sh:'The ancestors didn\'t choose you at random. They chose you because you listen.'}
+   ]},
+  {id:'childhood',ct:'LAYER I · QUESTION 2 OF 3',
+   t:'When you were a child, what did adults say about you?',
+   sub:'The mirror others held up to you — before you learned to hold your own.',
+   type:'select',
+   opts:[
+     {ic:'👁️',lbl:'"You\'re too sensitive"',d:'Feeling everything, absorbing every room',sh:'Your sensitivity is your signal receiver. It was never a flaw — it was equipment.'},
+     {ic:'🔥',lbl:'"You\'re too much"',d:'Too loud, too intense, too passionate',sh:'They said "too much" because they couldn\'t match your frequency.'},
+     {ic:'🤫',lbl:'"You\'re so quiet"',d:'Watchful, observant, inner world rich',sh:'Silence was never emptiness. It was strategy. You were mapping the room.'},
+     {ic:'⚡',lbl:'"You\'re so smart"',d:'Quick mind, pattern recognition, ahead of peers',sh:'Being "smart" became armor. Now it\'s time to let it become a bridge.'},
+     {ic:'🌊',lbl:'"You\'re a dreamer"',d:'Imaginative, elsewhere, building worlds',sh:'The worlds you built in your head? They\'re blueprints. Time to build them here.'},
+     {ic:'🛡️',lbl:'"You\'re so strong"',d:'Responsible, capable, carrying weight early',sh:'Strength was survival. Now let it be choice, not default.'}
+   ]},
+  {id:'money_body',ct:'LAYER I · QUESTION 3 OF 3',
+   t:'What happens in your body when money stress hits?',
+   sub:'Your nervous system already knows your relationship with money. Listen.',
+   type:'select',
+   opts:[
+     {ic:'💨',lbl:'Chest tightens, breath goes shallow',d:'Fight-or-flight activates in the ribcage',sh:'Your chest is guarding your heart. Money felt unsafe before you had words for it.'},
+     {ic:'🪨',lbl:'Stomach drops, nausea rises',d:'Gut-level dread, the body says "danger"',sh:'Your gut is the oldest brain. It remembers debts your mind has forgotten.'},
+     {ic:'🧊',lbl:'I freeze — can\'t think, can\'t move',d:'Shutdown mode, the lights go dim',sh:'Freeze is not weakness. It\'s your system protecting you from overwhelm. We work with it, not against it.'},
+     {ic:'🔄',lbl:'I spin — anxious thoughts, can\'t stop planning',d:'Mental overdrive, control attempts',sh:'The spinning is your genius trying to solve everything at once. We\'ll give it one thing at a time.'},
+     {ic:'😶',lbl:'I go numb — disconnect completely',d:'Dissociation, emotional flatline',sh:'Numbness is your system saying "I\'ve carried enough." We\'ll lighten the load.'},
+     {ic:'💪',lbl:'I get angry — fuel to fight',d:'Rage energy, productive or destructive',sh:'Anger is boundaries with teeth. We\'ll aim it at the right targets.'}
+   ]}
+];
+
+let cur=-1;const ans={};
+
+function renderIntro(){
+  const c=document.getElementById('content');
+  c.style.display='flex';c.style.alignItems='center';c.style.justifyContent='center';
+  c.innerHTML=`
+    <div class="sec-intro">
+      <div class="sec-icon">🍂</div>
+      <div class="sec-num">Layer I of III</div>
+      <div class="sec-title">Sacred Identity & Soul Readiness</div>
+      <div class="sec-desc">Before we map the city, we map you. Your sacred work, your shadow patterns, and the nervous system that runs your relationship with money.</div>
+      <button class="btn-begin" onclick="next()">Enter the Assessment →</button>
+    </div>`;
+  document.getElementById('prog').style.width='0%';
+}
+
+function renderQ(i){
+  const c=document.getElementById('content');
+  c.style.display='block';c.style.alignItems='';c.style.justifyContent='';
+  const q=QS[i];
+  document.getElementById('prog').style.width=Math.round(((i+1)/QS.length)*100)+'%';
+  let h=`<div class="qc on"><div class="qc-ct">${q.ct}</div><div class="qc-t">${q.t}</div><div class="qc-sub">${q.sub}</div><div class="opts">`;
+  q.opts.forEach((o,j)=>{
+    const s=ans[q.id]===j?' sel':'';
+    h+=`<div class="opt${s}" onclick="pick('${q.id}',${j},this)">
+      <div class="opt-ic">${o.ic}</div>
+      <div class="opt-body"><div class="opt-t">${o.lbl}</div><div class="opt-d">${o.d}</div><div class="opt-sh">${o.sh}</div></div></div>`;
+  });
+  h+=`</div><div class="nav"><button class="btn-back" onclick="prev()">← Back</button><button class="btn-next" onclick="next()">Continue →</button></div></div>`;
+  document.getElementById('content').innerHTML=h;
+  window.scrollTo(0,0);
+}
+
+function pick(id,j,el){
+  ans[id]=j;
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  setTimeout(()=>next(),650);
+}
+
+function next(){
+  cur++;
+  if(cur>=QS.length){
+    const c2=document.getElementById('content');c2.style.display='flex';c2.style.alignItems='center';c2.style.justifyContent='center';document.getElementById('prog').style.width='100%';
+    document.getElementById('content').innerHTML=`
+      <div class="sec-intro">
+        <div class="sec-icon">✦</div>
+        <div class="sec-num">Layer I Complete</div>
+        <div class="sec-title">Sacred Identity Mapped</div>
+        <div class="sec-desc">Your soul readiness profile is encoded. The leaves have fallen — now we move through the first frost, where we map your wealth geography and the cold truth of your numbers.</div>
+        <button class="btn-begin" onclick="alert('→ Next: Quiz Layer II — Winter')">Continue to Layer II →</button>
+      </div>`;
+    return;
+  }
+  renderQ(cur);
+}
+function prev(){if(cur<=0){cur=-1;renderIntro();return;}cur--;renderQ(cur);}
+
+renderIntro();
+</script>
+</body>
+</html>

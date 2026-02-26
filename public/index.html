@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Guerrilla Wealth — The Forgotten Code</title>
+<meta name="description" content="Guerrilla Wealth Assessment — discover your entrepreneurial archetype and unlock city-specific revenue strategies.">
+<meta name="author" content="Jennifer Leigh West — The Forgotten Code Research Institute">
+<meta property="og:title" content="Guerrilla Wealth — What's Your Entrepreneurial Archetype?">
+<meta property="og:description" content="Take the quiz. Get your personalized guerrilla wealth strategy for any city.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d0a0e">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:#0d0a0e;font-family:system-ui,-apple-system,sans-serif;}
+#app{width:100%;height:100%;position:relative;}
+iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;opacity:0;pointer-events:none;transition:opacity .6s ease;}
+iframe.active{opacity:1;pointer-events:auto;}
+
+/* Nav dots */
+.nav-dots{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:9999;display:flex;flex-direction:column;gap:6px;}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;border:none;padding:0;}
+.nav-dot.active{background:rgba(212,134,62,.8);box-shadow:0 0 8px rgba(212,134,62,.4);transform:scale(1.3);}
+.nav-dot:hover{background:rgba(212,134,62,.5);}
+
+/* Phase labels */
+.phase-label{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:9998;font-family:'Space Mono',monospace;font-size:.5rem;color:rgba(176,168,184,.4);letter-spacing:.1em;writing-mode:vertical-rl;text-orientation:mixed;pointer-events:none;transition:opacity .3s;}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="nav-dots" id="navDots"></div>
+<div class="phase-label" id="phaseLabel"></div>
+
+<script>
+const slides = [
+  { file: 'slides/slide-01-splash.html', phase: 'WELCOME' },
+  { file: 'slides/slide-02-autumn-quiz1.html', phase: 'QUIZ · IDENTITY' },
+  { file: 'slides/slide-03-winter-quiz2.html', phase: 'QUIZ · GEOGRAPHY' },
+  { file: 'slides/slide-04-spring-quiz3.html', phase: 'QUIZ · CAPACITY' },
+  { file: 'slides/slide-05-summer-plans-generating.html', phase: 'GENERATING' },
+  { file: 'slides/slide-06-ocean-overview.html', phase: 'DASHBOARD' },
+  { file: 'slides/slide-07-smokies-itinerary.html', phase: 'ITINERARY' },
+  { file: 'slides/slide-08-desert-venues.html', phase: 'VENUES' },
+  { file: 'slides/slide-09-city-events.html', phase: 'EVENTS' },
+  { file: 'slides/slide-10-forest-stickers.html', phase: 'STICKERS' },
+  { file: 'slides/slide-11-void-account.html', phase: 'ACCOUNT' },
+  { file: 'slides/slide-12-receipt-report.html', phase: 'RESULTS' },
+];
+
+const app = document.getElementById('app');
+const dotsEl = document.getElementById('navDots');
+const phaseEl = document.getElementById('phaseLabel');
+let current = 0;
+let iframes = [];
+let transitioning = false;
+
+// Build iframes and dots
+slides.forEach((s, i) => {
+  const iframe = document.createElement('iframe');
+  iframe.src = s.file;
+  iframe.setAttribute('loading', i < 3 ? 'eager' : 'lazy');
+  if (i === 0) iframe.classList.add('active');
+  app.appendChild(iframe);
+  iframes.push(iframe);
+
+  const dot = document.createElement('button');
+  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  dot.title = s.phase;
+  dot.addEventListener('click', () => goTo(i));
+  dotsEl.appendChild(dot);
+});
+
+phaseEl.textContent = slides[0].phase;
+
+function goTo(index) {
+  if (index === current || transitioning) return;
+  transitioning = true;
+  iframes[current].classList.remove('active');
+  dotsEl.children[current].classList.remove('active');
+  current = index;
+  iframes[current].classList.add('active');
+  dotsEl.children[current].classList.add('active');
+  phaseEl.textContent = slides[current].phase;
+  setTimeout(() => { transitioning = false; }, 700);
+}
+
+// Swipe support
+let touchStartY = 0;
+let touchStartX = 0;
+document.addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  const dx = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) {
+    if (dy > 0 && current < slides.length - 1) goTo(current + 1);
+    if (dy < 0 && current > 0) goTo(current - 1);
+  }
+}, { passive: true });
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    if (current < slides.length - 1) goTo(current + 1);
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    if (current > 0) goTo(current - 1);
+  }
+});
+
+// Wheel nav (debounced)
+let wheelTimeout;
+document.addEventListener('wheel', e => {
+  if (wheelTimeout) return;
+  wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 800);
+  if (e.deltaY > 30 && current < slides.length - 1) goTo(current + 1);
+  if (e.deltaY < -30 && current > 0) goTo(current - 1);
+}, { passive: true });
+</script>
+</body>
+</html>
