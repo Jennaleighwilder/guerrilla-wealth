@@ -140,6 +140,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 .name-banner{text-align:center;margin-bottom:.5rem;animation:fadeUp 1.2s ease-out .3s both;}
 .name-for{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
 .name-v{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--ember);margin-top:.2rem;}
+.name-input-wrap{margin-top:.6rem;max-width:280px;margin-left:auto;margin-right:auto;}
+.name-input{width:100%;padding:12px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(212,134,62,.25);border-radius:8px;color:var(--cream);font-family:'Cinzel',serif;font-size:1.1rem;text-align:center;outline:none;transition:all .3s;}
+.name-input:focus{border-color:rgba(212,134,62,.5);box-shadow:0 0 20px rgba(212,134,62,.15);}
+.name-input::placeholder{color:var(--dim);}
 
 /* ═══ SOCIAL PROOF ═══ */
 .proof{text-align:center;margin:1.5rem 0;padding:1rem;background:rgba(58,154,122,.06);border:1px solid rgba(58,154,122,.12);border-radius:10px;backdrop-filter:blur(8px);}
@@ -183,6 +187,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
   <div class="name-banner">
     <div class="name-for">Assessment Prepared For</div>
     <div class="name-v" id="userName">Your Name</div>
+    <div class="name-input-wrap">
+      <input type="text" class="name-input" id="nameInput" placeholder="Enter your name" maxlength="60" />
+    </div>
   </div>
 
   <!-- ═══ ARCHETYPE REVEAL ═══ -->
@@ -442,13 +449,18 @@ document.getElementById('emailInput').addEventListener('keydown',e=>{
   if(e.key==='Enter')sendEmail();
 });
 
-// ═══ NAME PROMPT — asks on load ═══
-setTimeout(()=>{
-  const name=prompt('Welcome! What name should we put on your assessment?');
-  if(name&&name.trim()){
-    document.getElementById('userName').textContent=name.trim();
+// ═══ NAME INPUT — in-app styled, no white popup ═══
+(function(){
+  const inp=document.getElementById('nameInput');
+  const disp=document.getElementById('userName');
+  function update(){
+    const v=inp.value.trim();
+    disp.textContent=v||'Your Name';
   }
-},1500);
+  inp.addEventListener('input',update);
+  inp.addEventListener('blur',update);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'){inp.blur();}});
+})();
 
 // ═══ BUILD RESULTS TEXT ═══
 function getResultsText(){
