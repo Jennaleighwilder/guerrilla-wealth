@@ -9,5 +9,8 @@
     "dev": "npx serve public -l 3000",
     "start": "npx serve public -l $PORT",
     "build": "echo 'Static site — no build needed'"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
   }
 }
