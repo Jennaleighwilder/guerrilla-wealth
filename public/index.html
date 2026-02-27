@@ -82,6 +82,17 @@ slides.forEach((s, i) => {
 
 phaseEl.textContent = slides[0].phase;
 
+// ═══ QUIZ DATA PERSISTENCE — shared across quiz slides & report
+window.gw_quiz = {};
+try {
+  const stored = sessionStorage.getItem('gw_quiz');
+  if (stored) window.gw_quiz = JSON.parse(stored);
+} catch (e) {}
+window.saveQuizData = function (layer, data) {
+  window.gw_quiz[layer] = data;
+  try { sessionStorage.setItem('gw_quiz', JSON.stringify(window.gw_quiz)); } catch (e) {}
+};
+
 function goTo(index) {
   if (index === current || transitioning) return;
   transitioning = true;

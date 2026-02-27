@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Guerrilla Wealth — Layer I: Sacred Identity (Autumn)</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
   --void:#080610;--deep:#0e0b18;--smoke:#1a1528;--ridge:#2a2240;
@@ -14,7 +14,7 @@
   --glow:rgba(212,134,62,0.15);--glow2:rgba(212,134,62,0.45);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Lora',Georgia,serif;background:var(--void);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--void);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
 /* ═══ CANVAS ═══ */
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
@@ -56,7 +56,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--void);color:var(--cream);
 .mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.06;color:var(--cream);}
 .mtn svg{width:100%;height:110px;display:block;}
 
-.sea{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);opacity:.3;z-index:50;pointer-events:none;}
+.sea{position:fixed;bottom:1rem;right:1rem;font-family:'Cormorant Garamond',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);opacity:.3;z-index:50;pointer-events:none;}
 
 /* ═══ PROGRESS ═══ */
 .prog{position:fixed;top:0;left:0;width:100%;height:4px;z-index:200;background:rgba(255,255,255,.06);}
@@ -68,14 +68,14 @@ body{font-family:'Lora',Georgia,serif;background:var(--void);color:var(--cream);
 .sec-intro{max-width:600px;margin:0 auto;padding:4rem 2rem 3rem;text-align:center;animation:fadeUp .8s ease-out;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .sec-icon{font-size:2.8rem;margin-bottom:1rem;filter:drop-shadow(0 0 12px rgba(212,134,62,.3));}
-.sec-num{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--copper);margin-bottom:.5rem;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--copper);margin-bottom:.5rem;}
 .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:.6rem;}
 .sec-desc{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--fog);line-height:1.6;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
 
 /* ═══ QUESTION ═══ */
 .qc{max-width:640px;margin:0 auto;padding:2rem 1.5rem 4rem;display:none;}
 .qc.on{display:block;animation:fadeUp .5s ease-out;}
-.qc-ct{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:#b0a8b8;margin-bottom:1.2rem;text-align:center;}
+.qc-ct{font-family:'Cormorant Garamond',serif;font-size:.62rem;letter-spacing:.15em;color:#b0a8b8;margin-bottom:1.2rem;text-align:center;}
 .qc-t{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3.5vw,1.6rem);text-align:center;line-height:1.35;margin-bottom:.5rem;}
 .qc-sub{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:#b0a8b8;text-align:center;margin-bottom:2rem;}
 
@@ -97,11 +97,11 @@ body{font-family:'Lora',Georgia,serif;background:var(--void);color:var(--cream);
 
 /* ═══ NAV ═══ */
 .nav{display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;padding:0 .5rem;}
-.btn-back{background:none;border:none;color:#b0a8b8;font-family:'Space Mono',monospace;font-size:.75rem;cursor:pointer;letter-spacing:.06em;transition:color .2s;-webkit-tap-highlight-color:transparent;}
+.btn-back{background:none;border:none;color:#b0a8b8;font-family:'Cormorant Garamond',serif;font-size:.75rem;cursor:pointer;letter-spacing:.06em;transition:color .2s;-webkit-tap-highlight-color:transparent;}
 .btn-back:hover{color:var(--cream);}
-.btn-next{padding:12px 32px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);color:var(--ember);border-radius:6px;font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);-webkit-tap-highlight-color:transparent;}
+.btn-next{padding:12px 32px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);color:var(--ember);border-radius:6px;font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);-webkit-tap-highlight-color:transparent;}
 .btn-next:hover{background:rgba(212,134,62,.25);transform:translateY(-2px);}
-.btn-begin{padding:14px 40px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);color:var(--ember);border-radius:6px;font-family:'Space Mono',monospace;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);-webkit-tap-highlight-color:transparent;}
+.btn-begin{padding:14px 40px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);color:var(--ember);border-radius:6px;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);-webkit-tap-highlight-color:transparent;}
 .btn-begin:hover{background:rgba(212,134,62,.25);transform:translateY(-2px);}
 
 @media(max-width:600px){.opts{gap:.5rem;}.opt{padding:.9rem 1rem;}.moon{width:100px;height:100px;top:4vh;right:5vw;}}
@@ -219,45 +219,75 @@ animate();
 
 // ═══ QUIZ ENGINE ═══
 const QS=[
-  {id:'sacred_work',ct:'LAYER I · QUESTION 1 OF 3',
+  {id:'sacred_work',ct:'LAYER I · QUESTION 1 OF 4',
    t:'What is your sacred work?',
    sub:'The offering you were born to give — even if the world hasn\'t named it yet.',
    type:'select',
    opts:[
-     {ic:'🔮',lbl:'Divination & Intuitive Readings',d:'Tarot, oracle, astrology, psychic guidance',sh:'You see what others can\'t. That\'s power — and it scares you sometimes.'},
-     {ic:'🌿',lbl:'Healing & Body Work',d:'Energy work, massage, herbalism, somatic healing',sh:'Your hands know what your mind hasn\'t caught up to yet.'},
-     {ic:'📚',lbl:'Teaching & Mentorship',d:'Courses, coaching, workshops, curriculum',sh:'You teach what you needed to learn. That\'s not coincidence.'},
-     {ic:'🎨',lbl:'Creative & Artisan Craft',d:'Visual art, music, writing, handmade goods',sh:'The thing you make in secret is the thing the world needs most.'},
-     {ic:'🏛️',lbl:'Strategy & Business Consulting',d:'Marketing, branding, systems, operations',sh:'You see patterns in chaos. Others call it magic. It\'s architecture.'},
-     {ic:'🌙',lbl:'Spiritual Services & Ritual',d:'Ceremony, heritage work, ancestral connection',sh:'The ancestors didn\'t choose you at random. They chose you because you listen.'}
+     {ic:'🔮',lbl:'Divination & Intuitive Readings',d:'Tarot, oracle, astrology, psychic guidance',sh:'You see what others can\'t. That\'s power — and it scares you sometimes.',arch:'oracle-strategist'},
+     {ic:'🌿',lbl:'Healing & Body Work',d:'Energy work, massage, herbalism, somatic healing',sh:'Your hands know what your mind hasn\'t caught up to yet.',arch:'temple-healer'},
+     {ic:'📚',lbl:'Teaching & Mentorship',d:'Courses, coaching, workshops, curriculum',sh:'You teach what you needed to learn. That\'s not coincidence.',arch:'lighthouse-storyteller'},
+     {ic:'🎨',lbl:'Creative & Artisan Craft',d:'Visual art, music, writing, handmade goods',sh:'The thing you make in secret is the thing the world needs most.',arch:'forge-builder,trickster-alchemist'},
+     {ic:'🏛️',lbl:'Strategy & Business Consulting',d:'Marketing, branding, systems, operations',sh:'You see patterns in chaos. Others call it magic. It\'s architecture.',arch:'oracle-strategist'},
+     {ic:'🌙',lbl:'Spiritual Services & Ritual',d:'Ceremony, heritage work, ancestral connection',sh:'The ancestors didn\'t choose you at random. They chose you because you listen.',arch:'temple-healer,lighthouse-storyteller'}
    ]},
-  {id:'childhood',ct:'LAYER I · QUESTION 2 OF 3',
+  {id:'childhood',ct:'LAYER I · QUESTION 2 OF 4',
    t:'When you were a child, what did adults say about you?',
    sub:'The mirror others held up to you — before you learned to hold your own.',
    type:'select',
    opts:[
-     {ic:'👁️',lbl:'"You\'re too sensitive"',d:'Feeling everything, absorbing every room',sh:'Your sensitivity is your signal receiver. It was never a flaw — it was equipment.'},
-     {ic:'🔥',lbl:'"You\'re too much"',d:'Too loud, too intense, too passionate',sh:'They said "too much" because they couldn\'t match your frequency.'},
-     {ic:'🤫',lbl:'"You\'re so quiet"',d:'Watchful, observant, inner world rich',sh:'Silence was never emptiness. It was strategy. You were mapping the room.'},
-     {ic:'⚡',lbl:'"You\'re so smart"',d:'Quick mind, pattern recognition, ahead of peers',sh:'Being "smart" became armor. Now it\'s time to let it become a bridge.'},
-     {ic:'🌊',lbl:'"You\'re a dreamer"',d:'Imaginative, elsewhere, building worlds',sh:'The worlds you built in your head? They\'re blueprints. Time to build them here.'},
-     {ic:'🛡️',lbl:'"You\'re so strong"',d:'Responsible, capable, carrying weight early',sh:'Strength was survival. Now let it be choice, not default.'}
+     {ic:'👁️',lbl:'"You\'re too sensitive"',d:'Feeling everything, absorbing every room',sh:'Your sensitivity is your signal receiver. It was never a flaw — it was equipment.',arch:'temple-healer,oracle-strategist'},
+     {ic:'🔥',lbl:'"You\'re too much"',d:'Too loud, too intense, too passionate',sh:'They said "too much" because they couldn\'t match your frequency.',arch:'forge-builder,trickster-alchemist'},
+     {ic:'🤫',lbl:'"You\'re so quiet"',d:'Watchful, observant, inner world rich',sh:'Silence was never emptiness. It was strategy. You were mapping the room.',arch:'oracle-strategist,dragon-steward'},
+     {ic:'⚡',lbl:'"You\'re so smart"',d:'Quick mind, pattern recognition, ahead of peers',sh:'Being "smart" became armor. Now it\'s time to let it become a bridge.',arch:'oracle-strategist,forge-builder'},
+     {ic:'🌊',lbl:'"You\'re a dreamer"',d:'Imaginative, elsewhere, building worlds',sh:'The worlds you built in your head? They\'re blueprints. Time to build them here.',arch:'lighthouse-storyteller,trickster-alchemist'},
+     {ic:'🛡️',lbl:'"You\'re so strong"',d:'Responsible, capable, carrying weight early',sh:'Strength was survival. Now let it be choice, not default.',arch:'dragon-steward,forge-builder'}
    ]},
-  {id:'money_body',ct:'LAYER I · QUESTION 3 OF 3',
+  {id:'money_body',ct:'LAYER I · QUESTION 3 OF 4',
    t:'What happens in your body when money stress hits?',
-   sub:'Your nervous system already knows your relationship with money. Listen.',
+   sub:'Your nervous system already knows your relationship with money. Listen. (Sacred Breakdown & Guardian Patterns)',
    type:'select',
    opts:[
-     {ic:'💨',lbl:'Chest tightens, breath goes shallow',d:'Fight-or-flight activates in the ribcage',sh:'Your chest is guarding your heart. Money felt unsafe before you had words for it.'},
-     {ic:'🪨',lbl:'Stomach drops, nausea rises',d:'Gut-level dread, the body says "danger"',sh:'Your gut is the oldest brain. It remembers debts your mind has forgotten.'},
-     {ic:'🧊',lbl:'I freeze — can\'t think, can\'t move',d:'Shutdown mode, the lights go dim',sh:'Freeze is not weakness. It\'s your system protecting you from overwhelm. We work with it, not against it.'},
-     {ic:'🔄',lbl:'I spin — anxious thoughts, can\'t stop planning',d:'Mental overdrive, control attempts',sh:'The spinning is your genius trying to solve everything at once. We\'ll give it one thing at a time.'},
-     {ic:'😶',lbl:'I go numb — disconnect completely',d:'Dissociation, emotional flatline',sh:'Numbness is your system saying "I\'ve carried enough." We\'ll lighten the load.'},
-     {ic:'💪',lbl:'I get angry — fuel to fight',d:'Rage energy, productive or destructive',sh:'Anger is boundaries with teeth. We\'ll aim it at the right targets.'}
+     {ic:'💨',lbl:'Chest tightens, breath goes shallow',d:'Fight-or-flight activates in the ribcage',sh:'Your chest is guarding your heart. Money felt unsafe before you had words for it.',arch:'temple-healer,dragon-steward'},
+     {ic:'🪨',lbl:'Stomach drops, nausea rises',d:'Gut-level dread, the body says "danger"',sh:'Your gut is the oldest brain. It remembers debts your mind has forgotten.',arch:'temple-healer,dragon-steward'},
+     {ic:'🧊',lbl:'I freeze — can\'t think, can\'t move',d:'Shutdown mode, the lights go dim',sh:'Freeze is not weakness. It\'s your system protecting you from overwhelm. We work with it, not against it.',arch:'temple-healer,dragon-steward'},
+     {ic:'🔄',lbl:'I spin — anxious thoughts, can\'t stop planning',d:'Mental overdrive, control attempts',sh:'The spinning is your genius trying to solve everything at once. We\'ll give it one thing at a time.',arch:'oracle-strategist,forge-builder'},
+     {ic:'😶',lbl:'I go numb — disconnect completely',d:'Dissociation, emotional flatline',sh:'Numbness is your system saying "I\'ve carried enough." We\'ll lighten the load.',arch:'temple-healer,dragon-steward'},
+     {ic:'💪',lbl:'I get angry — fuel to fight',d:'Rage energy, productive or destructive',sh:'Anger is boundaries with teeth. We\'ll aim it at the right targets.',arch:'forge-builder,trickster-alchemist'}
+   ]},
+  {id:'archetype',ct:'LAYER I · QUESTION 4 OF 4',
+   t:'Which ancestral commerce lineage flows through you?',
+   sub:'From the Sacred Entrepreneur Mirror Protocol — which ancient business current is in your bloodline? Select your primary resonance.',
+   type:'select',
+   opts:[
+     {ic:'🔮',lbl:'Oracle-Strategist',d:'Seers, advisors, wisdom-keepers who spoke truth to power',sh:'You see what others can\'t and build systems from vision.',arch:'oracle-strategist'},
+     {ic:'⚒️',lbl:'Forge-Builder',d:'Smiths, architects, engineers who built civilizations',sh:'You make things that last. Structure is your magic.',arch:'forge-builder'},
+     {ic:'🏪',lbl:'Bazaar-Weaver',d:'Merchants, traders, network-builders',sh:'You connect people and possibilities. The deal is the art.',arch:'bazaar-weaver'},
+     {ic:'🌿',lbl:'Temple-Healer',d:'Healers, midwives, medicine workers',sh:'Your hands know what your mind hasn\'t caught up to yet.',arch:'temple-healer'},
+     {ic:'🗼',lbl:'Lighthouse-Storyteller',d:'Bards, chroniclers, signal-keepers',sh:'You teach what you needed to learn. That\'s not coincidence.',arch:'lighthouse-storyteller'},
+     {ic:'🃏',lbl:'Trickster-Alchemist',d:'Innovators, jesters, rule-breakers',sh:'The thing you make in secret is the thing the world needs most.',arch:'trickster-alchemist'},
+     {ic:'🐉',lbl:'Dragon-Steward',d:'Guardians, protectors, treasure-keepers',sh:'You hold what matters. Stewardship is your power.',arch:'dragon-steward'}
    ]}
 ];
 
 let cur=-1;const ans={};
+function computeArchetype(){
+  const scores={};
+  QS.forEach(q=>{
+    if(q.opts&&ans[q.id]!==undefined){
+      const o=q.opts[ans[q.id]];
+      if(o&&o.arch){
+        o.arch.split(',').forEach(a=>{
+          const k=a.trim();
+          scores[k]=(scores[k]||0)+1;
+        });
+      }
+    }
+  });
+  let top='oracle-strategist',max=0;
+  Object.entries(scores).forEach(([k,v])=>{if(v>max){max=v;top=k;}});
+  return top;
+}
 
 function renderIntro(){
   const c=document.getElementById('content');
@@ -300,6 +330,10 @@ function pick(id,j,el){
 function next(){
   cur++;
   if(cur>=QS.length){
+    if(window.parent&&window.parent.saveQuizData){
+      const arch=computeArchetype();
+      window.parent.saveQuizData('layer1',{ans:JSON.parse(JSON.stringify(ans)),archetype:arch});
+    }
     const c2=document.getElementById('content');c2.style.display='flex';c2.style.alignItems='center';c2.style.justifyContent='center';document.getElementById('prog').style.width='100%';
     document.getElementById('content').innerHTML=`
       <div class="sec-intro">

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Guerrilla Wealth — Itinerary (Smoky Mountains)</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
   --void:#080610;--deep:#0a0d14;--smoke:#121a20;
@@ -17,7 +17,7 @@
   --haze:#6a8a7a;--dew:#88aa98;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Lora',Georgia,serif;background:var(--ridge-dark);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--ridge-dark);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
 #scene{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
@@ -29,21 +29,27 @@ body{font-family:'Lora',Georgia,serif;background:var(--ridge-dark);color:var(--c
   animation:auroraShift 28s ease-in-out infinite alternate;}
 @keyframes auroraShift{0%{opacity:.5}50%{opacity:.85}100%{opacity:.6}}
 
-.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--haze);opacity:.25;z-index:50;pointer-events:none;}
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--haze);opacity:.25;z-index:50;pointer-events:none;}
 
 /* Dashboard bar */
 .d-bar{position:sticky;top:0;z-index:100;background:rgba(26,42,26,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.12);}
 .d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
 .d-logo{font-family:'Cinzel',serif;font-size:1.05rem;}
-.d-tier{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
+.d-tier{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
 .d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
-.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:#b0a8b8;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+.d-tab{padding:.45rem .7rem;font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:#b0a8b8;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
 .d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
 
 .content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
 .page-title{font-family:'Cinzel',serif;font-size:1.1rem;margin-bottom:.2rem;}
 .page-sub{font-size:.85rem;color:#b0a8b8;margin-bottom:1rem;}
-.day-label{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dew);margin-bottom:.6rem;padding-bottom:.3rem;border-bottom:1px solid rgba(255,255,255,.12);}
+.day-tabs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem;}
+.day-tab{padding:.4rem .7rem;font-family:'Cormorant Garamond',serif;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#b0a8b8;cursor:pointer;border:1px solid rgba(255,255,255,.12);border-radius:6px;background:rgba(255,255,255,.04);transition:all .25s;-webkit-tap-highlight-color:transparent;}
+.day-tab:hover{color:var(--dew);border-color:rgba(136,170,152,.3);background:rgba(136,170,152,.08);}
+.day-tab.act{color:var(--dew);border-color:var(--copper);background:rgba(212,134,62,.12);}
+.day-label{font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dew);margin-bottom:.6rem;padding-bottom:.3rem;border-bottom:1px solid rgba(255,255,255,.12);}
+.day-panel{display:none;}
+.day-panel.on{display:block;}
 
 /* Action cards */
 .ac{display:flex;gap:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-bottom:.65rem;backdrop-filter:blur(8px);position:relative;}
@@ -55,10 +61,10 @@ body{font-family:'Lora',Georgia,serif;background:var(--ridge-dark);color:var(--c
 .ac-stripe.partnership{background:var(--jade);}
 .ac-stripe.content{background:var(--fire);}
 .ac-time{min-width:62px;padding:.9rem .5rem;text-align:center;border-right:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;justify-content:center;}
-.ac-time-v{font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;}
+.ac-time-v{font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:700;}
 .ac-time-d{font-size:.85rem;color:#b0a8b8;margin-top:.05rem;}
 .ac-body{flex:1;padding:.9rem;}
-.ac-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-bottom:.35rem;}
+.ac-badge{display:inline-block;font-family:'Cormorant Garamond',serif;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-bottom:.35rem;}
 .ac-badge.stealth{background:rgba(74,106,122,.12);color:var(--mist-blue);}
 .ac-badge.activation{background:rgba(212,134,62,.08);color:var(--copper);}
 .ac-badge.partnership{background:rgba(58,154,122,.08);color:var(--jade);}
@@ -67,8 +73,11 @@ body{font-family:'Lora',Georgia,serif;background:var(--ridge-dark);color:var(--c
 .ac-venue{font-size:.95rem;color:#b0a8b8;margin-bottom:.4rem;}
 .ac-venue strong{font-weight:600;}
 .ac-inst{font-size:1rem;line-height:1.45;padding:.65rem .7rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:6px;margin-bottom:.3rem;}
-.ac-supp{font-family:'Space Mono',monospace;font-size:.8rem;color:#b0a8b8;display:flex;flex-wrap:wrap;gap:.2rem;}
+.ac-supp{font-family:'Cormorant Garamond',serif;font-size:.8rem;color:#b0a8b8;display:flex;flex-wrap:wrap;gap:.2rem;}
 .ac-supp span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:2px 5px;border-radius:2px;}
+
+.mirror-reminder{background:rgba(138,43,226,.1);border:1px solid rgba(138,43,226,.25);border-radius:8px;padding:.7rem 1rem;font-size:.82rem;color:var(--dew);margin-bottom:1rem;}
+.ritual-banner{background:rgba(255,140,0,.1);border:1px solid rgba(255,140,0,.25);border-radius:6px;padding:.5rem .8rem;font-size:.8rem;color:var(--dew);margin-bottom:.6rem;}
 
 @media(max-width:600px){.ac-time{min-width:50px;}.ac-body{padding:.7rem;}}
 </style>
@@ -93,16 +102,67 @@ body{font-family:'Lora',Georgia,serif;background:var(--ridge-dark);color:var(--c
 
 <div class="content">
   <div class="page-title">Your Weekly Operations Plan</div>
-  <div class="page-sub">28 actions across 7 days. Calibrated to your archetype, boldness level, and hours available.</div>
-  <div class="day-label">Monday · March 3</div>
+  <div class="page-sub">28 actions across 7 days. Calibrated to your archetype, boldness level, and hours available. Includes Mirror → Oracle moments and ritual interludes from the Sacred Entrepreneur intake.</div>
+  <div class="mirror-reminder">
+    <strong>🪞 Mirror Protocol</strong> — Before each major action: Surface (what truth?) → Pattern (where else?) → Oracle (what instruction?)
+  </div>
+  <div class="day-tabs">
+    <span class="day-tab act" data-day="mon">Mon</span>
+    <span class="day-tab" data-day="tue">Tue</span>
+    <span class="day-tab" data-day="wed">Wed</span>
+    <span class="day-tab" data-day="thu">Thu</span>
+    <span class="day-tab" data-day="fri">Fri</span>
+    <span class="day-tab" data-day="sat">Sat</span>
+    <span class="day-tab" data-day="sun">Sun</span>
+  </div>
 
-  <div class="ac"><div class="ac-stripe stealth"></div><div class="ac-time"><div class="ac-time-v">7:30a</div><div class="ac-time-d">45 min</div></div><div class="ac-body"><div class="ac-badge stealth">Stealth</div><div class="ac-title">Sticker Route — Downtown Core</div><div class="ac-venue">Route: <strong>Malaprop's → Izzy's → Dobra Tea → Grove Arcade (×6) → Firestorm → Woolworth → Salt Cave → East Fork</strong></div><div class="ac-inst">Start at Malaprop's bathroom (high traffic, nobody watches). Work down to Izzy's — place on community board, not bathroom. Dobra Tea: inside front window ledge, next to business cards. Grove Arcade: 6 spots — 2 restrooms, community board, each floor stairwell landing. Firestorm: community board (they're radical, they'll love it). Woolworth: bathroom stall doors. Salt Cave: waiting area. East Fork: beside register card display.</div><div class="ac-supp"><span>50 stickers (Design A)</span><span>Blue tape strips</span><span>Business cards ×20</span></div></div></div>
+  <div class="day-panel on" id="panel-mon">
+    <div class="ritual-banner">🔥 Lineage Clearing — Hand on heart. Feel ancient business wisdom in your blood. Breathe out inherited shame.</div>
+    <div class="day-label">Monday · March 3</div>
+    <div class="ac"><div class="ac-stripe stealth"></div><div class="ac-time"><div class="ac-time-v">7:30a</div><div class="ac-time-d">45 min</div></div><div class="ac-body"><div class="ac-badge stealth">Stealth</div><div class="ac-title">Sticker Route — Downtown Core</div><div class="ac-venue">Route: <strong>Malaprop's → Izzy's → Dobra Tea → Grove Arcade (×6) → Firestorm → Woolworth → Salt Cave → East Fork</strong></div><div class="ac-inst">Start at Malaprop's bathroom (high traffic, nobody watches). Work down to Izzy's — place on community board, not bathroom. Dobra Tea: inside front window ledge, next to business cards. Grove Arcade: 6 spots — 2 restrooms, community board, each floor stairwell landing. Firestorm: community board (they're radical, they'll love it). Woolworth: bathroom stall doors. Salt Cave: waiting area. East Fork: beside register card display. <em>Oracle check: What boundary will you honor today?</em></div><div class="ac-supp"><span>50 stickers (Design A)</span><span>Blue tape strips</span><span>Business cards ×20</span></div></div></div>
+    <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">11:00a</div><div class="ac-time-d">90 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">Flash Reading Station — Pritchard Park</div><div class="ac-venue">Location: <strong>Pritchard Park</strong> · Bench near drum circle corner · 11a-12:30p peak foot traffic</div><div class="ac-inst">Small sign on folding stand: "Free 2-Min Heritage Reading — What Does Your Bloodline Want You to Know?" Sit with cards visible but not aggressive. Let people approach. Script: "Hey — want a quick pull? Takes 2 minutes and it's free." After the pull: "I do full heritage reports if you ever want to go deeper — here's my card." Goal: 8-12 readings, 4-6 cards out, 2-3 email captures.</div><div class="ac-supp"><span>Oracle deck</span><span>Folding sign</span><span>Business cards ×30</span><span>Email capture sheet</span><span>Pen</span></div></div></div>
+    <div class="ac"><div class="ac-stripe partnership"></div><div class="ac-time"><div class="ac-time-v">2:00p</div><div class="ac-time-d">30 min</div></div><div class="ac-body"><div class="ac-badge partnership">Partnership</div><div class="ac-title">Partnership Approach — Sister Moon Trading</div><div class="ac-venue">Location: <strong>Sister Moon Trading</strong> · Lexington Ave · Crystal/metaphysical shop</div><div class="ac-inst">Walk in as a customer first. Browse 5 minutes. Then approach owner/manager: "I do heritage readings — ancestral bloodline analysis. My clients are exactly your customers. Would you be open to me leaving cards here, or maybe doing a pop-up reading day one Saturday?" Don't pitch hard. Leave 10 cards and a sample report printout. Follow up in 3 days.</div><div class="ac-supp"><span>Business cards ×10</span><span>Sample report (printed)</span><span>Small thank-you gift</span></div></div></div>
+    <div class="ac"><div class="ac-stripe content"></div><div class="ac-time"><div class="ac-time-v">7:00p</div><div class="ac-time-d">60 min</div></div><div class="ac-body"><div class="ac-badge content">Content</div><div class="ac-title">TikTok Content Creation — 3 Videos</div><div class="ac-venue">Location: <strong>Home / any atmospheric spot</strong></div><div class="ac-inst">Video 1: "POV: You find out your bloodline has been trying to tell you something for 300 years" — mysterious, hook-first, show a card pull. Video 2: "Things I learned doing free readings in Asheville today" — recap of the flash readings, keep it real and personal. Video 3: "The mountains know your name" — atmospheric B-roll of Asheville with voiceover about heritage and ancestral connection. Use the sticker text as the hook.</div><div class="ac-supp"><span>Phone + tripod</span><span>Ring light</span><span>Oracle deck (for Video 1)</span></div></div></div>
+  </div>
 
-  <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">11:00a</div><div class="ac-time-d">90 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">Flash Reading Station — Pritchard Park</div><div class="ac-venue">Location: <strong>Pritchard Park</strong> · Bench near drum circle corner · 11a-12:30p peak foot traffic</div><div class="ac-inst">Small sign on folding stand: "Free 2-Min Heritage Reading — What Does Your Bloodline Want You to Know?" Sit with cards visible but not aggressive. Let people approach. Script: "Hey — want a quick pull? Takes 2 minutes and it's free." After the pull: "I do full heritage reports if you ever want to go deeper — here's my card." Goal: 8-12 readings, 4-6 cards out, 2-3 email captures.</div><div class="ac-supp"><span>Oracle deck</span><span>Folding sign</span><span>Business cards ×30</span><span>Email capture sheet</span><span>Pen</span></div></div></div>
+  <div class="day-panel" id="panel-tue">
+    <div class="day-label">Tuesday · March 4</div>
+    <div class="ac"><div class="ac-stripe stealth"></div><div class="ac-time"><div class="ac-time-v">9:00a</div><div class="ac-time-d">60 min</div></div><div class="ac-body"><div class="ac-badge stealth">Stealth</div><div class="ac-title">Sticker Route — West Asheville</div><div class="ac-venue">Route: <strong>Odd's Café → Harvest Records → Firestorm (West) → Westville Pub → Sunny Point</strong></div><div class="ac-inst">Odd's Café: bathroom + community board. Harvest Records: by the register, vinyl crowd loves heritage vibes. Firestorm West: community board. Westville Pub: bathroom + bar area. Sunny Point: wait area near host stand. Goal: 35 stickers, low-key placement.</div><div class="ac-supp"><span>35 stickers</span><span>Business cards ×15</span></div></div></div>
+    <div class="ac"><div class="ac-stripe partnership"></div><div class="ac-time"><div class="ac-time-v">2:30p</div><div class="ac-time-d">45 min</div></div><div class="ac-body"><div class="ac-badge partnership">Partnership</div><div class="ac-title">Follow-up Call — Sister Moon</div><div class="ac-venue">Call / email from Monday's drop</div><div class="ac-inst">If they took your cards, follow up. "Hey, it was great meeting you — wanted to see if you'd be open to me leaving a few more cards or scheduling that pop-up." If no answer, send a short email with a sample report PDF attached.</div><div class="ac-supp"><span>Phone</span><span>Sample report PDF</span></div></div></div>
+    <div class="ac"><div class="ac-stripe content"></div><div class="ac-time"><div class="ac-time-v">6:00p</div><div class="ac-time-d">45 min</div></div><div class="ac-body"><div class="ac-badge content">Content</div><div class="ac-title">Instagram Stories — Behind the Scenes</div><div class="ac-venue">Location: <strong>Home</strong></div><div class="ac-inst">Post 5-7 stories: sticker placement wins, a quick card pull, "what I'm reading tonight," client testimonial (with permission). Poll: "Would you want a free 2-min reading at a market?" End with a CTA to your link in bio.</div><div class="ac-supp"><span>Phone</span><span>Oracle deck</span></div></div></div>
+  </div>
 
-  <div class="ac"><div class="ac-stripe partnership"></div><div class="ac-time"><div class="ac-time-v">2:00p</div><div class="ac-time-d">30 min</div></div><div class="ac-body"><div class="ac-badge partnership">Partnership</div><div class="ac-title">Partnership Approach — Sister Moon Trading</div><div class="ac-venue">Location: <strong>Sister Moon Trading</strong> · Lexington Ave · Crystal/metaphysical shop</div><div class="ac-inst">Walk in as a customer first. Browse 5 minutes. Then approach owner/manager: "I do heritage readings — ancestral bloodline analysis. My clients are exactly your customers. Would you be open to me leaving cards here, or maybe doing a pop-up reading day one Saturday?" Don't pitch hard. Leave 10 cards and a sample report printout. Follow up in 3 days.</div><div class="ac-supp"><span>Business cards ×10</span><span>Sample report (printed)</span><span>Small thank-you gift</span></div></div></div>
+  <div class="day-panel" id="panel-wed">
+    <div class="ritual-banner">💰 Wealth Clearing — Hands on belly. Feel ancient survival/worth relationship. Your ancestors survived so you could thrive.</div>
+    <div class="day-label">Wednesday · March 5</div>
+    <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">6:00p</div><div class="ac-time-d">90 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">Herbal Medicine Making — Dancing Moon Herbs</div><div class="ac-venue">Location: <strong>Dancing Moon Herbs</strong> · Lexington Ave · $25 · 15 people · Herbals</div><div class="ac-inst">Pre-registered crowd = committed. After class, offer "heritage snapshot" — your bloodline + herbs connection. 5–8 people will say yes. Bring cards. Position near the tea station during break.</div><div class="ac-supp"><span>Oracle deck</span><span>Business cards ×20</span><span>Email capture</span></div></div></div>
+    <div class="ac"><div class="ac-stripe partnership"></div><div class="ac-time"><div class="ac-time-v">4:00p</div><div class="ac-time-d">30 min</div></div><div class="ac-body"><div class="ac-badge partnership">Partnership</div><div class="ac-title">Partnership Approach — Dobra Tea</div><div class="ac-venue">Location: <strong>Dobra Tea</strong> · Patton Ave</div><div class="ac-inst">Tea house = contemplative crowd. Ask about leaving cards or doing a "tea + reading" evening. They host events — pitch a collaboration. Leave 10 cards.</div><div class="ac-supp"><span>Business cards ×10</span><span>Sample report</span></div></div></div>
+  </div>
 
-  <div class="ac"><div class="ac-stripe content"></div><div class="ac-time"><div class="ac-time-v">7:00p</div><div class="ac-time-d">60 min</div></div><div class="ac-body"><div class="ac-badge content">Content</div><div class="ac-title">TikTok Content Creation — 3 Videos</div><div class="ac-venue">Location: <strong>Home / any atmospheric spot</strong></div><div class="ac-inst">Video 1: "POV: You find out your bloodline has been trying to tell you something for 300 years" — mysterious, hook-first, show a card pull. Video 2: "Things I learned doing free readings in Asheville today" — recap of the flash readings, keep it real and personal. Video 3: "The mountains know your name" — atmospheric B-roll of Asheville with voiceover about heritage and ancestral connection. Use the sticker text as the hook.</div><div class="ac-supp"><span>Phone + tripod</span><span>Ring light</span><span>Oracle deck (for Video 1)</span></div></div></div>
+  <div class="day-panel" id="panel-thu">
+    <div class="day-label">Thursday · March 6</div>
+    <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">7:00p</div><div class="ac-time-d">120 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">Full Moon Drum Circle — Pritchard Park</div><div class="ac-venue">Location: <strong>Pritchard Park</strong> · Free · 100–300+ people</div><div class="ac-inst">YOUR event. Arrive 30 min early. Blanket on circle edge + sign: "Free Pull — Ask The Cards." Work periphery. The energy is already high — you're harvesting attention that's already flowing. Goal: 15–20 readings → 5–8 report sales within the week. <em>Mirror → Oracle: What soul instruction emerged from tonight?</em></div><div class="ac-supp"><span>Oracle deck</span><span>Folding sign</span><span>Business cards ×50</span><span>Blanket</span></div></div></div>
+    <div class="ac"><div class="ac-stripe stealth"></div><div class="ac-time"><div class="ac-time-v">10:00a</div><div class="ac-time-d">45 min</div></div><div class="ac-body"><div class="ac-badge stealth">Stealth</div><div class="ac-title">Sticker Top-up — River Arts District</div><div class="ac-venue">Route: <strong>Wedge Studios → Odyssey Clay → Riverview Station</strong></div><div class="ac-inst">Refill spots that got cleared. Add 2-3 new locations. River Arts = creative, open-minded crowd.</div><div class="ac-supp"><span>25 stickers</span><span>Business cards ×10</span></div></div></div>
+  </div>
+
+  <div class="day-panel" id="panel-fri">
+    <div class="day-label">Friday · March 7</div>
+    <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">6:15p</div><div class="ac-time-d">90 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">Entrepreneurs Mixer — The Odditorium</div><div class="ac-venue">Location: <strong>The Odditorium</strong> · Haywood Rd · Free · ~60 people</div><div class="ac-inst">Arrive 6:15. Stand near food table. Lead with "What's your thing?" not "What do you do?" Goal: 5 conversations, 3 card exchanges. Follow up within 24hrs. Your archetype thrives in strategy conversations — find the other operators.</div><div class="ac-supp"><span>Business cards ×20</span><span>Sample report (phone)</span></div></div></div>
+    <div class="ac"><div class="ac-stripe content"></div><div class="ac-time"><div class="ac-time-v">8:00p</div><div class="ac-time-d">45 min</div></div><div class="ac-body"><div class="ac-badge content">Content</div><div class="ac-title">Week Recap Post — LinkedIn</div><div class="ac-venue">Location: <strong>Home</strong></div><div class="ac-inst">Post about the week: "5 things I learned doing guerrilla marketing in Asheville this week." Tag local spots. Position yourself as the heritage-reading entrepreneur. Include a soft CTA to your intake.</div><div class="ac-supp"><span>Phone/laptop</span></div></div></div>
+  </div>
+
+  <div class="day-panel" id="panel-sat">
+    <div class="day-label">Saturday · March 8</div>
+    <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">8:00a</div><div class="ac-time-d">180 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">North Asheville Tailgate Market — VENDOR BOOTH</div><div class="ac-venue">Location: <strong>UNC Asheville</strong> · $30 booth · 800+ traffic</div><div class="ac-inst">VENDOR booth. Sign: "Heritage Readings — What Does Your Bloodline Want You To Know?" 80% women 30–60 in buying mode. This is your highest-ROI event this month. Goal: 20+ readings, 5+ sales ($220+), 30+ emails. Bring the folding table, banner, and card display.</div><div class="ac-supp"><span>Folding table</span><span>Banner</span><span>Oracle deck</span><span>Business cards ×100</span><span>Square/venmo</span></div></div></div>
+    <div class="ac"><div class="ac-stripe stealth"></div><div class="ac-time"><div class="ac-time-v">2:00p</div><div class="ac-time-d">30 min</div></div><div class="ac-body"><div class="ac-badge stealth">Stealth</div><div class="ac-title">Sticker Drop — Biltmore Village</div><div class="ac-venue">Route: <strong>Biltmore Village shops</strong></div><div class="ac-inst">Higher-end crowd. Place stickers in restrooms of 3-4 shops. More discreet — quality over quantity.</div><div class="ac-supp"><span>20 stickers</span><span>Business cards ×10</span></div></div></div>
+  </div>
+
+  <div class="day-panel" id="panel-sun">
+    <div class="ritual-banner">🌿 Temple Blessing — Look around your space. Thank it for holding your dreams. You deserve a workspace that honors your gifts.</div>
+    <div class="day-label">Sunday · March 9</div>
+    <div class="ac"><div class="ac-stripe activation"></div><div class="ac-time"><div class="ac-time-v">10:00a</div><div class="ac-time-d">120 min</div></div><div class="ac-body"><div class="ac-badge activation">Activation</div><div class="ac-title">Brunch Market at Zillicoah</div><div class="ac-venue">Location: <strong>Zillicoah Beer Co</strong> · Woodfin · Free · 200+ families · Food & snacks</div><div class="ac-inst">Set up near kids' activity area — parents linger. "Family heritage snapshots" — 2-min mini-readings. Moms talk. One good reading = 3–4 referrals. This is relationship planting, not direct sales. Harvest comes next week.</div><div class="ac-supp"><span>Oracle deck</span><span>Folding sign</span><span>Business cards ×40</span></div></div></div>
+    <div class="ac"><div class="ac-stripe content"></div><div class="ac-time"><div class="ac-time-v">4:00p</div><div class="ac-time-d">60 min</div></div><div class="ac-body"><div class="ac-badge content">Content</div><div class="ac-title">Weekly Planning — Next Week's Itinerary</div><div class="ac-venue">Location: <strong>Home</strong></div><div class="ac-inst">Review what worked. Schedule follow-ups. Plan sticker routes for next week. Block time for content creation. Update your intake form if needed. <em>Final Oracle: What will you trust to unfold this week?</em></div><div class="ac-supp"><span>Calendar</span><span>Notes</span></div></div></div>
+  </div>
 </div>
 
 <script>
@@ -232,6 +292,16 @@ function animate(){
 }
 animate();
 document.querySelectorAll('.d-tab').forEach(t=>t.addEventListener('click',function(){parent.goTo(parseInt(this.dataset.slide,10));}));
+document.querySelectorAll('.day-tab').forEach(t=>{
+  t.addEventListener('click',function(){
+    const day=this.dataset.day;
+    document.querySelectorAll('.day-tab').forEach(x=>x.classList.remove('act'));
+    this.classList.add('act');
+    document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('on'));
+    const panel=document.getElementById('panel-'+day);
+    if(panel)panel.classList.add('on');
+  });
+});
 </script>
 </body>
 </html>

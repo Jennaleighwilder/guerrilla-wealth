@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Guerrilla Wealth — Venue Intelligence (Desert Night)</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
   --void:#080610;--deep:#0c0814;--smoke:#1a1528;
@@ -17,7 +17,7 @@
   --cactus:#4a6a3a;--dusk:#2a1a30;--starlight:#d0d8e8;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Lora',Georgia,serif;background:#0a0610;color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:#0a0610;color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
 #scene{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
@@ -57,15 +57,15 @@ body{font-family:'Lora',Georgia,serif;background:#0a0610;color:var(--cream);over
 .mtn{position:fixed;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;opacity:0.08;color:var(--mesa);}
 .mtn svg{width:100%;height:120px;display:block;}
 
-.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sandstone);opacity:.25;z-index:50;pointer-events:none;}
+.sea-lbl{position:fixed;bottom:1rem;right:1rem;font-family:'Cormorant Garamond',serif;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sandstone);opacity:.25;z-index:50;pointer-events:none;}
 
 /* Dashboard bar */
 .d-bar{position:sticky;top:0;z-index:100;background:rgba(10,6,16,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);}
 .d-bar-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem .25rem;}
 .d-logo{font-family:'Cinzel',serif;font-size:.9rem;}
-.d-tier{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
+.d-tier{font-family:'Cormorant Garamond',serif;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(212,134,62,.1);color:var(--copper);}
 .d-tabs{display:flex;overflow-x:auto;padding:0 .6rem;}
-.d-tab{padding:.45rem .7rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+.d-tab{padding:.45rem .7rem;font-family:'Cormorant Garamond',serif;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
 .d-tab.act{color:var(--ember);border-bottom-color:var(--copper);}
 
 .content{position:relative;z-index:2;padding:1.2rem;max-width:700px;margin:0 auto;}
@@ -75,8 +75,8 @@ body{font-family:'Lora',Georgia,serif;background:#0a0610;color:var(--cream);over
 /* Venue panels */
 .tier-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;margin-top:1rem;}
 .tier-hd:first-of-type{margin-top:0;}
-.tier-t{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
-.tier-badge{font-family:'Space Mono',monospace;font-size:.55rem;padding:2px 8px;border-radius:3px;background:rgba(212,134,62,.08);color:var(--copper);}
+.tier-t{font-family:'Cormorant Garamond',serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.tier-badge{font-family:'Cormorant Garamond',serif;font-size:.55rem;padding:2px 8px;border-radius:3px;background:rgba(212,134,62,.08);color:var(--copper);}
 
 .vc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem;margin-bottom:.6rem;backdrop-filter:blur(8px);position:relative;overflow:hidden;display:flex;gap:.8rem;align-items:flex-start;}
 .vc::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);animation:shimmer 14s ease-in-out infinite;}
@@ -88,12 +88,12 @@ body{font-family:'Lora',Georgia,serif;background:#0a0610;color:var(--cream);over
 .vc-info{flex:1;min-width:0;}
 .vc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
 .vc-nm{font-weight:700;font-size:.92rem;}
-.vc-sc{font-family:'Space Mono',monospace;font-size:.88rem;color:var(--ember);font-weight:700;flex-shrink:0;}
+.vc-sc{font-family:'Cormorant Garamond',serif;font-size:.88rem;color:var(--ember);font-weight:700;flex-shrink:0;}
 .vc-meta{font-size:.75rem;color:var(--dim);margin-top:.15rem;line-height:1.4;}
 .vc-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.4rem;}
-.vc-tag{font-family:'Space Mono',monospace;font-size:.52rem;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.vc-tag{font-family:'Cormorant Garamond',serif;font-size:.52rem;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
 .vc-tag.hot{background:rgba(212,134,62,.08);border-color:rgba(212,134,62,.15);color:var(--copper);}
-.vc-pk{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--sage);margin-top:.3rem;}
+.vc-pk{font-family:'Cormorant Garamond',serif;font-size:.6rem;color:var(--sage);margin-top:.3rem;}
 
 @media(max-width:600px){.moon{width:100px;height:100px;top:3vh;right:5vw;}}
 </style>

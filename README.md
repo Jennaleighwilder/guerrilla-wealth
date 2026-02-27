@@ -168,7 +168,7 @@ git push -u origin main
 
 - Each slide is self-contained — edit any single file without breaking others
 - The `index.html` loader uses iframes, so slides are fully isolated
-- Google Fonts are loaded per-slide (Cinzel, Space Mono, Inter)
+- Google Fonts are loaded per-slide (Cinzel, Cormorant Garamond)
 - No npm dependencies for the actual app — `serve` is only for local dev
 - All animations are pure CSS + vanilla JS (no libraries)
 - Particle systems use requestAnimationFrame — they're performant on mobile
