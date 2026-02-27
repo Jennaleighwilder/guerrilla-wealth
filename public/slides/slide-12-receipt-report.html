@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Your Guerrilla Wealth Assessment — Results</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
   --void:#080610;--deep:#0e0b18;--smoke:#1a1528;
@@ -13,7 +13,7 @@
   --cream:#f5f0e8;--dim:#b0a8b8;--fog:#a89ab8;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);-webkit-font-smoothing:antialiased;min-height:100vh;}
+body{font-family:'Lora',Georgia,serif;background:var(--void);color:var(--cream);-webkit-font-smoothing:antialiased;min-height:100vh;}
 
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
 .aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -94,8 +94,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 .off-pr{font-family:'Space Mono',monospace;font-size:.88rem;color:var(--ember);font-weight:700;}
 .off-nm{font-weight:700;font-size:.95rem;margin-bottom:.2rem;}
 .off-desc{font-size:.78rem;color:var(--dim);line-height:1.45;}
-.off-buy{display:inline-block;margin-top:.6rem;padding:6px 14px;background:rgba(212,134,62,.15);border:1px solid rgba(212,134,62,.3);border-radius:6px;color:var(--ember);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-decoration:none;transition:all .2s;}
-.off-buy:hover{background:rgba(212,134,62,.25);border-color:rgba(212,134,62,.5);}
 
 /* ═══ WEEKLY SNAPSHOT ═══ */
 .snap{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem;}
@@ -120,7 +118,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 .email-section{margin-top:2rem;text-align:center;}
 .email-title{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;}
 .email-row{display:flex;gap:.5rem;max-width:400px;margin:0 auto;}
-.email-input{flex:1;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;}
+.email-input{flex:1;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--cream);font-family:'Lora',Georgia,serif;font-size:.85rem;outline:none;transition:border-color .3s;}
 .email-input:focus{border-color:rgba(212,134,62,.4);}
 .email-input::placeholder{color:var(--dim);}
 .email-send{padding:12px 20px;background:linear-gradient(135deg,var(--copper),var(--fire));color:var(--cream);border:none;border-radius:6px;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap;}
@@ -180,6 +178,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 .readable{font-size:1rem;line-height:1.7;color:var(--cream);}
 .readable p{margin-bottom:.8rem;}
 .readable ul{margin:.5rem 0 1rem 1.2rem;}
+/* Beta badge */
+.beta-badge{display:inline-block;padding:6px 14px;background:linear-gradient(135deg,var(--jade),var(--river));color:#fff;border-radius:20px;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;box-shadow:0 4px 15px rgba(58,154,122,.3);}
 .readable li{margin-bottom:.4rem;}
 
 @media(max-width:600px){.scores{grid-template-columns:1fr;}.snap{grid-template-columns:1fr;}.email-row{flex-direction:column;}.share-row{flex-wrap:wrap;}.cat-grid{grid-template-columns:1fr;}}
@@ -195,6 +195,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 
   <!-- ═══ HEADER ═══ -->
   <div class="rpt-hd">
+    <div id="betaBadgeWrap" style="display:none;"><div class="beta-badge">Beta Tester — Full Access</div></div>
     <div class="rpt-orb"></div>
     <div class="rpt-brand">Guerrilla Wealth</div>
     <div class="rpt-sub">Assessment Results</div>
@@ -256,7 +257,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
   <div class="snap">
     <div class="snap-card"><div class="snap-v">147</div><div class="snap-l">Venues Scored</div></div>
     <div class="snap-card"><div class="snap-v">23</div><div class="snap-l">Events This Week</div></div>
-    <div class="snap-card"><div class="snap-v">$4,130</div><div class="snap-l">Monthly Projection</div></div>
     <div class="snap-card"><div class="snap-v">43</div><div class="snap-l">Sticker Placements</div></div>
   </div>
 
@@ -284,37 +284,38 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
     </div>
   </div>
 
-  <!-- ═══ FREE REPORT — More Detail ═══ -->
+  <!-- ═══ WHAT YOU GET ═══ -->
   <div class="free-detail">
-    <div class="sec-t">✨ Your Free Report — What's Included</div>
+    <div class="sec-t">What's in This Report</div>
     <div class="readable">
-      <p><strong>This free assessment gives you:</strong></p>
+      <p><strong>This assessment preview includes:</strong></p>
       <ul>
         <li><strong>Archetype reveal</strong> — Your entrepreneurial DNA (Oracle-Strategist)</li>
         <li><strong>4 layer scores</strong> — Identity, Geography, Capacity, Resonance</li>
-        <li><strong>147 Asheville venues</strong> — Mapped, scored, with peak times</li>
-        <li><strong>6 category breakdowns</strong> — Magic, herbals, tea, coffee, food, snacks</li>
-        <li><strong>23 events this week</strong> — With "Your Play" strategy for each</li>
-        <li><strong>43 sticker placements</strong> — Where to leave your mark</li>
-        <li><strong>Offering ladder</strong> — $0 to $1,500/mo, built for your archetype</li>
+        <li><strong>Venue categories</strong> — Magic, herbals, tea, coffee, food, snacks</li>
+        <li><strong>Map link</strong> — Asheville venues</li>
       </ul>
-      <p>Upgrade to the full dashboard for live maps, weekly event alerts, and 1-on-1 strategy.</p>
+      <p><strong>Full membership</strong> unlocks weekly updates (Sunday evening), all three reports (Sacred Entrepreneur, Financial Identity Map, Business Identity Map), live maps, event alerts, and full dashboard. Hand-crafted — not templated.</p>
     </div>
   </div>
 
-  <!-- ═══ YOUR OFFERING LADDER ═══ -->
-  <div class="sec">
-    <div class="sec-t">Your Offering Ladder</div>
-    <div class="sec-sub">Built from your quiz answers. This is the price architecture that matches your archetype.</div>
+  <!-- ═══ BETA: OFFERING LADDER PREVIEW (try each tier) ═══ -->
+  <div id="betaOfferingsWrap" style="display:none;">
+    <div class="sec">
+      <div class="sec-t">Try Each Tier — Beta Preview</div>
+      <div class="sec-sub">As a beta tester you see the full offering ladder. Subscribe when ready to go live.</div>
+    </div>
+    <div class="off"><div class="off-top"><div class="off-tier">Free Hook</div><div class="off-pr">$0</div></div><div class="off-nm">Flash Reading</div><div class="off-desc">2-min taste at events. Captures email + curiosity. Conversion: 25–35%.</div></div>
+    <div class="off"><div class="off-top"><div class="off-tier">Entry</div><div class="off-pr">$44</div></div><div class="off-nm">Entrepreneur Snapshot</div><div class="off-desc">15-min reading or single-page report. Impulse price. 20/mo = $880.</div></div>
+    <div class="off"><div class="off-top"><div class="off-tier">Core</div><div class="off-pr">$350</div></div><div class="off-nm">Full Entrepreneur Report</div><div class="off-desc">Deep 30+ page analysis. 5/mo = $1,750. Your signature product.</div></div>
+    <div class="off"><div class="off-top"><div class="off-tier">Monthly</div><div class="off-pr">Subscription</div></div><div class="off-nm">Full Dashboard + Report</div><div class="off-desc">Everything unlocked. Live maps, event alerts, full report.</div></div>
   </div>
 
-  <div class="off"><div class="off-top"><div class="off-tier">Free Hook</div><div class="off-pr">$0</div></div><div class="off-nm">Flash Reading</div><div class="off-desc">2-min taste at events. Captures email + curiosity. Your Oracle nature makes this magnetic — people feel seen instantly. Conversion rate: 25–35%.</div></div>
-
-  <div class="off"><div class="off-top"><div class="off-tier">Entry</div><div class="off-pr">$44</div></div><div class="off-nm">Entrepreneur Snapshot</div><div class="off-desc">15-min reading or single-page report. Impulse price. 20 per month = $880. This is where you plant seeds.</div><a href="#" class="off-buy" id="buy44">Pay $44 →</a></div>
-
-  <div class="off"><div class="off-top"><div class="off-tier">Core</div><div class="off-pr">$350</div></div><div class="off-nm">Full Entrepreneur Report</div><div class="off-desc">Deep 30+ page entrepreneurial analysis. This is your signature product. 5 per month = $1,750. Every flash reading funnels here.</div><a href="#" class="off-buy" id="buy350">Pay $350 →</a></div>
-
-  <div class="off"><div class="off-top"><div class="off-tier">Premium</div><div class="off-pr">$1,500/mo</div></div><div class="off-nm">Monthly Retainer</div><div class="off-desc">Ongoing guidance + full report suite. 1–2 clients at this level = $1,500–$3,000. These are your long-game relationships.</div><a href="#" class="off-buy" id="buy1500">Inquire →</a></div>
+  <!-- ═══ MEMBERSHIP — Intense, worth it ═══ -->
+  <div id="subscriptionSec" class="sec">
+    <div class="sec-t">Full Membership — Weekly Intelligence</div>
+    <div class="sec-sub">New intakes processed every Sunday evening. Your report + dashboard updated weekly. Full access to Sacred Entrepreneur, Financial Identity Map, and Business Identity Map — hand-crafted, not templated.</div>
+  </div>
 
   <!-- ═══ SOCIAL PROOF ═══ -->
   <div class="proof">
@@ -324,16 +325,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
     <div class="proof-txt">97% satisfaction rate</div>
   </div>
 
-  <!-- ═══ THE FUNNEL — CTAs ═══ -->
+  <!-- ═══ CTA ═══ -->
   <div class="cta-section">
     <div class="cta-title">Ready to Activate?</div>
-    <div class="cta-desc">Your intelligence map is built. Your archetype is revealed. The venues, events, and stickers are waiting. The only question is when you start.</div>
+    <div class="cta-desc" id="ctaDesc">Your intelligence map is built. Your archetype is revealed. Join the membership — weekly updates, full dashboard, all three reports. Jennifer reads every word.</div>
 
-    <a href="https://jennaleighwilder.github.io/AI-Consulting-/" class="cta-btn primary">Unlock Your Full Dashboard →</a>
-    <a href="mailto:theforgottencode780@gmail.com?subject=Entrepreneur%20Reading%20Inquiry&body=Hi%20Jennifer%2C%0A%0AI%20just%20took%20the%20Guerrilla%20Wealth%20assessment%20and%20I'm%20interested%20in%20learning%20more%20about%20an%20entrepreneur%20reading.%0A%0AMy%20archetype%3A%20Oracle-Strategist%0A%0AThank%20you!" class="cta-btn secondary">Book an Entrepreneur Reading</a>
-    <a href="mailto:theforgottencode780@gmail.com?subject=Free%20Flash%20Reading%20Request&body=Hi%20Jennifer%2C%0A%0AI%27d%20love%20a%20free%20flash%20reading!%20I%20just%20completed%20the%20Guerrilla%20Wealth%20assessment." class="cta-btn ghost">Get a Free Flash Reading</a>
-
-    <div class="urgency"><div class="urgency-txt">⚡ Only 8 entrepreneur reading slots available this month — 3 already claimed</div></div>
+    <a href="https://jennaleighwilder.github.io/AI-Consulting-/" class="cta-btn primary" id="ctaBtn">Join Membership — Weekly Intelligence →</a>
 
     <div class="share-row">
       <button type="button" class="share-btn" onclick="shareText()">📤 Share Results</button>
@@ -373,9 +370,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--cream);
 </div>
 
 <script>
-// ═══ CONFIG — Update PAYMENT_URL with your Venmo/Stripe/PayPal link ═══
-const PAYMENT_URL = 'https://jennaleighwilder.github.io/AI-Consulting-/#readings';
-(function(){const b44=document.getElementById('buy44');if(b44)b44.href=PAYMENT_URL;const b350=document.getElementById('buy350');if(b350)b350.href=PAYMENT_URL;const b1500=document.getElementById('buy1500');if(b1500)b1500.href=PAYMENT_URL;})();
+// ═══ BETA MODE — from URL ?beta=1 (passed by index.html when BETA_MODE)
+(function(){
+  const url=new URL(window.location.href);
+  const isBeta=url.searchParams.get('beta')==='1'||url.searchParams.get('beta')==='true';
+  if(isBeta){
+    const b=document.getElementById('betaBadgeWrap');
+    const o=document.getElementById('betaOfferingsWrap');
+    const s=document.getElementById('subscriptionSec');
+    const d=document.getElementById('ctaDesc');
+    const btn=document.getElementById('ctaBtn');
+    if(b)b.style.display='block';
+    if(o)o.style.display='block';
+    if(s)s.style.display='none';
+    if(d)d.textContent="You're in! Full access unlocked. Subscribe when you're ready to go live.";
+    if(btn){btn.textContent='Subscribe When Ready →';btn.href='https://jennaleighwilder.github.io/AI-Consulting-/';}
+  }
+})();
 const cv=document.getElementById('particles'),cx=cv.getContext('2d');
 let W,H;
 function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
@@ -468,12 +479,8 @@ LAYER SCORES:
 • Sacred Capacity: 91/100
 • Resonance Score: 74/100
 
-YOUR OFFERING LADDER:
-• Free Hook: Flash Reading ($0) → 25-35% conversion
-• Entry: Entrepreneur Snapshot ($44) → 20/mo = $880
-• Core: Full Entrepreneur Report ($350) → 5/mo = $1,750
-• Premium: Monthly Retainer ($1,500/mo)
-• Monthly Projection: $4,130
+MONTHLY SUBSCRIPTION:
+Full report + full dashboard access
 
 YOUR CITY SNAPSHOT:
 • 147 Venues Scored
@@ -550,19 +557,13 @@ YOUR BEST VENUE CATEGORIES:
 
 MAP: https://www.google.com/maps/search/crystal+shops+herbals+tea+coffee+asheville+nc
 
-OFFERING LADDER:
-Flash Reading: $0 (free hook)
-Entrepreneur Snapshot: $44
-Full Entrepreneur Report: $350
-Monthly Retainer: $1,500/mo
-Projected Monthly: $4,130
+MONTHLY SUBSCRIPTION:
+Full report + dashboard access
+https://jennaleighwilder.github.io/AI-Consulting-/
 
 229+ clients served | 97% satisfaction
 
-Ready to activate?
-https://jennaleighwilder.github.io/AI-Consulting-/
-Book a reading: theforgottencode780@gmail.com
-Call: 423-388-8304
+Contact: theforgottencode780@gmail.com | 423-388-8304
 
 The Forgotten Code Research Institute
 by Jennifer Leigh West`;

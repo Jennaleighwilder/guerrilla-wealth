@@ -173,11 +173,15 @@ git push -u origin main
 - All animations are pure CSS + vanilla JS (no libraries)
 - Particle systems use requestAnimationFrame — they're performant on mobile
 
-**Payment link:** Edit `public/slides/slide-12-receipt-report.html` — find `const PAYMENT_URL =` near the top of the script and replace with your Venmo, Stripe, PayPal, or other payment link.
+**Beta test mode** — Give testers full access + offering tier preview:
+- Add `?beta=1` to the URL (e.g. `yoursite.com?beta=1`), or
+- Set `BETA_MODE = true` in `public/index.html` (line ~40) to enable for everyone
+- Beta testers see "Beta Tester — Full Access" badge, full offering ladder preview, and CTA "Subscribe when ready to go live"
+- To turn off beta: remove `?beta=1` from URL or set `BETA_MODE = false`
 
 **Common modifications in Cursor:**
 - To change city data: edit slides 06-10 (each has hardcoded Asheville data)
-- To change quiz questions: edit slides 02-04
+- To change quiz questions and wording: edit slides 02-04 (each has a `QS` array with questions, options, subtitles)
 - To change archetype names/descriptions: edit slides 05, 06, 12
 - To change pricing/offerings: edit slides 06, 11, 12
 - To change contact info: edit slides 11, 12 (email, phone, website)

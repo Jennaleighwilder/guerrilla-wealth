@@ -33,6 +33,15 @@ iframe.active{opacity:1;pointer-events:auto;}
 <div class="phase-label" id="phaseLabel"></div>
 
 <script>
+// ═══ BETA MODE — Toggle for testers to access full service + try each tier
+// Set to true here, OR add ?beta=1 to the URL (e.g. yoursite.com?beta=1)
+const BETA_MODE = (() => {
+  const url = new URL(window.location.href);
+  if (url.searchParams.get('beta') === '1' || url.searchParams.get('beta') === 'true') return true;
+  try { if (localStorage.getItem('gw_beta') === '1') return true; } catch (e) {}
+  return false;  // ← Change to true to enable beta for everyone
+})();
+
 const slides = [
   { file: 'slides/slide-01-splash.html', phase: 'WELCOME' },
   { file: 'slides/slide-02-autumn-quiz1.html', phase: 'QUIZ · IDENTITY' },
@@ -58,7 +67,7 @@ let transitioning = false;
 // Build iframes and dots
 slides.forEach((s, i) => {
   const iframe = document.createElement('iframe');
-  iframe.src = s.file;
+  iframe.src = s.file + (BETA_MODE ? '?beta=1' : '');
   iframe.setAttribute('loading', i < 3 ? 'eager' : 'lazy');
   if (i === 0) iframe.classList.add('active');
   app.appendChild(iframe);
